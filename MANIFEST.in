@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include healthcare_addon *.css
+recursive-include healthcare_addon *.csv
+recursive-include healthcare_addon *.html
+recursive-include healthcare_addon *.ico
+recursive-include healthcare_addon *.js
+recursive-include healthcare_addon *.json
+recursive-include healthcare_addon *.md
+recursive-include healthcare_addon *.png
+recursive-include healthcare_addon *.py
+recursive-include healthcare_addon *.svg
+recursive-include healthcare_addon *.txt
+recursive-exclude healthcare_addon *.pyc

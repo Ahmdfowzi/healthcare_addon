@@ -1,0 +1,66 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-03-13 11:33:38.785009",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "emergency_medical_services_item",
+  "column_break_hkonl",
+  "premature_service_item",
+  "accounts_section",
+  "default_practitioners_commission_account"
+ ],
+ "fields": [
+  {
+   "fieldname": "emergency_medical_services_item",
+   "fieldtype": "Link",
+   "label": "Emergency Medical Services Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "column_break_hkonl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "premature_service_item",
+   "fieldtype": "Link",
+   "label": "Premature Service Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "accounts_section",
+   "fieldtype": "Section Break",
+   "label": "Accounts"
+  },
+  {
+   "fieldname": "default_practitioners_commission_account",
+   "fieldtype": "Link",
+   "label": "Default Practitioners Commission Account",
+   "options": "Account"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-03-16 10:23:42.603651",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Default Healthcare Service Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

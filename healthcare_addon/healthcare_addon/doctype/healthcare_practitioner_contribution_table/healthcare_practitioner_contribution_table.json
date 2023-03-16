@@ -1,0 +1,82 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-03-12 12:08:24.370961",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "document_type",
+  "practitioner_commission_account",
+  "is_fixed_amount",
+  "is_percentage",
+  "fixed_amount",
+  "percentage",
+  "total_commissions"
+ ],
+ "fields": [
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Healthcare Practitioner",
+   "options": "Healthcare Practitioner",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fixed_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Fixed Amount",
+   "mandatory_depends_on": "eval:doc.preferred_commission_type ==\"Fixed Amount\"",
+   "read_only_depends_on": "eval:doc.preferred_commission_type ==\"Percentage\""
+  },
+  {
+   "fieldname": "percentage",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Percentage",
+   "mandatory_depends_on": "eval:doc.preferred_commission_type ==\"Percentage\""
+  },
+  {
+   "fieldname": "total_commissions",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Commissions"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_fixed_amount",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Fixed Amount",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_percentage",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Percentage",
+   "read_only": 1
+  },
+  {
+   "fieldname": "practitioner_commission_account",
+   "fieldtype": "Link",
+   "label": "Practitioner Commission Account",
+   "options": "Account",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-03-16 10:17:33.012665",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Healthcare Practitioner Contribution Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

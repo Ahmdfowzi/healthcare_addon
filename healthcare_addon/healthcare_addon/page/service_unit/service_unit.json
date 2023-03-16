@@ -1,0 +1,20 @@
+{
+ "content": null,
+ "creation": "2023-03-13 19:46:56.871739",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2023-03-13 19:46:56.871739",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "service-unit",
+ "owner": "Administrator",
+ "page_name": "service-unit",
+ "restrict_to_domain": "Healthcare",
+ "roles": [],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 1,
+ "title": "Service Unit"
+}

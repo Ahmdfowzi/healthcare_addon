@@ -156,14 +156,11 @@ def create_medication_invoice(self):
     set_references_table(invoice, self)
 
 
-def create_emergency_medical_services_invoice(self):
+def create_healthcare_service_invoice(self, item_code, qty):
     """
     It creates a new Sales Invoice with the patient as the customer, the practitioner as the reference
-    practitioner, and the Emergency Medical Services Item as the item
+    practitioner, and the item passed as parameter
     """
-    item = frappe.db.get_single_value(
-        "Default Healthcare Service Settings", "emergency_medical_services_item")
-
     letter_head = frappe.db.get_value(
         'Company', self.company, 'default_letter_head')
     invoice = frappe.new_doc("Sales Invoice")
@@ -171,16 +168,17 @@ def create_emergency_medical_services_invoice(self):
     invoice.patient = self.patient
     invoice.ref_practitioner = self.practitioner
     invoice.update_stock = False
-    if letter_head != None:
+    if letter_head is not None:
         invoice.letter_head = letter_head
-    if (item == ""):
-        frappe.throw(_("Please Set The Emergency Medical Services Item"))
+    if item_code == "":
+        frappe.throw(_("Please Set The Healthcare Service Item"))
     else:
         invoice.append("items", {
-            "item_code": item,
-            'qty': 1,
+            "item_code": item_code,
+            'qty': qty,
         })
     invoice.insert()
+    self.invoiced = True
     set_references_table(invoice, self)
 
 
@@ -249,13 +247,31 @@ def create_commission_je(self):
 
 
 def calculate_practitioner_contribution(self):
+    if not self.service_item:
+        return {'error': 'Please select a service item'}
+
     for practitioner in self.healthcare_practitioner_contribution:
         if practitioner.is_fixed_amount:
             practitioner.total_commissions = practitioner.fixed_amount
         else:
-            if self.service_item == "":
-                frappe.throw("Please Select a service item")
             item_price = frappe.db.get_value(
                 'Item Price', {'item_code': self.service_item}, ['price_list_rate'])
             commission = (practitioner.percentage * item_price) / 100
             practitioner.total_commissions = commission
+
+
+@frappe.whitelist()
+def clear_linked_je(doc_type, docname):
+    doc = frappe.get_doc(doc_type, docname)
+    if doc.docstatus == 1:
+        for ref in doc.references_table:
+            if ref.document_type == "Journal Entry":
+                je = frappe.get_doc(ref.document_type, ref.document_link)
+                if je.docstatus == 1:
+                    # Delete the current document from the child table
+                    doc.remove(ref)
+                    # Save the changes to the current document
+                    doc.save(ignore_permissions=True)
+                    frappe.msgprint(
+                        _(f"Please Cancel The Linked Journal Entry\n {je.name}"))
+                    doc.reload()

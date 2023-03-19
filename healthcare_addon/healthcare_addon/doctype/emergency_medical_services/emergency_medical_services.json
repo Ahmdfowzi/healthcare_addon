@@ -30,8 +30,6 @@
   "symptoms",
   "physical_examination",
   "diagnosis",
-  "codification",
-  "codification_table",
   "sb_drug_prescription",
   "drug_prescription",
   "sb_test_prescription",
@@ -41,6 +39,7 @@
   "sb_refs",
   "healthcare_practitioner_contribution",
   "more_info_section",
+  "clear_linked_je",
   "references_table",
   "amended_from"
  ],
@@ -179,18 +178,6 @@
    "options": "Patient Encounter Diagnosis"
   },
   {
-   "collapsible": 1,
-   "fieldname": "codification",
-   "fieldtype": "Section Break",
-   "label": "Medical Coding"
-  },
-  {
-   "fieldname": "codification_table",
-   "fieldtype": "Table",
-   "label": "Medical Codes",
-   "options": "Codification Table"
-  },
-  {
    "fieldname": "sb_drug_prescription",
    "fieldtype": "Section Break",
    "label": "Medications"
@@ -250,6 +237,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "healthcare_practitioner_contribution",
    "fieldtype": "Table",
    "label": "Healthcare Practitioner Contribution",
@@ -269,15 +257,24 @@
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "service_item",
    "fieldtype": "Link",
    "label": "Service Item",
-   "options": "Item"
+   "options": "Item",
+   "read_only_depends_on": "eval:doc.docstatus == 1;",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.docstatus == 1;",
+   "fieldname": "clear_linked_je",
+   "fieldtype": "Button",
+   "label": "Clear Linked JE"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-03-16 12:22:23.624087",
+ "modified": "2023-03-19 15:32:28.359747",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Emergency Medical Services",

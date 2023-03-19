@@ -5,7 +5,7 @@ frappe.ui.form.on('Emergency Medical Services', {
 
 	/* Getting the default item for the emergency medical services from the Default Healthcare Service
 	Settings doctype. */
-	setup: async function (frm) {
+	setup: function (frm) {
 		frappe.db.get_single_value('Default Healthcare Service Settings', 'emergency_medical_services_item')
 			.then(item => {
 				frm.doc.service_item = item
@@ -21,12 +21,19 @@ frappe.ui.form.on('Emergency Medical Services', {
 					frm.add_custom_button(__('Schedule Discharge'), function () {
 						schedule_discharge(frm);
 					});
+
 				} else if (frm.doc.inpatient_status != 'Discharge Scheduled') {
 					frm.add_custom_button(__('Schedule Admission'), function () {
 						schedule_inpatient(frm);
 					});
+					if (frm.doc.inpatient_status != "Discharged") {
+						frm.add_custom_button(__('Discharge Now'), function () {
+							discharge_now(frm);
+						}).addClass('btn-danger');
+					}
 				}
 			}
+
 
 			frm.add_custom_button(__('Patient History'), function () {
 				if (frm.doc.patient) {
@@ -55,9 +62,21 @@ frappe.ui.form.on('Emergency Medical Services', {
 		}
 	},
 
-
+	clear_linked_je: function (frm) {
+		frappe.call({
+			method: 'healthcare_addon.utils.utils.clear_linked_je',
+			args: {
+				doc_type: frm.doctype,
+				docname: frm.docname
+			},
+			freeze: true,
+			freeze_message: __('Clearing'),
+			callback: function (r) {
+				frm.refresh();
+			}
+		}).then(window.location.reload());
+	}
 });
-
 
 /**
  * It creates a new Patient Medical Record for the patient selected in the form
@@ -92,7 +111,18 @@ let create_vital_signs = function (frm) {
 	frappe.new_doc('Vital Signs');
 };
 
-
+/**
+ * It sets the discharge_at field to the current time and the inpatient_status field to "Discharged"
+ * and then refreshes the form
+ * @param frm - The current form object.
+ */
+let discharge_now = function (frm) {
+	frappe.db.set_value(frm.doctype, frm.doc.name, 'discharge_at', frappe.datetime.now_datetime()).then(r => {
+		frappe.db.set_value(frm.doctype, frm.doc.name, 'inpatient_status', "Discharged").then(frm.refresh())
+	})
+	window.location.reload()
+	frappe.msgprint(__('Patient Discharged'));
+};
 
 
 /* A function that is called when the user clicks on the Schedule Admission button. */

@@ -103,7 +103,11 @@ doctype_js = {
 doc_events = {
     "Inpatient Record": {
         "after_insert": "healthcare_addon.utils.events.inpatient_record.after_insert",
+        "validate": "healthcare_addon.utils.establish.make_establish",
     },
+    "Inpatient Medication Entry": {
+		"on_submit": "healthcare_addon.utils.medication_entry.new_medication"
+	},
     "Clinical Procedure": {
         "before_save": "healthcare_addon.utils.events.clinical_procedure.before_save",
         "on_submit": "healthcare_addon.utils.events.clinical_procedure.on_submit",

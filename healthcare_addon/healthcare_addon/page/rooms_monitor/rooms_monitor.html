@@ -1,7 +1,7 @@
 <div class="monitor p-5">    
     <div class="position-sticky sticky-top mb-5 position-sticky">
         {% for floor in floors %}
-            <div data-name="{{floor.floor_name}}" class="btn btn-lg btn-secondary rounded bold "> {{floor.floor_name}}</div>
+            <div data-floorname="{{floor.floor_name}}" class="btn btn-lg btn-secondary rounded bold "> {{floor.floor_name}}</div>
         {% endfor %}
     </div>
     <div class="row">

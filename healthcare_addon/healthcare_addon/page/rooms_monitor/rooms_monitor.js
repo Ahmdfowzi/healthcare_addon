@@ -203,7 +203,7 @@ frappe.pages['rooms-monitor'].on_page_load = async function (wrapper) {
 	 */
 	function loadState() {
 		const state = localStorage.getItem('state');
-		console.log(state);
+		//console.log(state);
 		return state ? JSON.parse(state) : null;
 	}
 	/**
@@ -216,14 +216,14 @@ frappe.pages['rooms-monitor'].on_page_load = async function (wrapper) {
 			index : 0,
 			floor : data[0].floor_name
 		}
-		console.log(state);
+		//console.log(state);
 		saveState(state)
 		return state
 	}
 	
 
 	setTimeout(()=>{
-		document.querySelectorAll("[data-name]").forEach((el,i)=>{
+		document.querySelectorAll("[data-floorname]").forEach((el,i)=>{
 			el.dataset.index = i
 		})
 		document.querySelectorAll("[data-floor]").forEach((el,i)=>{
@@ -231,31 +231,34 @@ frappe.pages['rooms-monitor'].on_page_load = async function (wrapper) {
 		})
 		
 		const initialState = loadState() ? loadState() : getDefaultState() 
-		console.log(initialState);
-		document.querySelectorAll("[data-name]")[initialState.index].classList.add("btn-primary")
+		//console.log("init ",initialState);
+		document.querySelectorAll("[data-floorname]")[initialState.index].classList.add("btn-primary")
+		//console.log(document.querySelectorAll("[data-floor]")[initialState.index]);
+		//console.log(document.querySelectorAll("[data-floorname]")[initialState.index]);
 		document.querySelectorAll("[data-floor]")[initialState.index].classList.add("active")
 		document.querySelectorAll("[data-time]").forEach(elm=>{
 			if(elm.dataset.time===initialState.floor){
-				// // console.log(elm.dataset);
+				// // //console.log(elm.dataset);
 				elm.classList.add("active")
 			}
 		})
-		document.querySelectorAll("[data-name]").forEach(floor_btn=>{
+		document.querySelectorAll("[data-floorname]").forEach(floor_btn=>{
 			floor_btn.addEventListener("click",(e) => {
+				//console.log(floor_btn.dataset.index)
 				saveState({index :parseInt(floor_btn.dataset.index),floor : data[parseInt(floor_btn.dataset.index)].floor_name})
-				// // console.log(loadState());
+				// // //console.log(loadState());
 				document.querySelectorAll("[data-time]").forEach(elm=>{
 					elm.classList.remove("active")
 					
 				})
 				document.querySelectorAll("[data-time]").forEach(elm=>{
 					if(elm.dataset.time===data[parseInt(floor_btn.dataset.index)].floor_name){
-						// // console.log("insidey");
+						// // //console.log("insidey");
 						elm.classList.add("active")
 					}
 				})
-				// // // console.log(floor_btn.dataset.index)
-				document.querySelectorAll("[data-name]").forEach(elm=>{
+				// // // //console.log(floor_btn.dataset.index)
+				document.querySelectorAll("[data-floorname]").forEach(elm=>{
 					elm.classList.remove("btn-primary")
 					elm.classList.add("btn-secondary")
 				})
@@ -272,7 +275,7 @@ frappe.pages['rooms-monitor'].on_page_load = async function (wrapper) {
 			//   document.querySelector(".alarm-sound").play()
 			  // Example usage
 			  setTimer('13:47:00', function() {
-				// // console.log('Time is up!');
+				// // //console.log('Time is up!');
 				document.querySelector(".timer-item").classList.add("bg-warning")
 				document.querySelector(".timer-item").classList.add("border-0")
 				document.querySelector(".thetime svg").classList.add("alarm-ring")
@@ -293,9 +296,9 @@ frappe.pages['rooms-monitor'].on_page_load = async function (wrapper) {
 				let patient_name = elm.children[0].textContent.trim()
 				let dosage_time = elm.children[1].children[1].textContent.trim()
 				let clock_icon = elm.children[1].children[0]
-				console.log(dosage_time)
+				//console.log(dosage_time)
 				if(isTimeLessThanNow(formatTime(dosage_time))){
-					console.log(dosage_time)
+					//console.log(dosage_time)
 					elm.classList.add("bg-warning")
 					elm.classList.add("border-0")
 					clock_icon.classList.add("alarm-ring")

@@ -1,0 +1,19 @@
+{
+ "content": null,
+ "creation": "2023-03-25 11:54:20.356685",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2023-03-25 11:54:20.356685",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "rooms-monitor",
+ "owner": "Administrator",
+ "page_name": "rooms-monitor",
+ "roles": [],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Rooms monitor"
+}

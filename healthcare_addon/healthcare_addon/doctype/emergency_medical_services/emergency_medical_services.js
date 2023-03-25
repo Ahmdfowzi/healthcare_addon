@@ -259,6 +259,6 @@ frappe.ui.form.on('Healthcare Practitioner Contribution Table', {
 					}
 				}
 			}
-			)
+		)
 	}
 });

@@ -215,7 +215,6 @@ def calculate_total_commission(self):
         i.total_commissions for i in self.healthcare_practitioner_contribution
     )
 
-
 def create_commission_je(self):
     """
     It creates a new Journal Entry, adds the default practitioner's commission account to the debit
@@ -245,17 +244,55 @@ def create_commission_je(self):
     je.submit()
     set_references_table(je, self)
 
+@frappe.whitelist()
+def create_appointment_commission_je(doc_type, docname):
+    """
+    It creates a new Journal Entry, adds the default practitioner's commission account to the debit
+    side, and then adds each practitioner's commission account to the credit side
+    """
+    doc = frappe.get_doc(doc_type, docname)
+    default_practitioners_account = frappe.db.get_single_value(
+        "Default Healthcare Service Settings", "default_practitioners_commission_account")
+    je = frappe.new_doc("Journal Entry")
+    je.company = doc.company
+    je.posting_date = today()
 
-def calculate_practitioner_contribution(self):
-    if not self.service_item:
+    je.append("accounts", {
+        'account': default_practitioners_account,
+        'debit_in_account_currency': calculate_total_commission(doc),
+        'credit_in_account_currency': 0
+    })
+
+    for practitioner in doc.healthcare_practitioner_contribution:
+        je.append("accounts", {
+            'account': practitioner.practitioner_commission_account,
+            'debit_in_account_currency': 0,
+            'credit_in_account_currency': practitioner.total_commissions
+        })
+
+    je.remark = f"{doc.name} - {doc.doctype}"
+    je.insert()
+    je.submit()
+    set_references_table(je, doc)
+
+
+def calculate_practitioner_contribution(self, rate:int = None):
+    # sourcery skip: assign-if-exp, or-if-exp-identity, swap-if-expression
+    if not rate and not self.service_item:
         return {'error': 'Please select a service item'}
 
     for practitioner in self.healthcare_practitioner_contribution:
         if practitioner.is_fixed_amount:
             practitioner.total_commissions = practitioner.fixed_amount
         else:
-            item_price = frappe.db.get_value(
-                'Item Price', {'item_code': self.service_item}, ['price_list_rate'])
+            if not rate:
+                item_price = frappe.db.get_value(
+                    'Item Price',
+                    {'item_code': self.service_item},
+                    ['price_list_rate'],
+                )
+            else:
+                item_price = rate
             commission = (practitioner.percentage * item_price) / 100
             practitioner.total_commissions = commission
 

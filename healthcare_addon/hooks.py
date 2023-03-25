@@ -31,7 +31,12 @@ app_license = "MIT"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-doctype_js = {"Sales Invoice" : "public/js/sales_invoice.js"}
+doctype_js = {
+    "Sales Invoice": "public/js/sales_invoice.js",
+    "Clinical Procedure": "public/js/clinical_procedure.js",
+    "Patient Appointment": "public/js/patient_appointment.js",
+    "Patient Encounter": "public/js/patient_encounter.js",
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -44,7 +49,7 @@ doctype_js = {"Sales Invoice" : "public/js/sales_invoice.js"}
 
 # website user home page (by Role)
 # role_home_page = {
-#	"Role": "home_page"
+# "Role": "home_page"
 # }
 
 # Generators
@@ -76,11 +81,11 @@ doctype_js = {"Sales Invoice" : "public/js/sales_invoice.js"}
 # Permissions evaluated in scripted ways
 
 # permission_query_conditions = {
-#	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
+# "Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
 #
 # has_permission = {
-#	"Event": "frappe.desk.doctype.event.event.has_permission",
+# "Event": "frappe.desk.doctype.event.event.has_permission",
 # }
 
 # DocType Class
@@ -88,7 +93,7 @@ doctype_js = {"Sales Invoice" : "public/js/sales_invoice.js"}
 # Override standard doctype classes
 
 # override_doctype_class = {
-#	"ToDo": "custom_app.overrides.CustomToDo"
+# "ToDo": "custom_app.overrides.CustomToDo"
 # }
 
 # Document Events
@@ -96,30 +101,50 @@ doctype_js = {"Sales Invoice" : "public/js/sales_invoice.js"}
 # Hook on document methods and events
 
 doc_events = {
-	"Inpatient Record": {
-		"after_insert": "healthcare_addon.utils.events.inpatient_record.after_insert",
-	}
+    "Inpatient Record": {
+        "after_insert": "healthcare_addon.utils.events.inpatient_record.after_insert",
+    },
+    "Clinical Procedure": {
+        "before_save": "healthcare_addon.utils.events.clinical_procedure.before_save",
+        "on_submit": "healthcare_addon.utils.events.clinical_procedure.on_submit",
+        "on_cancel": "healthcare_addon.utils.events.clinical_procedure.on_cancel",
+        "before_update_after_submit": "healthcare_addon.utils.events.clinical_procedure.before_update_after_submit",
+    },
+    "Patient Appointment": {
+        "before_save": "healthcare_addon.utils.events.patient_appointment.before_save",
+        "on_submit": "healthcare_addon.utils.events.patient_appointment.on_submit",
+        "after_delete": "healthcare_addon.utils.events.patient_appointment.after_delete",
+        "on_update": "healthcare_addon.utils.events.patient_appointment.on_update",
+    },
+    "Lab Test Template": {
+        "before_insert": "healthcare_addon.utils.events.lab_test_template.before_insert",
+    },
+    "Patient Encounter": {
+        "before_save": "healthcare_addon.utils.events.patient_encounter.before_save",
+        "on_submit": "healthcare_addon.utils.events.patient_encounter.on_submit",
+        "on_cancel": "healthcare_addon.utils.events.patient_encounter.on_cancel",
+        "before_update_after_submit": "healthcare_addon.utils.events.patient_encounter.before_update_after_submit",    },
 }
 
 # Scheduled Tasks
 # ---------------
 
 # scheduler_events = {
-#	"all": [
-#		"healthcare_addon.tasks.all"
-#	],
-#	"daily": [
-#		"healthcare_addon.tasks.daily"
-#	],
-#	"hourly": [
-#		"healthcare_addon.tasks.hourly"
-#	],
-#	"weekly": [
-#		"healthcare_addon.tasks.weekly"
-#	]
-#	"monthly": [
-#		"healthcare_addon.tasks.monthly"
-#	]
+# "all": [
+# "healthcare_addon.tasks.all"
+# ],
+# "daily": [
+# "healthcare_addon.tasks.daily"
+# ],
+# "hourly": [
+# "healthcare_addon.tasks.hourly"
+# ],
+# "weekly": [
+# "healthcare_addon.tasks.weekly"
+# ]
+# "monthly": [
+# "healthcare_addon.tasks.monthly"
+# ]
 # }
 
 # Testing
@@ -131,14 +156,14 @@ doc_events = {
 # ------------------------------
 #
 # override_whitelisted_methods = {
-#	"frappe.desk.doctype.event.event.get_events": "healthcare_addon.event.get_events"
+# "frappe.desk.doctype.event.event.get_events": "healthcare_addon.event.get_events"
 # }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
 # override_doctype_dashboards = {
-#	"Task": "healthcare_addon.task.get_dashboard_data"
+# "Task": "healthcare_addon.task.get_dashboard_data"
 # }
 
 # exempt linked doctypes from being automatically cancelled
@@ -159,30 +184,29 @@ doc_events = {
 # --------------------
 
 user_data_fields = [
-	{
-		"doctype": "{doctype_1}",
-		"filter_by": "{filter_by}",
-		"redact_fields": ["{field_1}", "{field_2}"],
-		"partial": 1,
-	},
-	{
-		"doctype": "{doctype_2}",
-		"filter_by": "{filter_by}",
-		"partial": 1,
-	},
-	{
-		"doctype": "{doctype_3}",
-		"strict": False,
-	},
-	{
-		"doctype": "{doctype_4}"
-	}
+    {
+        "doctype": "{doctype_1}",
+        "filter_by": "{filter_by}",
+        "redact_fields": ["{field_1}", "{field_2}"],
+        "partial": 1,
+    },
+    {
+        "doctype": "{doctype_2}",
+        "filter_by": "{filter_by}",
+        "partial": 1,
+    },
+    {
+        "doctype": "{doctype_3}",
+        "strict": False,
+    },
+    {
+        "doctype": "{doctype_4}"
+    }
 ]
 
 # Authentication and authorization
 # --------------------------------
 
 # auth_hooks = [
-#	"healthcare_addon.auth.validate"
+# "healthcare_addon.auth.validate"
 # ]
-

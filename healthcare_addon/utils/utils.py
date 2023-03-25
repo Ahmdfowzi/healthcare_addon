@@ -56,7 +56,7 @@ def schedule_inpatient(args):
 
 
 @frappe.whitelist()
-def schedule_discharge(args):
+def schedule_discharge(args):  # sourcery skip: use-named-expression
     discharge_order = json.loads(args)
     if (
             not discharge_order
@@ -66,25 +66,15 @@ def schedule_discharge(args):
         frappe.throw(
             _("Missing required details, did not create schedule discharge"))
 
-    if inpatient_record_id := frappe.db.get_value(
-        "Patient", discharge_order["patient"], "inpatient_record"
-    ):
-        inpatient_record = frappe.get_doc(
-            "Inpatient Record", inpatient_record_id)
-        check_out_inpatient(
-            inpatient_record, discharge_order["discharge_ordered_datetime"])
+    inpatient_record_id = frappe.db.get_value("Patient", discharge_order["patient"], "inpatient_record")
+    if inpatient_record_id:
+        inpatient_record = frappe.get_doc("Inpatient Record", inpatient_record_id)
+        check_out_inpatient(inpatient_record, discharge_order["discharge_ordered_datetime"])
         set_details_from_ip_order(inpatient_record, discharge_order)
         inpatient_record.status = "Discharge Scheduled"
         inpatient_record.save(ignore_permissions=True)
-        frappe.db.set_value(
-            "Patient", discharge_order["patient"], "inpatient_status", inpatient_record.status
-        )
-        frappe.db.set_value(
-            "Emergency Medical Services",
-            inpatient_record.emergency_medical_services_discharge,
-            "inpatient_status",
-            inpatient_record.status,
-        )
+        frappe.db.set_value("Patient", discharge_order["patient"], "inpatient_status", inpatient_record.status)
+        frappe.db.set_value("Emergency Medical Services", inpatient_record.emergency_medical_services_discharge, "inpatient_status", inpatient_record.status)
 
 
 def check_out_inpatient(inpatient_record, discharge_ordered_datetime):

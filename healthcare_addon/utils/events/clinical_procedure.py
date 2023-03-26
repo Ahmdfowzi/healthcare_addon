@@ -1,5 +1,5 @@
 from frappe import _
-from healthcare_addon.utils.utils import create_commission_je, cancel_references_table_docs, calculate_practitioner_contribution
+from healthcare_addon.utils.utils import create_commission_je, cancel_references_table_docs, calculate_practitioner_contribution, update_message
 
 
 def before_save(doc, method):
@@ -35,7 +35,7 @@ def on_cancel(doc, method) -> None:
     cancel_references_table_docs(doc)
 
 
-def before_update_after_submit(doc, method):
+def before_update_after_submit(doc, method) -> None:
     """
     > When a new `Practitioner` is created, calculate the practitioner's contribution based on the
     practitioner's rate
@@ -44,3 +44,7 @@ def before_update_after_submit(doc, method):
     :param method: The name of the method that is being called
     """
     calculate_practitioner_contribution(doc, rate=doc.rate)
+    update_message(doc)
+
+
+

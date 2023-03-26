@@ -1,29 +1,38 @@
 frappe.ui.form.on('Healthcare Practitioner Contribution Table', {
-    document_type: function (frm, cdt, cdn) {
-        let row = locals[cdt][cdn]
-        frappe.db.get_doc('Healthcare Practitioner', row.document_type)
-            .then(doc => {
-                for (let index = 0; index < doc.healthcare_practitioner_commission.length; index++) {
-                    if (doc.healthcare_practitioner_commission[index].document_type == frm.doctype) {
-                        if (doc.healthcare_practitioner_commission[index].preferred_commission_type == "Fixed Amount") {
-                            row.is_fixed_amount = true
-                            row.fixed_amount = doc.healthcare_practitioner_commission[index].fixed_amount
-                            row.percentage = 0
-                            row.practitioner_commission_account = doc.practitioner_commission_account
-                            frm.refresh()
-                        } else if (doc.healthcare_practitioner_commission[index].preferred_commission_type == "Percentage") {
-                            row.is_percentage = true
-                            row.fixed_amount = 0
-                            row.percentage = doc.healthcare_practitioner_commission[index].percentage
-                            row.practitioner_commission_account = doc.practitioner_commission_account
-                            frm.refresh()
-                        }
-                    }
-                }
-            }
-            )
-    },
-})
+	document_type: function (frm, cdt, cdn) {
+		let row = locals[cdt][cdn]
+		frappe.db.get_doc('Healthcare Practitioner', row.document_type)
+			.then(doc => {
+				const practitionerCommission = doc.healthcare_practitioner_commission.find(commission => commission.document_type === frm.doctype);
+				if (practitionerCommission) {
+					switch (practitionerCommission.preferred_commission_type) {
+						case "Fixed Amount":
+							row.is_fixed_amount = true;
+							row.fixed_amount = practitionerCommission.fixed_amount;
+							row.percentage = 0;
+							row.practitioner_commission_account = doc.practitioner_commission_account;
+							break;
+						case "Percentage":
+							row.is_percentage = true;
+							row.fixed_amount = 0;
+							row.percentage = practitionerCommission.percentage;
+							row.practitioner_commission_account = doc.practitioner_commission_account;
+							break;
+						default:
+						// handle default case
+					}
+					frm.refresh();
+				}
+			}).catch(err => {
+				frappe.msgprint({
+					title: __('Error'),
+					message: __('Unable to fetch practitioner document: {0}', [err.message])
+				});
+			}
+			);
+	}
+});
+
 
 frappe.ui.form.on('Clinical Procedure', {
     refresh(frm) {

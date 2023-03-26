@@ -1,0 +1,51 @@
+h1,h2,h3,h4,h5,h6,p{
+    margin: 0!important;
+    padding: 0!important;
+}
+.w-fit{
+    width: fit-content;
+}
+.flex-table {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .flex-row {
+    display: flex;
+    background-color: #eef1f9;
+    }
+
+    .flex-row *{
+      font-size: 25px;
+    }
+ .istime.active{
+    background-color: rgb(108, 108, 238);
+    color: white;
+    padding-top: 45px!important;
+    padding-bottom: 45px!important;
+  }
+.istime.active  *{
+    color: white;
+    font-weight: bolder;
+    font-size: 45px;
+  }
+  .istime.active svg{
+    width: 20px;
+    height: 20px;
+  }
+  .flex-header {
+    display: flex;
+    font-weight: bold;
+  }
+  .flex-header *{
+    font-size: 35px;
+
+  }
+  .flex-cell {
+    flex: 1;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

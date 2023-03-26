@@ -243,6 +243,31 @@
  ],
  "custom_perms": [],
  "doctype": "Patient Appointment",
- "property_setters": [],
+ "property_setters": [
+  {
+   "_assign": null,
+   "_comments": null,
+   "_liked_by": null,
+   "_user_tags": null,
+   "creation": "2023-03-27 00:57:27.088869",
+   "default_value": null,
+   "doc_type": "Patient Appointment",
+   "docstatus": 0,
+   "doctype_or_field": "DocField",
+   "field_name": "appointment_type",
+   "idx": 0,
+   "modified": "2023-03-27 00:57:27.088869",
+   "modified_by": "Administrator",
+   "name": "Patient Appointment-appointment_type-reqd",
+   "owner": "Administrator",
+   "parent": null,
+   "parentfield": null,
+   "parenttype": null,
+   "property": "reqd",
+   "property_type": "Check",
+   "row_name": null,
+   "value": "1"
+  }
+ ],
  "sync_on_migrate": 1
 }

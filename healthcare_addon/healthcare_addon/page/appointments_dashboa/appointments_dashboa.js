@@ -69,18 +69,30 @@ frappe.pages['appointments-dashboa'].on_page_load = async function (wrapper) {
 
 	const data = await frappe.db.get_list("Patient Appointment",{
 		fields: '*',
-		filters: [['appointment_date', '=', new Date()],['status','=','Open']],
+		// ['appointment_date', '=', new Date()],
+		filters: [['status','!=','Closed']],
 		// limit: 10,
 	})
 	frappe.realtime.on("visited",(data)=>{
-		console.log("visted");
+		console.log(data);
 		frappe.show_alert({
-			message: `visited to room`,
+			message: `${data.patient_name} visited by ${data.practitioner_name}`,
 			indicator: "green"
 		  });
 		setTimeout(()=>{
 			location.reload();
-		},2000)
+		},3000)
+	})
+	// new-appointment
+	frappe.realtime.on("new-appointment",(data)=>{
+		console.log(data);
+		frappe.show_alert({
+			message: `${data.patient_name} added to patient appointment`,
+			indicator: "blue"
+		  });
+		setTimeout(()=>{
+			location.reload();
+		},3000)
 	})
 	setTimeout(()=>{
 		setTimer("13:37:00",() => {

@@ -1,7 +1,7 @@
 import frappe
 from frappe import _
 from healthcare_addon.utils.utils import create_commission_je, cancel_references_table_docs, calculate_practitioner_contribution, update_message
-
+from frappe.realtime import publish_realtime
 
 def before_save(doc, method) -> None:
     """
@@ -26,6 +26,11 @@ def on_submit(doc, method) -> None:
     # Creating a Journal Entry for the practitioner.
     if len(doc.healthcare_practitioner_contribution) > 0:
         create_commission_je(doc)
+
+    # emit event to update appointments dashboard
+    if doc.appointment:
+        publish_realtime("visited",{"patient_name":doc.patient_name, "practitioner_name" : doc.practitioner_name})
+
 
 
 def on_cancel(doc, method) -> None:

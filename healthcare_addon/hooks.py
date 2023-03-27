@@ -122,6 +122,7 @@ doc_events = {
         "on_submit": "healthcare_addon.utils.events.patient_appointment.on_submit",
         "after_delete": "healthcare_addon.utils.events.patient_appointment.after_delete",
         "on_update": "healthcare_addon.utils.events.patient_appointment.on_update",
+        "validate": "healthcare_addon.utils.events.patient_appointment.validate"
     },
     "Lab Test Template": {
     ## no hooks yet

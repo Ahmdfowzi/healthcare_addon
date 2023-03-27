@@ -1,7 +1,7 @@
 import frappe
 from frappe import _
 from healthcare_addon.utils.utils import cancel_references_table_docs, calculate_practitioner_contribution, update_message
-
+from frappe.realtime import publish_realtime
 
 def before_save(doc, method) -> None:
     rate = get_service_rate(doc)
@@ -25,3 +25,7 @@ def get_service_rate(doc):
             rate = item.op_consulting_charge
             break
     return rate
+
+def validate(doc, method) -> None:
+    frappe.msgprint("new appointment")
+    publish_realtime("new-appointment",{"patient_name":doc.patient_name})

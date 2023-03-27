@@ -15,7 +15,7 @@ frappe.ui.form.on('Premature', {
 	refresh: function (frm) {
 		if (!frm.doc.__islocal) {
 			if (frm.doc.docstatus === 1) {
-				if (frm.doc.inpatient_status != "Discharged" && frm.doc.docstatus == 1) {
+				if (frm.doc.inpatient_status != "Discharged") {
 					frm.add_custom_button(__('Discharge Now'), function () {
 						discharge_now(frm);
 					}).addClass('btn-danger');
@@ -64,25 +64,33 @@ frappe.ui.form.on('Healthcare Practitioner Contribution Table', {
 		let row = locals[cdt][cdn]
 		frappe.db.get_doc('Healthcare Practitioner', row.document_type)
 			.then(doc => {
-				for (let index = 0; index < doc.healthcare_practitioner_commission.length; index++) {
-					if (doc.healthcare_practitioner_commission[index].document_type == frm.doctype) {
-						if (doc.healthcare_practitioner_commission[index].preferred_commission_type == "Fixed Amount") {
-							row.is_fixed_amount = true
-							row.fixed_amount = doc.healthcare_practitioner_commission[index].fixed_amount
-							row.percentage = 0
-							row.practitioner_commission_account = doc.practitioner_commission_account
-							frm.refresh()
-						} else if (doc.healthcare_practitioner_commission[index].preferred_commission_type == "Percentage") {
-							row.is_percentage = true
-							row.fixed_amount = 0
-							row.percentage = doc.healthcare_practitioner_commission[index].percentage
-							row.practitioner_commission_account = doc.practitioner_commission_account
-							frm.refresh()
-						}
+				const practitionerCommission = doc.healthcare_practitioner_commission.find(commission => commission.document_type === frm.doctype);
+				if (practitionerCommission) {
+					switch (practitionerCommission.preferred_commission_type) {
+						case "Fixed Amount":
+							row.is_fixed_amount = true;
+							row.fixed_amount = practitionerCommission.fixed_amount;
+							row.percentage = 0;
+							row.practitioner_commission_account = doc.practitioner_commission_account;
+							break;
+						case "Percentage":
+							row.is_percentage = true;
+							row.fixed_amount = 0;
+							row.percentage = practitionerCommission.percentage;
+							row.practitioner_commission_account = doc.practitioner_commission_account;
+							break;
+						default:
+						// handle default case
 					}
+					frm.refresh();
 				}
+			}).catch(err => {
+				frappe.msgprint({
+					title: __('Error'),
+					message: __('Unable to fetch practitioner document: {0}', [err.message])
+				});
 			}
-			)
+			);
 	}
 });
 
@@ -130,6 +138,6 @@ let discharge_now = function (frm) {
 	frappe.db.set_value(frm.doctype, frm.doc.name, 'discharge_at', frappe.datetime.now_datetime()).then(r => {
 		frappe.db.set_value(frm.doctype, frm.doc.name, 'inpatient_status', "Discharged").then(frm.refresh())
 	})
-	window.location.reload()
 	frappe.msgprint(__('Patient Discharged'));
+	window.location.reload()
 };

@@ -5,6 +5,10 @@ from frappe import _
 from frappe.utils import today
 
 
+def update_message(doc):
+    if len(doc.references_table) > 0:
+        frappe.msgprint(title=_("Attention!"), msg=_("This document contains a linked journal entry. Please make sure to review the linked entry for important additional information related to this document."))
+
 @frappe.whitelist()
 def schedule_inpatient(args):
     admission_order = json.loads(args)  # admission order via Encounter
@@ -270,7 +274,8 @@ def calculate_practitioner_contribution(self, rate:int = None):
     # sourcery skip: assign-if-exp, or-if-exp-identity, swap-if-expression
     if not rate and not self.service_item:
         return {'error': 'Please select a service item'}
-
+    if len(self.healthcare_practitioner_contribution) <= 0:
+        return
     for practitioner in self.healthcare_practitioner_contribution:
         if practitioner.is_fixed_amount:
             practitioner.total_commissions = practitioner.fixed_amount
@@ -283,8 +288,7 @@ def calculate_practitioner_contribution(self, rate:int = None):
                 )
             else:
                 item_price = rate
-            commission = (practitioner.percentage * item_price) / 100
-            practitioner.total_commissions = commission
+            practitioner.total_commissions = (practitioner.percentage * item_price) / 100
 
 
 @frappe.whitelist()

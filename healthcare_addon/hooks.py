@@ -36,6 +36,9 @@ doctype_js = {
     "Clinical Procedure": "public/js/clinical_procedure.js",
     "Patient Appointment": "public/js/patient_appointment.js",
     "Patient Encounter": "public/js/patient_encounter.js",
+    "Lab Test Template": "public/js/lab_test_template.js",
+    "Lab Test": "public/js/lab_test.js",
+    "Item Group": "public/js/item_group.js",
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -119,9 +122,10 @@ doc_events = {
         "on_submit": "healthcare_addon.utils.events.patient_appointment.on_submit",
         "after_delete": "healthcare_addon.utils.events.patient_appointment.after_delete",
         "on_update": "healthcare_addon.utils.events.patient_appointment.on_update",
+        "validate": "healthcare_addon.utils.events.patient_appointment.validate"
     },
     "Lab Test Template": {
-        "before_insert": "healthcare_addon.utils.events.lab_test_template.before_insert",
+    ## no hooks yet
     },
     "Patient Encounter": {
         "before_save": "healthcare_addon.utils.events.patient_encounter.before_save",

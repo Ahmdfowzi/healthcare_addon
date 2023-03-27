@@ -71,9 +71,10 @@ frappe.pages['schedule-monitor'].on_page_load = async function (wrapper) {
 	const data = await frappe.db.get_list("Patient Appointment",{
 		fields: '*',
 		// ['appointment_date', '=', new Date()],
-		filters: [['status','!=','Closed']],
+		filters: [["appointment_date","=",new Date()],['status','!=','Closed']],
 		// limit: 10,
 	})
+	console.log(data);
 	frappe.realtime.on("visited",(data)=>{
 		console.log(data);
 		frappe.show_alert({

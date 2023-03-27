@@ -27,5 +27,4 @@ def get_service_rate(doc):
     return rate
 
 def validate(doc, method) -> None:
-    frappe.msgprint("new appointment")
     publish_realtime("new-appointment",{"patient_name":doc.patient_name})

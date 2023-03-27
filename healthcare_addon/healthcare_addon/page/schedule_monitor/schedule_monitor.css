@@ -21,13 +21,13 @@ h1,h2,h3,h4,h5,h6,p{
  .istime.active{
     background-color: rgb(108, 108, 238);
     color: white;
-    padding-top: 45px!important;
-    padding-bottom: 45px!important;
+    padding-top: 10px!important;
+    padding-bottom: 10px!important;
   }
 .istime.active  *{
     color: white;
     font-weight: bolder;
-    font-size: 45px;
+    font-size: 25px;
   }
   .istime.active svg{
     width: 20px;

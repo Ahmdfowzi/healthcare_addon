@@ -51,8 +51,11 @@ def get_floor_section_room():
     It returns a list of dictionaries, each dictionary representing a row in the table
     :return: A list of dictionaries.
     """
+    # select * from `tabHealthcare Service Unit`
+    # where is_group = 0
     result = frappe.db.sql(f"""
-    select * from `tabHealthcare Service Unit`
-    where is_group = 0
+    select `tabHealthcare Service Unit`.* from `tabHealthcare Service Unit`
+    left join `tabHealthcare Service Unit Type` on `tabHealthcare Service Unit Type`.name = `tabHealthcare Service Unit`.service_unit_type
+    where `tabHealthcare Service Unit`.is_group = 0 and `tabHealthcare Service Unit Type`.allow_appointments = 0
     """,as_dict=True)
     return result

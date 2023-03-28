@@ -11,19 +11,19 @@
             <div data-floor="{{floor.floor_name}}">
                 {% for section in floor.floor_sections %}
                 <div class="mborder gridy rounded-sm px-2 m-2 mb-4">
-                    <h2 style="width:fit-content; margin-top:-25px;" class="mborder rounded-sm p-1 text-dark bg-light ">
+                    <h2 style="width:fit-content; margin-top:-25px;" class="mborder rounded-sm p-1 section">
                         {{section.section_name}}</h2>
                     <div class="p-3 row mb-1">
                         {% for room in section.section_rooms %}
                         {% if room.room_status == "Occupied" %}
-                        <div style="max-width: 150px;" class="py-1 px-2 bg-danger text-light m-1 rounded-sm">
-                            <h4 class="text-center text-light text-md-center font-weight-bold mb-2">{{room.room_name}}</h4>
-                            <h5 class="text-center text-light text-md-center font-weight-bold mb-0 p-0">{{room.patient_name}}</h5>
+                        <div style="max-width: 150px;" class="py-2 px-2 occupied m-1 rounded-sm">
+                            <h4 class="text-center text-md-center font-weight-bold mb-2">{{room.room_name}}</h4>
+                            <h5 class="text-center text-md-center font-weight-bold mb-0 p-0">{{room.patient_name}}</h5>
                         </div>
                         {%endif%}
                         {% if room.room_status == "Vacant" %}
-                        <div style="max-width: 150px;" class="py-1 px-2 bg-success text-light m-1 rounded-sm">
-                            <h4 class="text-center text-light font-weight-bold">{{room.room_name}}</h4>
+                        <div style="max-width: 150px;" class="center py-2 px-2 vacant m-1 rounded-sm">
+                            <h4 class="text-center font-weight-bold">{{room.room_name}}</h4>
                         </div>
                         {% endif %}
                         {% endfor %}

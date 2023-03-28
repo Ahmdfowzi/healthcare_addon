@@ -5,12 +5,14 @@ from frappe import _
 from frappe.utils import today
 
 
-def update_message(doc):
+def update_message(doc) -> None:
     if len(doc.references_table) > 0:
-        frappe.msgprint(title=_("Attention!"), msg=_("This document contains a linked journal entry. Please make sure to review the linked entry for important additional information related to this document."))
+        frappe.msgprint(title=_("Attention!"), msg=_(
+            "This document contains a linked journal entry. Please make sure to review the linked entry for important additional information related to this document."))
+
 
 @frappe.whitelist()
-def schedule_inpatient(args):
+def schedule_inpatient(args) -> None:
     admission_order = json.loads(args)  # admission order via Encounter
     if (
             not admission_order
@@ -60,7 +62,7 @@ def schedule_inpatient(args):
 
 
 @frappe.whitelist()
-def schedule_discharge(args):  # sourcery skip: use-named-expression
+def schedule_discharge(args) -> None:  # sourcery skip: use-named-expression
     discharge_order = json.loads(args)
     if (
             not discharge_order
@@ -70,18 +72,23 @@ def schedule_discharge(args):  # sourcery skip: use-named-expression
         frappe.throw(
             _("Missing required details, did not create schedule discharge"))
 
-    inpatient_record_id = frappe.db.get_value("Patient", discharge_order["patient"], "inpatient_record")
+    inpatient_record_id = frappe.db.get_value(
+        "Patient", discharge_order["patient"], "inpatient_record")
     if inpatient_record_id:
-        inpatient_record = frappe.get_doc("Inpatient Record", inpatient_record_id)
-        check_out_inpatient(inpatient_record, discharge_order["discharge_ordered_datetime"])
+        inpatient_record = frappe.get_doc(
+            "Inpatient Record", inpatient_record_id)
+        check_out_inpatient(
+            inpatient_record, discharge_order["discharge_ordered_datetime"])
         set_details_from_ip_order(inpatient_record, discharge_order)
         inpatient_record.status = "Discharge Scheduled"
         inpatient_record.save(ignore_permissions=True)
-        frappe.db.set_value("Patient", discharge_order["patient"], "inpatient_status", inpatient_record.status)
-        frappe.db.set_value("Emergency Medical Services", inpatient_record.emergency_medical_services_discharge, "inpatient_status", inpatient_record.status)
+        frappe.db.set_value(
+            "Patient", discharge_order["patient"], "inpatient_status", inpatient_record.status)
+        frappe.db.set_value("Emergency Medical Services", inpatient_record.emergency_medical_services_discharge,
+                            "inpatient_status", inpatient_record.status)
 
 
-def check_out_inpatient(inpatient_record, discharge_ordered_datetime):
+def check_out_inpatient(inpatient_record, discharge_ordered_datetime) -> None:
     """
     It checks out the patient from the service unit
 
@@ -98,7 +105,7 @@ def check_out_inpatient(inpatient_record, discharge_ordered_datetime):
                 )
 
 
-def set_details_from_ip_order(inpatient_record, ip_order):
+def set_details_from_ip_order(inpatient_record, ip_order) -> None:
     """
     It takes an inpatient record and an inpatient order, and sets the details of the inpatient record
     from the inpatient order.
@@ -125,7 +132,7 @@ def set_ip_child_records(inpatient_record, inpatient_record_child, encounter_chi
             table.set(df.fieldname, item.get(df.fieldname))
 
 
-def create_medication_invoice(self):
+def create_medication_invoice(self) -> None:
     """
     It creates a new Sales Invoice document, populates it with the patient, practitioner, and items from
     the prescription, and then inserts it into the database
@@ -150,7 +157,7 @@ def create_medication_invoice(self):
     set_references_table(invoice, self)
 
 
-def create_healthcare_service_invoice(self, item_code, qty):
+def create_healthcare_service_invoice(self, item_code, qty) -> None:
     """
     It creates a new Sales Invoice with the patient as the customer, the practitioner as the reference
     practitioner, and the item passed as parameter
@@ -176,7 +183,7 @@ def create_healthcare_service_invoice(self, item_code, qty):
     set_references_table(invoice, self)
 
 
-def set_references_table(document, self):
+def set_references_table(document, self) -> None:
     """
     It adds a new row to the `references_table` table with the `document_type` and `document_link`
     fields set to the `doctype` and `name` of the `document` parameter
@@ -190,7 +197,7 @@ def set_references_table(document, self):
     self.save()
 
 
-def cancel_references_table_docs(self):
+def cancel_references_table_docs(self) -> None:
     """
     It cancels all the documents that are referenced in the references_table of the current document
     """
@@ -200,7 +207,7 @@ def cancel_references_table_docs(self):
             doc.cancel()
 
 
-def calculate_total_commission(self):
+def calculate_total_commission(self) -> int:
     """
     It returns the sum of the total commissions for each healthcare practitioner contribution
     :return: The sum of the total commissions for each healthcare practitioner contribution.
@@ -209,7 +216,8 @@ def calculate_total_commission(self):
         i.total_commissions for i in self.healthcare_practitioner_contribution
     )
 
-def create_commission_je(self):
+
+def create_commission_je(self) -> None:
     """
     It creates a new Journal Entry, adds the default practitioner's commission account to the debit
     side, and then adds each practitioner's commission account to the credit side
@@ -238,8 +246,9 @@ def create_commission_je(self):
     je.submit()
     set_references_table(je, self)
 
+
 @frappe.whitelist()
-def create_appointment_commission_je(doc_type, docname):
+def create_appointment_commission_je(doc_type, docname) -> None:
     """
     It creates a new Journal Entry, adds the default practitioner's commission account to the debit
     side, and then adds each practitioner's commission account to the credit side
@@ -270,7 +279,7 @@ def create_appointment_commission_je(doc_type, docname):
     set_references_table(je, doc)
 
 
-def calculate_practitioner_contribution(self, rate:int = None):
+def calculate_practitioner_contribution(self, rate: int = None) -> dict[str, str] | None:
     # sourcery skip: assign-if-exp, or-if-exp-identity, swap-if-expression
     if not rate and not self.service_item:
         return {'error': 'Please select a service item'}
@@ -288,11 +297,12 @@ def calculate_practitioner_contribution(self, rate:int = None):
                 )
             else:
                 item_price = rate
-            practitioner.total_commissions = (practitioner.percentage * item_price) / 100
+            practitioner.total_commissions = (
+                practitioner.percentage * item_price) / 100
 
 
 @frappe.whitelist()
-def clear_linked_je(doc_type, docname):
+def clear_linked_je(doc_type, docname) -> None:
     doc = frappe.get_doc(doc_type, docname)
     if doc.docstatus == 1:
         for ref in doc.references_table:

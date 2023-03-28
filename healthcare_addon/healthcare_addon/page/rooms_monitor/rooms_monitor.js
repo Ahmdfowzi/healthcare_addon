@@ -221,7 +221,28 @@ frappe.pages['rooms-monitor'].on_page_load = async function (wrapper) {
 		return state
 	}
 	
-
+	/* Creating a new date object and then assigning the year, month, and day to variables. */
+	const now = new Date();
+	const year = now.getFullYear();
+	const month = ('0' + (now.getMonth() + 1)).slice(-2);
+	const day = ('0' + now.getDate()).slice(-2);
+	const formattedDate = `${year}-${month}-${day}`;
+	let result = await frappe.call({
+		method : 'healthcare_addon.healthcare_addon.page.rooms_monitor.rooms_monitor.get_patient_floor_drug',
+		args : {
+			date: formattedDate
+		}
+	})
+	result = result.message
+	let newResult = []
+	/* Removing duplicates from the result array. */
+	const visitedNodes = new Set()
+	for (const r of result) {
+		if(!visitedNodes.has(r.time + ":" + r.patient)){
+			newResult.push(r)
+			visitedNodes.add(r.time + ":" + r.patient)
+		}
+	}
 	setTimeout(()=>{
 		document.querySelectorAll("[data-floorname]").forEach((el,i)=>{
 			el.dataset.index = i
@@ -273,29 +294,29 @@ frappe.pages['rooms-monitor'].on_page_load = async function (wrapper) {
 			})
 
 			//   document.querySelector(".alarm-sound").play()
-			  // Example usage
-			  setTimer('13:47:00', function() {
-				// // //console.log('Time is up!');
-				document.querySelector(".timer-item").classList.add("bg-warning")
-				document.querySelector(".timer-item").classList.add("border-0")
-				document.querySelector(".thetime svg").classList.add("alarm-ring")
-				document.querySelector(".timer-item").addEventListener("click",(e)=>{
-					let patient_name = document.querySelector(".timer-item").children[0].textContent.trim()
-					let dosage_time = document.querySelector(".timer-item").children[1].children[1].textContent.trim()
-					frappe.route_options = {
-						'patient': patient_name,
-						'from_date': "25-03-2023",
-						'to_date': "25-03-2023",
-					};
-					frappe.new_doc('Inpatient Medication Entry');
-					// document.querySelector(".timer-item").remove()
-				})
+			//   // Example usage
+			//   setTimer('13:47:00', function() {
+			// 	// // //console.log('Time is up!');
+			// 	document.querySelector(".timer-item").classList.add("bg-warning")
+			// 	document.querySelector(".timer-item").classList.add("border-0")
+			// 	document.querySelector(".thetime svg").classList.add("alarm-ring")
+			// 	document.querySelector(".timer-item").addEventListener("click",(e)=>{
+			// 		let patient_name = document.querySelector(".timer-item").children[0].textContent.trim()
+			// 		let dosage_time = document.querySelector(".timer-item").children[1].children[1].textContent.trim()
+			// 		frappe.route_options = {
+			// 			'patient': patient_name,
+			// 			'from_date': "25-03-2023",
+			// 			'to_date': "25-03-2023",
+			// 		};
+			// 		frappe.new_doc('Inpatient Medication Entry');
+			// 		// document.querySelector(".timer-item").remove()
+			// 	})
 
-			  });
+			//   });
 			  document.querySelectorAll(".timer-item").forEach(elm=>{
 				let patient_name = elm.children[0].textContent.trim()
-				let dosage_time = elm.children[1].children[1].textContent.trim()
-				let clock_icon = elm.children[1].children[0]
+				let dosage_time = elm.children[2].children[1].textContent.trim()
+				let clock_icon = elm.children[2].children[0]
 				//console.log(dosage_time)
 				if(isTimeLessThanNow(formatTime(dosage_time))){
 					//console.log(dosage_time)
@@ -306,8 +327,6 @@ frappe.pages['rooms-monitor'].on_page_load = async function (wrapper) {
 					elm.addEventListener("click",()=>{
 						frappe.route_options = {
 							'patient': patient_name,
-							'from_date': "25-03-2023",
-							'to_date': "25-03-2023",
 						};
 						frappe.new_doc('Inpatient Medication Entry');
 					})
@@ -319,8 +338,6 @@ frappe.pages['rooms-monitor'].on_page_load = async function (wrapper) {
 					elm.addEventListener("click",()=>{
 						frappe.route_options = {
 							'patient': patient_name,
-							'from_date': "25-03-2023",
-							'to_date': "25-03-2023",
 						};
 						frappe.new_doc('Inpatient Medication Entry');
 					})
@@ -332,28 +349,7 @@ frappe.pages['rooms-monitor'].on_page_load = async function (wrapper) {
 			  })
 
 	},[1000])
-	/* Creating a new date object and then assigning the year, month, and day to variables. */
-	const now = new Date();
-	const year = now.getFullYear();
-	const month = ('0' + (now.getMonth() + 1)).slice(-2);
-	const day = ('0' + now.getDate()).slice(-2);
-	const formattedDate = `${year}-${month}-${day}`;
-	let result = await frappe.call({
-		method : 'healthcare_addon.healthcare_addon.page.rooms_monitor.rooms_monitor.get_patient_floor_drug',
-		args : {
-			date: formattedDate
-		}
-	})
-	result = result.message
-	let newResult = []
-	/* Removing duplicates from the result array. */
-	const visitedNodes = new Set()
-	for (const r of result) {
-		if(!visitedNodes.has(r.time + ":" + r.patient)){
-			newResult.push(r)
-			visitedNodes.add(r.time + ":" + r.patient)
-		}
-	}
+	
 
 	/* Listening to the event "enter" and when it is triggered it will show an alert with the message
 	"data.data added to room" and it will reload the page after 2 seconds */
@@ -386,7 +382,7 @@ frappe.pages['rooms-monitor'].on_page_load = async function (wrapper) {
 			location.reload();
 		},2000)
 	})
-
+	console.log(newResult);
 	parent.html(frappe.render_template("rooms_monitor", {floors:data, timer: newResult}));
 }
 

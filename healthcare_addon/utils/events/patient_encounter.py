@@ -5,13 +5,14 @@ from frappe.realtime import publish_realtime
 
 def before_save(doc, method) -> None:
     """
-    > It calculates the practitioner contribution for a given document, using the rate specified in the
-    document
-
+    > If the appointment field is empty, calculate the practitioner contribution using the rate from the
+    get_rate function
+    
     :param doc: The document that is being saved
     :param method: The method that is being called
     """
-    calculate_practitioner_contribution(doc, rate=get_rate(doc))
+    if not doc.appointment:
+        calculate_practitioner_contribution(doc, rate=get_rate(doc))
 
 
 def on_submit(doc, method) -> None:
@@ -42,14 +43,14 @@ def on_cancel(doc, method) -> None:
 
 def before_update_after_submit(doc, method) -> None:
     """
-    > When a new `Practitioner` is created, calculate the practitioner's contribution based on the
-    practitioner's rate
-
-    :param doc: The document object that is being submitted
-    :param method: The name of the method that is being called
+    > If the appointment is not set, calculate the practitioner contribution and update the message
+    
+    :param doc: The document that is being submitted
+    :param method: The method that is being called
     """
-    calculate_practitioner_contribution(doc, rate=get_rate(doc))
-    update_message(doc)
+    if not doc.appointment:
+        calculate_practitioner_contribution(doc, rate=get_rate(doc))
+        update_message(doc)
 
 
 def get_rate(doc):

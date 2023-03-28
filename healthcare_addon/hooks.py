@@ -124,8 +124,8 @@ doc_events = {
         "on_update": "healthcare_addon.utils.events.patient_appointment.on_update",
         "validate": "healthcare_addon.utils.events.patient_appointment.validate"
     },
-    "Lab Test Template": {
-    ## no hooks yet
+    "Lab Test": {
+        "before_save": "healthcare_addon.utils.events.lab_test.before_save",
     },
     "Patient Encounter": {
         "before_save": "healthcare_addon.utils.events.patient_encounter.before_save",

@@ -1,0 +1,20 @@
+{
+ "content": null,
+ "creation": "2023-03-27 13:24:53.895633",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2023-03-27 13:24:53.895633",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "schedule-monitor",
+ "owner": "Administrator",
+ "page_name": "schedule-monitor",
+ "restrict_to_domain": "Healthcare",
+ "roles": [],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 1,
+ "title": "Schedule Monitor"
+}

@@ -36,22 +36,22 @@ frappe.ui.form.on('Healthcare Practitioner Contribution Table', {
 
 frappe.ui.form.on('Patient Appointment', {
 	refresh(frm) {
-		if (!frm.doc.__islocal && frm.doc.references_table.length == 0) {
-            frm.add_custom_button(__('Submit Je'), function () {
-                frappe.call({
-                    method: 'healthcare_addon.utils.utils.create_appointment_commission_je',
-                    args: {
-                        doc_type: frm.doctype,
-                        docname: frm.docname,
-                    },
-                    freeze: true,
-                    freeze_message: __('Clearing'),
-                    callback: function (r) {
-                        frm.refresh();
-                    }
-                }).then(window.location.reload());
-            }).addClass('btn-primary');
-        }
+		if (!frm.doc.__islocal && frm.doc.references_table.length == 0 && (frm.doc.status != "Cancelled" && frm.doc.status != "Closed")) {
+			frm.add_custom_button(__('Submit Je'), function () {
+				frappe.call({
+					method: 'healthcare_addon.utils.utils.create_appointment_commission_je',
+					args: {
+						doc_type: frm.doctype,
+						docname: frm.docname,
+					},
+					freeze: true,
+					freeze_message: __('Clearing'),
+					callback: function (r) {
+						frm.refresh();
+					}
+				}).then(window.location.reload());
+			}).addClass('btn-primary');
+		}
 	},
 })
 

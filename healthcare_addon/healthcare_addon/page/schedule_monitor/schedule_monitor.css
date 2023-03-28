@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
+.app *{
+  font-family: 'Cairo', sans-serif;
+}
+h1,h2,h3,h4,h5,h6,p{
+    margin: 0!important;
+    padding: 0!important;
+}
+.w-fit{
+    width: fit-content;
+}
+.flex-table {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .flex-row {
+    display: flex;
+    background-color: #eef1f9;
+    }
+    [data-theme="dark"] .flex-row{
+      background-color: var(--dark);
+    }
+    .flex-row *{
+      font-size: 25px;
+    }
+ .istime.active{
+    background-color: rgb(108, 108, 238);
+    color: white;
+    padding-top: 10px!important;
+    padding-bottom: 10px!important;
+  }
+.istime.active  *{
+    color: white;
+    font-weight: bolder;
+    font-size: 25px;
+  }
+  .istime.active svg{
+    width: 20px;
+    height: 20px;
+  }
+  .flex-header {
+    display: flex;
+    font-weight: bold;
+  }
+  .flex-header *{
+    font-size: 35px;
+
+  }
+  .flex-cell {
+    flex: 1;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

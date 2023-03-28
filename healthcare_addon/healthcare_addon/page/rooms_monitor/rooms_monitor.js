@@ -27,7 +27,7 @@ async function MapThroughTables(){
 		method : 'healthcare_addon.healthcare_addon.page.rooms_monitor.rooms_monitor.get_floor_section_room',
 	})
 	floor_section_room = floor_section_room.message
-
+	console.log(floor_section_room);
 	// collect floors in set to ensure there is no dublicate
 	const floorSet = new Set()
 	for(let floor of floor_section_room){

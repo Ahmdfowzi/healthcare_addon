@@ -25,7 +25,10 @@ def on_submit(doc, method) -> None:
     """
 
     # Creating a Journal Entry for the practitioner.
-    if len(doc.healthcare_practitioner_contribution) > 0:
+    if (
+        not doc.appointment
+        and len(doc.healthcare_practitioner_contribution) > 0
+    ):
         create_commission_je(doc)
 
     # emit event to update appointments dashboard

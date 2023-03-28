@@ -109,8 +109,8 @@ doc_events = {
         "validate": "healthcare_addon.utils.establish.make_establish",
     },
     "Inpatient Medication Entry": {
-		"on_submit": "healthcare_addon.utils.medication_entry.new_medication"
-	},
+        "on_submit": "healthcare_addon.utils.medication_entry.new_medication"
+    },
     "Clinical Procedure": {
         "before_save": "healthcare_addon.utils.events.clinical_procedure.before_save",
         "on_submit": "healthcare_addon.utils.events.clinical_procedure.on_submit",
@@ -131,7 +131,11 @@ doc_events = {
         "before_save": "healthcare_addon.utils.events.patient_encounter.before_save",
         "on_submit": "healthcare_addon.utils.events.patient_encounter.on_submit",
         "on_cancel": "healthcare_addon.utils.events.patient_encounter.on_cancel",
-        "before_update_after_submit": "healthcare_addon.utils.events.patient_encounter.before_update_after_submit",    },
+        "before_update_after_submit": "healthcare_addon.utils.events.patient_encounter.before_update_after_submit",
+    },
+    "Inpatient Medication Order": {
+        "on_submit": "healthcare_addon.utils.events.inpatient_medication_order.on_submit",
+    },
 }
 
 # Scheduled Tasks

@@ -73,7 +73,7 @@
    "columns": 0,
    "creation": "2023-03-21 12:02:22.888643",
    "default": null,
-   "depends_on": null,
+   "depends_on": "eval:!doc.procedure_template",
    "description": null,
    "docstatus": 0,
    "dt": "Patient Appointment",

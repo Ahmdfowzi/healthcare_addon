@@ -279,7 +279,7 @@ def create_appointment_commission_je(doc_type, docname) -> None:
     set_references_table(je, doc)
 
 
-def calculate_practitioner_contribution(self, rate: int = None):
+def calculate_practitioner_contribution(self, rate: int = None) -> None:
     # sourcery skip: assign-if-exp, or-if-exp-identity, swap-if-expression
     if not rate and not self.service_item:
         return {'error': 'Please select a service item'}

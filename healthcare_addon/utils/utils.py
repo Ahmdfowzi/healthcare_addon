@@ -117,7 +117,7 @@ def set_details_from_ip_order(inpatient_record, ip_order) -> None:
         inpatient_record.set(key, ip_order[key])
 
 
-def set_ip_child_records(inpatient_record, inpatient_record_child, encounter_child):
+def set_ip_child_records(inpatient_record, inpatient_record_child, encounter_child) -> None:
     """
     > For each item in the encounter_child list, append a new row to the inpatient_record table, and set
     the values of each field in the new row to the values of the corresponding fields in the item
@@ -279,7 +279,7 @@ def create_appointment_commission_je(doc_type, docname) -> None:
     set_references_table(je, doc)
 
 
-def calculate_practitioner_contribution(self, rate: int = None) -> dict[str, str] | None:
+def calculate_practitioner_contribution(self, rate: int = None):
     # sourcery skip: assign-if-exp, or-if-exp-identity, swap-if-expression
     if not rate and not self.service_item:
         return {'error': 'Please select a service item'}

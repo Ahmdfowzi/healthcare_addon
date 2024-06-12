@@ -1,0 +1,199 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-06-12 11:42:30.725514",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "patient_section",
+  "patient",
+  "gender",
+  "date",
+  "column_break_edlp",
+  "date_of_birth",
+  "wieght",
+  "section_break_nsvj",
+  "medical_and_drugs_hx",
+  "cardiovascular",
+  "neurolngical",
+  "column_break_pwbx",
+  "resplratory",
+  "endocrline",
+  "physical_examination_section",
+  "bp",
+  "column_break_sxhf",
+  "mmhg",
+  "column_break_ujrx",
+  "cheast",
+  "column_break_zjnv",
+  "odeema",
+  "column_break_ovju",
+  "hr_bmp",
+  "column_break_vcym",
+  "denntiton",
+  "notes_section",
+  "nots"
+ ],
+ "fields": [
+  {
+   "fieldname": "patient_section",
+   "fieldtype": "Section Break",
+   "label": "Patient"
+  },
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "label": "Patient",
+   "options": "Patient"
+  },
+  {
+   "fetch_from": "patient.sex",
+   "fieldname": "gender",
+   "fieldtype": "Data",
+   "label": "Gender"
+  },
+  {
+   "fieldname": "wieght",
+   "fieldtype": "Float",
+   "label": "Wieght"
+  },
+  {
+   "fieldname": "column_break_edlp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "patient.dob",
+   "fieldname": "date_of_birth",
+   "fieldtype": "Data",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "section_break_nsvj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "medical_and_drugs_hx",
+   "fieldtype": "Small Text",
+   "label": "Medical and Drugs Hx"
+  },
+  {
+   "fieldname": "cardiovascular",
+   "fieldtype": "Small Text",
+   "label": "Cardiovascular"
+  },
+  {
+   "fieldname": "column_break_pwbx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "neurolngical",
+   "fieldtype": "Small Text",
+   "label": "Neurolngical"
+  },
+  {
+   "fieldname": "resplratory",
+   "fieldtype": "Small Text",
+   "label": "Resplratory"
+  },
+  {
+   "fieldname": "endocrline",
+   "fieldtype": "Small Text",
+   "label": "Endocrline"
+  },
+  {
+   "fieldname": "physical_examination_section",
+   "fieldtype": "Section Break",
+   "label": "Physical Examination"
+  },
+  {
+   "fieldname": "bp",
+   "fieldtype": "Float",
+   "label": "BP"
+  },
+  {
+   "fieldname": "column_break_sxhf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mmhg",
+   "fieldtype": "Float",
+   "label": "mmhg"
+  },
+  {
+   "fieldname": "column_break_ujrx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cheast",
+   "fieldtype": "Data",
+   "label": "Cheast"
+  },
+  {
+   "fieldname": "column_break_zjnv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "odeema",
+   "fieldtype": "Data",
+   "label": "Odeema"
+  },
+  {
+   "fieldname": "column_break_ovju",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "denntiton",
+   "fieldtype": "Select",
+   "label": "Denntiton",
+   "options": "Positive\nNegative"
+  },
+  {
+   "fieldname": "hr_bmp",
+   "fieldtype": "Data",
+   "label": "HR bmp"
+  },
+  {
+   "fieldname": "column_break_vcym",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "notes_section",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "nots",
+   "fieldtype": "Small Text",
+   "label": "Nots"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-06-12 11:57:34.156946",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Pre Anaesthesia Evaluation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

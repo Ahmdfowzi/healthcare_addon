@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:PAE-{DD}-{MM}-{YYYY}-{#####}",
  "creation": "2024-06-12 11:42:30.725514",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -32,7 +33,29 @@
   "column_break_vcym",
   "denntiton",
   "notes_section",
-  "nots"
+  "nots",
+  "section_break_agur",
+  "airway_assessment",
+  "ecg",
+  "echo_study",
+  "cxr",
+  "column_break_lezr",
+  "asa",
+  "section_break_nzgd",
+  "lad_results_hgb_gdl",
+  "column_break_jwir",
+  "pcv",
+  "column_break_pgdh",
+  "bl_sugar",
+  "column_break_smxb",
+  "bl_urea",
+  "column_break_baey",
+  "scr",
+  "section_break_onnq",
+  "smoking",
+  "recommendation_and_signature",
+  "column_break_yidz",
+  "allergies"
  ],
  "fields": [
   {
@@ -170,14 +193,118 @@
    "fieldname": "nots",
    "fieldtype": "Small Text",
    "label": "Nots"
+  },
+  {
+   "fieldname": "section_break_agur",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "airway_assessment",
+   "fieldtype": "Data",
+   "label": "Airway Assessment"
+  },
+  {
+   "fieldname": "ecg",
+   "fieldtype": "Data",
+   "label": "ECG"
+  },
+  {
+   "fieldname": "echo_study",
+   "fieldtype": "Data",
+   "label": "Echo Study"
+  },
+  {
+   "fieldname": "cxr",
+   "fieldtype": "Data",
+   "label": "CXR"
+  },
+  {
+   "fieldname": "column_break_lezr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "asa",
+   "fieldtype": "Select",
+   "label": "ASA",
+   "options": "1\n2\n3\n4"
+  },
+  {
+   "fieldname": "section_break_nzgd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "lad_results_hgb_gdl",
+   "fieldtype": "Float",
+   "label": "Lad Results Hgb g/dl"
+  },
+  {
+   "fieldname": "column_break_jwir",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pcv",
+   "fieldtype": "Float",
+   "label": "PCV"
+  },
+  {
+   "fieldname": "column_break_pgdh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bl_sugar",
+   "fieldtype": "Float",
+   "label": "Bl Sugar"
+  },
+  {
+   "fieldname": "column_break_smxb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bl_urea",
+   "fieldtype": "Float",
+   "label": "Bl Urea"
+  },
+  {
+   "fieldname": "column_break_baey",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "scr",
+   "fieldtype": "Float",
+   "label": "SCR"
+  },
+  {
+   "fieldname": "section_break_onnq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "smoking",
+   "fieldtype": "Select",
+   "label": "Smoking",
+   "options": "Positive\nNegative"
+  },
+  {
+   "fieldname": "recommendation_and_signature",
+   "fieldtype": "Data",
+   "label": "Recommendation and Signature"
+  },
+  {
+   "fieldname": "column_break_yidz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "allergies",
+   "fieldtype": "Data",
+   "label": "Allergies"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-12 11:57:34.156946",
+ "modified": "2024-06-12 12:09:20.373502",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Pre Anaesthesia Evaluation",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

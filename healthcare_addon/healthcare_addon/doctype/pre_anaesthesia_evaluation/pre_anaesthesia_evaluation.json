@@ -11,8 +11,13 @@
   "gender",
   "date",
   "column_break_edlp",
-  "date_of_birth",
+  "age",
   "wieght",
+  "section_break_ruca",
+  "dx_procedure",
+  "surgical_hx",
+  "column_break_kimo",
+  "surgeon",
   "section_break_nsvj",
   "medical_and_drugs_hx",
   "cardiovascular",
@@ -25,12 +30,14 @@
   "column_break_sxhf",
   "mmhg",
   "column_break_ujrx",
+  "column_break_suwl",
+  "section_break_nphi",
   "cheast",
-  "column_break_zjnv",
-  "odeema",
-  "column_break_ovju",
+  "column_break_zktm",
+  "odema",
+  "column_break_avcl",
   "hr_bmp",
-  "column_break_vcym",
+  "column_break_ckhg",
   "denntiton",
   "notes_section",
   "nots",
@@ -41,6 +48,8 @@
   "cxr",
   "column_break_lezr",
   "asa",
+  "smoking",
+  "allergies",
   "section_break_nzgd",
   "lad_results_hgb_gdl",
   "column_break_jwir",
@@ -52,10 +61,8 @@
   "column_break_baey",
   "scr",
   "section_break_onnq",
-  "smoking",
   "recommendation_and_signature",
-  "column_break_yidz",
-  "allergies"
+  "column_break_yidz"
  ],
  "fields": [
   {
@@ -76,19 +83,14 @@
    "label": "Gender"
   },
   {
+   "fetch_from": "patient.custom_wieght",
    "fieldname": "wieght",
-   "fieldtype": "Float",
+   "fieldtype": "Data",
    "label": "Wieght"
   },
   {
    "fieldname": "column_break_edlp",
    "fieldtype": "Column Break"
-  },
-  {
-   "fetch_from": "patient.dob",
-   "fieldname": "date_of_birth",
-   "fieldtype": "Data",
-   "label": "Date of Birth"
   },
   {
    "fieldname": "date",
@@ -157,19 +159,6 @@
    "label": "Cheast"
   },
   {
-   "fieldname": "column_break_zjnv",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "odeema",
-   "fieldtype": "Data",
-   "label": "Odeema"
-  },
-  {
-   "fieldname": "column_break_ovju",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "denntiton",
    "fieldtype": "Select",
    "label": "Denntiton",
@@ -181,10 +170,6 @@
    "label": "HR bmp"
   },
   {
-   "fieldname": "column_break_vcym",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "notes_section",
    "fieldtype": "Section Break",
    "label": "Notes"
@@ -192,7 +177,7 @@
   {
    "fieldname": "nots",
    "fieldtype": "Small Text",
-   "label": "Nots"
+   "label": "Notes"
   },
   {
    "fieldname": "section_break_agur",
@@ -243,7 +228,7 @@
   },
   {
    "fieldname": "pcv",
-   "fieldtype": "Float",
+   "fieldtype": "Percent",
    "label": "PCV"
   },
   {
@@ -280,12 +265,14 @@
   {
    "fieldname": "smoking",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Smoking",
-   "options": "Positive\nNegative"
+   "options": "Positive\nNegative",
+   "reqd": 1
   },
   {
    "fieldname": "recommendation_and_signature",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Recommendation and Signature"
   },
   {
@@ -296,11 +283,66 @@
    "fieldname": "allergies",
    "fieldtype": "Data",
    "label": "Allergies"
+  },
+  {
+   "fetch_from": "patient.dob",
+   "fieldname": "age",
+   "fieldtype": "Data",
+   "label": "Age"
+  },
+  {
+   "fieldname": "section_break_ruca",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "dx_procedure",
+   "fieldtype": "Data",
+   "label": "Dx Procedure"
+  },
+  {
+   "fieldname": "surgical_hx",
+   "fieldtype": "Data",
+   "label": "Surgical Hx"
+  },
+  {
+   "fieldname": "column_break_kimo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "surgeon",
+   "fieldtype": "Link",
+   "label": "Surgeon",
+   "options": "Healthcare Practitioner"
+  },
+  {
+   "fieldname": "column_break_suwl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_nphi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_zktm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "odema",
+   "fieldtype": "Data",
+   "label": "Odema"
+  },
+  {
+   "fieldname": "column_break_avcl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ckhg",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-12 12:09:20.373502",
+ "modified": "2024-06-13 11:42:51.356458",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Pre Anaesthesia Evaluation",

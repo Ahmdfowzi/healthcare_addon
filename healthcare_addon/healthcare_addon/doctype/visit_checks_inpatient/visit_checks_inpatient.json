@@ -39,6 +39,10 @@
   "good_feeding",
   "poor_appetite",
   "nau",
+  "abdomen",
+  "rigid",
+  "tender",
+  "soft",
   "column_break_i7hbi",
   "vomiting",
   "hernatemesis",
@@ -57,10 +61,6 @@
   "pae",
   "normal_s1_s2",
   "abn_heart_sounds",
-  "abdomen",
-  "soft",
-  "tender",
-  "rigid",
   "vital_signs",
   "bowel_sounds",
   "pr",
@@ -70,7 +70,10 @@
   "c",
   "spo2",
   "rbs",
-  "uop"
+  "uop",
+  "doctor_name",
+  "signature",
+  "management"
  ],
  "fields": [
   {
@@ -260,8 +263,7 @@
   },
   {
    "fieldname": "column_break_i7hbi",
-   "fieldtype": "Column Break",
-   "label": "Column Break"
+   "fieldtype": "Column Break"
   },
   {
    "default": "0",
@@ -452,12 +454,28 @@
    "fieldname": "vital_signs",
    "fieldtype": "Heading",
    "label": "Vital Signs"
+  },
+  {
+   "fieldname": "doctor_name",
+   "fieldtype": "Link",
+   "label": "Doctor Name",
+   "options": "Healthcare Practitioner"
+  },
+  {
+   "fieldname": "signature",
+   "fieldtype": "Data",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "management",
+   "fieldtype": "Small Text",
+   "label": "Management"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-06-13 10:47:27.039340",
+ "modified": "2024-06-13 11:59:03.354113",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Visit Checks Inpatient",

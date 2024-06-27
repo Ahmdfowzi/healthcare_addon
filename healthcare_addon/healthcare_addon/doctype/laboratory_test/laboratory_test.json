@@ -1,0 +1,424 @@
+{
+ "actions": [],
+ "allow_copy": 1,
+ "allow_import": 1,
+ "autoname": "format:{Laboratory}-{YY}-{#####}",
+ "creation": "2024-01-27 13:26:19.478872",
+ "default_view": "List",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "lab_tests",
+  "column_break_26",
+  "company",
+  "submitted_date",
+  "result_date",
+  "approved_date",
+  "expected_result_date",
+  "expected_result_time",
+  "printed_on",
+  "sb_first",
+  "patient",
+  "patient_name",
+  "patient_age",
+  "patient_sex",
+  "vial_count",
+  "vial_code",
+  "inpatient_record",
+  "report_preference",
+  "email",
+  "mobile",
+  "c_b",
+  "user",
+  "sample",
+  "sb_normal",
+  "lab_test_html",
+  "normal_test_items",
+  "sb_sensitivity",
+  "sensitivity_test_items",
+  "sb_comments",
+  "lab_test_comment",
+  "sb_customresult",
+  "custom_result",
+  "section_break_50",
+  "prescription",
+  "consumable_items",
+  "stock_entry_reference",
+  "section_break_maeuv",
+  "column_break_clo19",
+  "clinician",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "column_break_26",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company",
+   "print_hide": 1,
+   "report_hide": 1
+  },
+  {
+   "fieldname": "submitted_date",
+   "fieldtype": "Datetime",
+   "label": "Submitted Date",
+   "print_hide": 1,
+   "report_hide": 1
+  },
+  {
+   "fieldname": "result_date",
+   "fieldtype": "Date",
+   "label": "Result Date",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "approved_date",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "Approved Date",
+   "print_hide": 1,
+   "report_hide": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "expected_result_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Expected Result Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "expected_result_time",
+   "fieldtype": "Time",
+   "hidden": 1,
+   "label": "Expected Result Time",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "printed_on",
+   "fieldtype": "Datetime",
+   "label": "Printed on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_first",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Patient",
+   "options": "Patient",
+   "reqd": 1,
+   "search_index": 1,
+   "set_only_once": 1
+  },
+  {
+   "fetch_from": "patient.patient_name",
+   "fieldname": "patient_name",
+   "fieldtype": "Data",
+   "label": "Patient Name",
+   "print_hide": 1,
+   "read_only": 1,
+   "report_hide": 1
+  },
+  {
+   "fieldname": "patient_age",
+   "fieldtype": "Data",
+   "label": "Age",
+   "print_hide": 1,
+   "read_only": 1,
+   "report_hide": 1
+  },
+  {
+   "fetch_from": "patient.sex",
+   "fieldname": "patient_sex",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Gender",
+   "options": "Gender",
+   "print_hide": 1,
+   "read_only": 1,
+   "report_hide": 1,
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fetch_from": "patient.inpatient_record",
+   "fieldname": "inpatient_record",
+   "fieldtype": "Link",
+   "label": "Inpatient Record",
+   "options": "Inpatient Record",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "patient.report_preference",
+   "fieldname": "report_preference",
+   "fieldtype": "Data",
+   "label": "Report Preference",
+   "print_hide": 1,
+   "read_only": 1,
+   "report_hide": 1
+  },
+  {
+   "fetch_from": "patient.email",
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Email",
+   "print_hide": 1,
+   "read_only": 1,
+   "report_hide": 1
+  },
+  {
+   "fetch_from": "patient.mobile",
+   "fieldname": "mobile",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Mobile",
+   "print_hide": 1,
+   "read_only": 1,
+   "report_hide": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "c_b",
+   "fieldtype": "Column Break",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "User",
+   "no_copy": 1,
+   "options": "User",
+   "print_hide": 1,
+   "report_hide": 1
+  },
+  {
+   "fieldname": "sample",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "in_filter": 1,
+   "label": "Sample ID",
+   "options": "Sample Collection",
+   "print_hide": 1,
+   "read_only": 1,
+   "report_hide": 1
+  },
+  {
+   "fieldname": "sb_normal",
+   "fieldtype": "Section Break",
+   "label": "Compound Test Result"
+  },
+  {
+   "fieldname": "lab_test_html",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "normal_test_items",
+   "fieldtype": "Table",
+   "label": "Normal Test Result",
+   "options": "Normal Test Result",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "sb_sensitivity",
+   "fieldtype": "Section Break",
+   "label": "Sensitivity Test Result"
+  },
+  {
+   "fieldname": "sensitivity_test_items",
+   "fieldtype": "Table",
+   "label": "Sensitivity Test Result",
+   "options": "Sensitivity Test Result",
+   "print_hide": 1,
+   "report_hide": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "sb_comments",
+   "fieldtype": "Section Break",
+   "label": "Comments"
+  },
+  {
+   "fieldname": "lab_test_comment",
+   "fieldtype": "Text",
+   "ignore_xss_filter": 1,
+   "label": "Comments",
+   "print_hide": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "sb_customresult",
+   "fieldtype": "Section Break",
+   "label": "Custom Result"
+  },
+  {
+   "fieldname": "custom_result",
+   "fieldtype": "Text Editor",
+   "ignore_xss_filter": 1,
+   "label": "Custom Result",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "section_break_50",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Laboratory Test",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "prescription",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Prescription",
+   "no_copy": 1,
+   "options": "Lab Prescription",
+   "print_hide": 1,
+   "read_only": 1,
+   "report_hide": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Laboratory Test",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "consumable_items",
+   "fieldtype": "Table",
+   "label": "Consumable Items",
+   "options": "Clinical Procedure Item"
+  },
+  {
+   "fieldname": "lab_tests",
+   "fieldtype": "Table",
+   "label": "Lab Tests",
+   "options": "Lab Prescription"
+  },
+  {
+   "fieldname": "stock_entry_reference",
+   "fieldtype": "Link",
+   "label": "Stock Entry Reference",
+   "options": "Stock Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vial_count",
+   "fieldtype": "Int",
+   "label": "Vial Count"
+  },
+  {
+   "fieldname": "vial_code",
+   "fieldtype": "Data",
+   "label": "Vial Code"
+  },
+  {
+   "fieldname": "clinician",
+   "fieldtype": "Link",
+   "label": "Clinician",
+   "options": "Healthcare Practitioner"
+  },
+  {
+   "fieldname": "section_break_maeuv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_clo19",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Patient",
+   "link_fieldname": "patient"
+  }
+ ],
+ "modified": "2024-06-27 14:08:39.677146",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Laboratory Test",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Laboratory User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "LabTest Approver",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Physician",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "restrict_to_domain": "Healthcare",
+ "search_fields": "patient,sample",
+ "show_name_in_global_search": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "patient",
+ "track_changes": 1,
+ "track_seen": 1
+}

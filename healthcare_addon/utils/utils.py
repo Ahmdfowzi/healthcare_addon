@@ -4,6 +4,28 @@ import frappe
 from frappe import _
 from frappe.utils import today
 
+@frappe.whitelist()
+def get_lab_test_prescribed(patient, healthcare_practitioner):
+    return frappe.db.sql(
+        """
+			select
+				lp.name,
+				lp.lab_test_code,
+				lp.parent,
+				lp.invoiced,
+				lp.lab_test_comment,
+				pe.practitioner_name,
+				pe.encounter_date
+			from
+				`tabPatient Encounter` pe, `tabLab Prescription` lp
+			where
+				pe.patient = %s
+    			and pe.practitioner = %s
+				and lp.parent = pe.name
+				and lp.lab_test_created = 0
+		""",
+        (patient, healthcare_practitioner),
+    )
 
 def update_message(doc) -> None:
     if len(doc.references_table) > 0:
@@ -281,7 +303,7 @@ def create_appointment_commission_je(doc_type, docname) -> None:
 
 def calculate_practitioner_contribution(self, rate: int = None) -> None:
     # sourcery skip: assign-if-exp, or-if-exp-identity, swap-if-expression
-    if not rate and not self.service_item:
+    if not rate and not self.custom_service_item:
         return {'error': 'Please select a service item'}
     if len(self.healthcare_practitioner_contribution) <= 0:
         return
@@ -292,7 +314,7 @@ def calculate_practitioner_contribution(self, rate: int = None) -> None:
             if not rate:
                 item_price = frappe.db.get_value(
                     'Item Price',
-                    {'item_code': self.service_item},
+                    {'item_code': self.custom_service_item},
                     ['price_list_rate'],
                 )
             else:

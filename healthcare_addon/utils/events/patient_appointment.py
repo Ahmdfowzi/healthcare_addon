@@ -5,7 +5,8 @@ from frappe.realtime import publish_realtime
 
 def before_save(doc, method) -> None:
     rate = get_service_rate(doc)
-    calculate_practitioner_contribution(doc, rate=rate)
+    if(rate != None):
+        calculate_practitioner_contribution(doc, rate=rate)
 
 
 def after_delete(doc, method) -> None:
@@ -14,16 +15,17 @@ def after_delete(doc, method) -> None:
 
 def on_update(doc, method) -> None:
     rate = get_service_rate(doc)
-    calculate_practitioner_contribution(doc, rate=rate)
-    update_message(doc)
+    if(rate != None):
+        calculate_practitioner_contribution(doc, rate=rate)
+        update_message(doc)
 
 
 def get_service_rate(doc):
+    rate = None
     service_items = frappe.get_doc('Appointment Type', doc.appointment_type)
     for item in service_items.items:
-        if item.medical_department == doc.department:
-            rate = item.op_consulting_charge
-            break
+        rate = item.op_consulting_charge
+        break
     return rate
 
 def validate(doc, method) -> None:

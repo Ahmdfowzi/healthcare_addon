@@ -21,9 +21,8 @@ def on_update(doc, method) -> None:
 def get_service_rate(doc):
     service_items = frappe.get_doc('Appointment Type', doc.appointment_type)
     for item in service_items.items:
-        if item.medical_department == doc.department:
-            rate = item.op_consulting_charge
-            break
+        rate = item.op_consulting_charge
+        break
     return rate
 
 def validate(doc, method) -> None:

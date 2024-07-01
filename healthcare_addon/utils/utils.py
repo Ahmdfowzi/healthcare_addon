@@ -303,8 +303,13 @@ def create_appointment_commission_je(doc_type, docname) -> None:
 
 def calculate_practitioner_contribution(self, rate: int = None) -> None:
     # sourcery skip: assign-if-exp, or-if-exp-identity, swap-if-expression
-    if not rate and not self.custom_service_item:
+    
+    if(hasattr(self, "custom_service_item")):
+        if (self.custom_service_item== None):
+            return {'error': 'Please select a service item'}
+    elif not hasattr(self, "service_item"):
         return {'error': 'Please select a service item'}
+            
     if len(self.healthcare_practitioner_contribution) <= 0:
         return
     for practitioner in self.healthcare_practitioner_contribution:
@@ -312,11 +317,18 @@ def calculate_practitioner_contribution(self, rate: int = None) -> None:
             practitioner.total_commissions = practitioner.fixed_amount
         else:
             if not rate:
-                item_price = frappe.db.get_value(
-                    'Item Price',
-                    {'item_code': self.custom_service_item},
-                    ['price_list_rate'],
-                )
+                if( hasattr(self, "custom_service_item")):
+                    item_price = frappe.db.get_value(
+                        'Item Price',
+                        {'item_code': self.custom_service_item},
+                        ['price_list_rate'],
+                    )
+                else:
+                    item_price = frappe.db.get_value(
+                        'Item Price',
+                        {'item_code': self.service_item},
+                        ['price_list_rate'],
+                    )
             else:
                 item_price = rate
             practitioner.total_commissions = (

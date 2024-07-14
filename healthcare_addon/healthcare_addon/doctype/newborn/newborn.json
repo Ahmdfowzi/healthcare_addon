@@ -1,0 +1,235 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:NB-{YYYY}-{#####}",
+ "creation": "2024-07-14 10:41:05.928827",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "baby_name",
+  "date_of_birth",
+  "admission_date",
+  "time",
+  "column_break_pzgt",
+  "mother_name",
+  "mother_date_of_birth",
+  "age",
+  "blood_group",
+  "section_break_hdfk",
+  "gravida",
+  "para",
+  "abortions",
+  "maternal_diseases",
+  "maternal_drug",
+  "baby_gender",
+  "column_break_fjmk",
+  "mode_of_delivery",
+  "delivery_details",
+  "section_break_xfgq",
+  "baby_weight",
+  "gestational_age_in_week",
+  "column_break_abhv",
+  "respiratory_rate",
+  "respiratory_heart_rate",
+  "section_break_cpjh",
+  "resuscitation",
+  "apgar_score1_min",
+  "apgar_score5_min",
+  "column_break_nvrq",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "baby_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Baby name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date of Birth",
+   "reqd": 1
+  },
+  {
+   "fieldname": "admission_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Admission Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mother_name",
+   "fieldtype": "Link",
+   "label": "Mother name",
+   "options": "Patient",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "mother_name.blood_group",
+   "fieldname": "blood_group",
+   "fieldtype": "Data",
+   "label": "Blood Group",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_pzgt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_hdfk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "gravida",
+   "fieldtype": "Int",
+   "label": "GRAVIDA"
+  },
+  {
+   "fieldname": "para",
+   "fieldtype": "Int",
+   "label": "PARA"
+  },
+  {
+   "fieldname": "abortions",
+   "fieldtype": "Int",
+   "label": "ABORTIONS"
+  },
+  {
+   "fieldname": "column_break_fjmk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mode_of_delivery",
+   "fieldtype": "Select",
+   "label": "Mode of Delivery",
+   "options": "CS\nNVD"
+  },
+  {
+   "fieldname": "delivery_details",
+   "fieldtype": "Text",
+   "label": "Delivery details"
+  },
+  {
+   "fieldname": "maternal_diseases",
+   "fieldtype": "Data",
+   "label": "Maternal Diseases"
+  },
+  {
+   "fieldname": "maternal_drug",
+   "fieldtype": "Data",
+   "label": "Maternal Drug"
+  },
+  {
+   "fieldname": "baby_gender",
+   "fieldtype": "Select",
+   "label": "Baby Gender",
+   "options": "Male\nFemale"
+  },
+  {
+   "fieldname": "section_break_xfgq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "baby_weight",
+   "fieldtype": "Float",
+   "label": "Baby Weight"
+  },
+  {
+   "fieldname": "gestational_age_in_week",
+   "fieldtype": "Int",
+   "label": "Gestational Age in Week"
+  },
+  {
+   "fieldname": "column_break_abhv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "respiratory_rate",
+   "fieldtype": "Int",
+   "label": "RESPIRATORY (RATE)"
+  },
+  {
+   "fieldname": "respiratory_heart_rate",
+   "fieldtype": "Int",
+   "label": "RESPIRATORY (HEART RATE)"
+  },
+  {
+   "fieldname": "section_break_cpjh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "resuscitation",
+   "fieldtype": "Select",
+   "label": "Resuscitation",
+   "options": "None\nBag and mask\nIntubation"
+  },
+  {
+   "fieldname": "apgar_score1_min",
+   "fieldtype": "Int",
+   "label": "APGAR SCORE(1 MIN)"
+  },
+  {
+   "fieldname": "apgar_score5_min",
+   "fieldtype": "Int",
+   "label": "APGAR SCORE(5 MIN)"
+  },
+  {
+   "fieldname": "column_break_nvrq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  },
+  {
+   "fetch_from": "mother_name.dob",
+   "fieldname": "mother_date_of_birth",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Mother Date of Birth",
+   "read_only": 1
+  },
+  {
+   "fieldname": "age",
+   "fieldtype": "Data",
+   "label": "Age",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-14 11:01:31.735289",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Newborn",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

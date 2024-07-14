@@ -9,6 +9,18 @@ app_color = "grey"
 app_email = "ahmedgzi07@gmail.com"
 app_license = "MIT"
 
+
+# Fixtures
+fixtures = [
+    {
+        "dt": "Letter Head",
+        "filters": [
+            [
+                "name", "in", ["Base Header"],
+            ],
+        ],
+    },
+]
 # Includes in <head>
 # ------------------
 

@@ -1,0 +1,263 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:BLR-{#####}",
+ "creation": "2024-07-13 14:27:23.405667",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_bxpi",
+  "patient_details",
+  "patient",
+  "blood_group",
+  "column_break_uunf",
+  "date_of_birth",
+  "gender",
+  "section_break_ooqn",
+  "history",
+  "hbplt",
+  "diagnosis",
+  "reason_of_transfusion",
+  "column_break_vgxt",
+  "reson_for_transfusion",
+  "any_reaction",
+  "previous_pregnancy",
+  "previous_transfusion",
+  "request_section",
+  "red_cells",
+  "other",
+  "column_break_isgq",
+  "plasma",
+  "column_break_spvm",
+  "whole_blood",
+  "column_break_krad",
+  "platelet",
+  "section_break_ljdr",
+  "datetime",
+  "column_break_fmkp",
+  "deliver_to",
+  "section_break_xriv",
+  "important",
+  "name_of_doctor",
+  "section_break_hftq",
+  "blood_request_execution",
+  "section_break_wbxb",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_bxpi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Blood Request",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "patient_details",
+   "fieldtype": "Heading",
+   "label": "Patient Details"
+  },
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Patient",
+   "options": "Patient",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_uunf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "patient.dob",
+   "fieldname": "date_of_birth",
+   "fieldtype": "Data",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "section_break_wbxb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "patient.sex",
+   "fieldname": "gender",
+   "fieldtype": "Data",
+   "label": "Gender"
+  },
+  {
+   "fieldname": "blood_group",
+   "fieldtype": "Data",
+   "label": "Blood Group"
+  },
+  {
+   "fieldname": "section_break_ooqn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "hbplt",
+   "fieldtype": "Data",
+   "label": "Hb/PLT"
+  },
+  {
+   "fieldname": "diagnosis",
+   "fieldtype": "Data",
+   "label": "Diagnosis"
+  },
+  {
+   "fieldname": "history",
+   "fieldtype": "Data",
+   "label": "History"
+  },
+  {
+   "fieldname": "column_break_vgxt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "any_reaction",
+   "fieldtype": "Data",
+   "label": "Any Reaction"
+  },
+  {
+   "fieldname": "previous_pregnancy",
+   "fieldtype": "Data",
+   "label": "Previous pregnancy"
+  },
+  {
+   "fieldname": "section_break_ljdr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "datetime",
+   "fieldtype": "Datetime",
+   "label": "DateTime"
+  },
+  {
+   "fieldname": "reason_of_transfusion",
+   "fieldtype": "Data",
+   "label": "Reason of transfusion"
+  },
+  {
+   "fieldname": "reson_for_transfusion",
+   "fieldtype": "Data",
+   "label": "Reson for transfusion"
+  },
+  {
+   "fieldname": "previous_transfusion",
+   "fieldtype": "Data",
+   "label": "Previous transfusion"
+  },
+  {
+   "fieldname": "deliver_to",
+   "fieldtype": "Link",
+   "label": "Deliver To",
+   "options": "Healthcare Practitioner"
+  },
+  {
+   "description": "This Blood form will not be accepted if it is not signed for any section is left blank.",
+   "fieldname": "important",
+   "fieldtype": "Heading",
+   "label": "Important"
+  },
+  {
+   "fieldname": "request_section",
+   "fieldtype": "Section Break",
+   "label": "Request"
+  },
+  {
+   "fieldname": "red_cells",
+   "fieldtype": "Int",
+   "label": "Red Cells"
+  },
+  {
+   "fieldname": "other",
+   "fieldtype": "Data",
+   "label": "Other"
+  },
+  {
+   "fieldname": "column_break_isgq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "plasma",
+   "fieldtype": "Int",
+   "label": "Plasma"
+  },
+  {
+   "fieldname": "column_break_spvm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "whole_blood",
+   "fieldtype": "Int",
+   "label": "Whole Blood"
+  },
+  {
+   "fieldname": "column_break_krad",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "platelet",
+   "fieldtype": "Int",
+   "label": "Platelet"
+  },
+  {
+   "fieldname": "column_break_fmkp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_xriv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "name_of_doctor",
+   "fieldtype": "Link",
+   "label": "Name of Doctor",
+   "options": "Healthcare Practitioner"
+  },
+  {
+   "fieldname": "section_break_hftq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "blood_request_execution",
+   "fieldtype": "Table",
+   "label": "Blood Request Execution",
+   "options": "Blood Request Execution"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-07-13 15:03:25.756556",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Blood Request",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

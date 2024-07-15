@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:BCB-{#####}",
+ "creation": "2024-07-13 14:20:32.511743",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "fridge",
+  "blood_collection_number",
+  "blood_group",
+  "consumed",
+  "column_break_ccfj",
+  "entry_date",
+  "expiry_data",
+  "donation_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "fridge",
+   "fieldtype": "Data",
+   "label": "Fridge"
+  },
+  {
+   "fieldname": "blood_collection_number",
+   "fieldtype": "Data",
+   "label": "Blood Collection number"
+  },
+  {
+   "fieldname": "blood_group",
+   "fieldtype": "Data",
+   "label": "Blood group"
+  },
+  {
+   "fieldname": "column_break_ccfj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "entry_date",
+   "fieldtype": "Datetime",
+   "label": "Entry date"
+  },
+  {
+   "fieldname": "expiry_data",
+   "fieldtype": "Datetime",
+   "label": "Expiry data"
+  },
+  {
+   "fieldname": "donation_date",
+   "fieldtype": "Datetime",
+   "label": "Donation Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "consumed",
+   "fieldtype": "Check",
+   "label": "Consumed",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-15 10:39:59.909503",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Blood Collection Bag",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

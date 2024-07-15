@@ -1,0 +1,25 @@
+[
+ {
+  "align": "Center",
+  "content": "\n\n\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Your Document Title</title>\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Jomhuria&amp;display=swap\" rel=\"stylesheet\">\n    <style>\n        .jomhuria-regular {\n            font-family: \"Jomhuria\", serif;\n            font-weight: bold;\n            font-style: normal;\n        }\n    </style>\n\n\n    <div class=\"container\">\n        <div class=\"row justify-content-center align-items-center text-center py-4\" style=\"background-color: #ffffff;\">\n            <div class=\"col-4\">\n                <img src=\"https://upload.wikimedia.org/wikipedia/commons/8/81/Wikimedia-logo.svg\" alt=\"Image 1\" class=\"img-fluid\" style=\"max-width: 100px; margin-bottom: 10px;\">\n            </div>\n            <div class=\"col-4\">\n                <h4 class=\"jomhuria-regular\"><strong> مستشفى الفرات الاهلي</strong> </h4>\n                <p class=\"jomhuria-regular\"><strong>Al-Furat Private Hospital</strong></p>\n            </div>\n            <div class=\"col-4\">\n                <p class=\"jomhuria-regular\"><strong> 20245/07/02</strong></p>\n            </div>\n        </div>\n        <hr style=\"height: 4px; margin-top: 10px; border: none; background-color: #000;\">\n\n    </div>\n\n\n",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Letter Head",
+  "footer": "\n\n\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Your Document Title</title>\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Jomhuria&amp;display=swap\" rel=\"stylesheet\">\n    <style>\n        .jomhuria-regular {\n            font-family: \"Jomhuria\", serif;\n            font-weight: 400;\n            font-style: normal;\n        }\n    </style>\n\n\n    <div class=\"container\">\n        <hr style=\"height: 4px; margin-top: 10px; border: none; background-color: #000;\">\n        <div class=\"row justify-content-between align-items-center py-4\" style=\"background-color: #ffffff;\">\n            <div class=\"col-6 text-left\">\n                <p class=\"jomhuria-regular\" style=\"font-weight: bold;\">Website: test.com</p>\n                <p class=\"jomhuria-regular\" style=\"font-weight: bold;\">Email: GG</p>\n                <p class=\"jomhuria-regular\" style=\"font-weight: bold;\">Mobile: 077000000 000000000000</p>\n            </div>\n            <div class=\"col-6 text-right\">\n                <p class=\"jomhuria-regular\" style=\"font-weight: bold;\">بغداد -  شارع صفي الدين الحلي</p>\n                <p class=\"jomhuria-regular\" style=\"font-weight: bold;\">قرب حسر الطالبية</p>\n            </div>\n        </div>\n    </div>\n\n\n",
+  "footer_align": "Left",
+  "footer_image": null,
+  "footer_image_height": 0.0,
+  "footer_image_width": 0.0,
+  "footer_script": null,
+  "footer_source": "HTML",
+  "header_script": null,
+  "image": null,
+  "image_height": 0.0,
+  "image_width": 0.0,
+  "is_default": 1,
+  "letter_head_name": "Base Header",
+  "modified": "2024-07-14 12:31:57.876303",
+  "name": "Base Header",
+  "source": "HTML"
+ }
+]

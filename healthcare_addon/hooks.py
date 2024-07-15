@@ -9,6 +9,18 @@ app_color = "grey"
 app_email = "ahmedgzi07@gmail.com"
 app_license = "MIT"
 
+
+# Fixtures
+fixtures = [
+    {
+        "dt": "Letter Head",
+        "filters": [
+            [
+                "name", "in", ["Base Header"],
+            ],
+        ],
+    },
+]
 # Includes in <head>
 # ------------------
 
@@ -39,6 +51,8 @@ doctype_js = {
     "Lab Test Template": "public/js/lab_test_template.js",
     "Lab Test": "public/js/lab_test.js",
     "Item Group": "public/js/item_group.js",
+    "Patient History Settings": "public/js/patient_list_edit.js",
+
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}

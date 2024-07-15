@@ -1,0 +1,82 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-07-13 14:49:25.122816",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "blood_collection_bag",
+  "blood_collection_number",
+  "donar_blood_group",
+  "patient_blood_group",
+  "room_temp",
+  "ahg",
+  "datetime_of_cross_match",
+  "datetime_of_issue"
+ ],
+ "fields": [
+  {
+   "fieldname": "blood_collection_bag",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Blood Collection Bag",
+   "options": "Blood Collection Bag",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "blood_collection_bag.blood_group",
+   "fieldname": "donar_blood_group",
+   "fieldtype": "Data",
+   "label": "Donar Blood Group"
+  },
+  {
+   "fetch_from": "blood_collection_bag.blood_group",
+   "fieldname": "patient_blood_group",
+   "fieldtype": "Data",
+   "label": "Patient Blood Group"
+  },
+  {
+   "fieldname": "room_temp",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Room Temp."
+  },
+  {
+   "fieldname": "ahg",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "AHG"
+  },
+  {
+   "fieldname": "datetime_of_cross_match",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Datetime of Cross Match"
+  },
+  {
+   "fieldname": "datetime_of_issue",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Datetime of Issue"
+  },
+  {
+   "fetch_from": "blood_collection_bag.blood_collection_number",
+   "fieldname": "blood_collection_number",
+   "fieldtype": "Data",
+   "label": "Blood Collection number"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-07-14 15:35:46.369268",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Blood Request Execution",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

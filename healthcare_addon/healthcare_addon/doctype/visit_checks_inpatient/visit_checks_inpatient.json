@@ -1,0 +1,487 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-06-13 10:09:55.903575",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_da20",
+  "time",
+  "general",
+  "conscious",
+  "drowsy",
+  "unconscious",
+  "oriented",
+  "confused",
+  "disoriented",
+  "slurred_speech",
+  "mouth_dev",
+  "neck_stiffness",
+  "afebnle",
+  "febrile",
+  "lying_flat",
+  "semirecumbent",
+  "sitting_upright",
+  "not_dyspnic",
+  "dyspnic",
+  "chest_pain",
+  "orthopnic",
+  "cough",
+  "looks_normal",
+  "pale",
+  "cyanosis",
+  "jaundice",
+  "no_oedema",
+  "bilateral",
+  "unilateral",
+  "generalized",
+  "good_feeding",
+  "poor_appetite",
+  "nau",
+  "abdomen",
+  "rigid",
+  "tender",
+  "soft",
+  "column_break_i7hbi",
+  "vomiting",
+  "hernatemesis",
+  "hernatochezia",
+  "o2",
+  "monitor",
+  "oleys_cath",
+  "drain_type",
+  "chest",
+  "clear",
+  "nvb",
+  "bb",
+  "wheeze",
+  "crepit",
+  "gae",
+  "pae",
+  "normal_s1_s2",
+  "abn_heart_sounds",
+  "vital_signs",
+  "bowel_sounds",
+  "pr",
+  "bpm",
+  "rr",
+  "c_m",
+  "c",
+  "spo2",
+  "rbs",
+  "uop",
+  "doctor_name",
+  "signature",
+  "management"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_da20",
+   "fieldtype": "Section Break",
+   "label": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "conscious",
+   "fieldtype": "Check",
+   "label": "Conscious"
+  },
+  {
+   "default": "0",
+   "fieldname": "drowsy",
+   "fieldtype": "Check",
+   "label": "Drowsy"
+  },
+  {
+   "default": "0",
+   "fieldname": "unconscious",
+   "fieldtype": "Check",
+   "label": "Unconscious"
+  },
+  {
+   "default": "0",
+   "fieldname": "oriented",
+   "fieldtype": "Check",
+   "label": "Oriented"
+  },
+  {
+   "default": "0",
+   "fieldname": "confused",
+   "fieldtype": "Check",
+   "label": "Confused"
+  },
+  {
+   "default": "0",
+   "fieldname": "disoriented",
+   "fieldtype": "Check",
+   "label": "Disoriented"
+  },
+  {
+   "default": "0",
+   "fieldname": "slurred_speech",
+   "fieldtype": "Check",
+   "label": "Slurred Speech"
+  },
+  {
+   "default": "0",
+   "fieldname": "mouth_dev",
+   "fieldtype": "Check",
+   "label": "Mouth Dev"
+  },
+  {
+   "default": "0",
+   "fieldname": "neck_stiffness",
+   "fieldtype": "Check",
+   "label": "Neck Stiffness"
+  },
+  {
+   "default": "0",
+   "fieldname": "afebnle",
+   "fieldtype": "Check",
+   "label": "Afebrile"
+  },
+  {
+   "default": "0",
+   "fieldname": "febrile",
+   "fieldtype": "Check",
+   "label": "Febrile"
+  },
+  {
+   "default": "0",
+   "fieldname": "lying_flat",
+   "fieldtype": "Check",
+   "label": "Lying Flat"
+  },
+  {
+   "default": "0",
+   "fieldname": "semirecumbent",
+   "fieldtype": "Check",
+   "label": "Semirecumbent"
+  },
+  {
+   "default": "0",
+   "fieldname": "sitting_upright",
+   "fieldtype": "Check",
+   "label": "Sitting Upright"
+  },
+  {
+   "default": "0",
+   "fieldname": "not_dyspnic",
+   "fieldtype": "Check",
+   "label": "Not Dyspnic"
+  },
+  {
+   "default": "0",
+   "fieldname": "dyspnic",
+   "fieldtype": "Check",
+   "label": "Dyspnic"
+  },
+  {
+   "default": "0",
+   "fieldname": "chest_pain",
+   "fieldtype": "Check",
+   "label": "Chest Pain"
+  },
+  {
+   "default": "0",
+   "fieldname": "orthopnic",
+   "fieldtype": "Check",
+   "label": "Orthopnic"
+  },
+  {
+   "default": "0",
+   "fieldname": "cough",
+   "fieldtype": "Check",
+   "label": "Cough"
+  },
+  {
+   "default": "0",
+   "fieldname": "looks_normal",
+   "fieldtype": "Check",
+   "label": "Looks Normal"
+  },
+  {
+   "default": "0",
+   "fieldname": "pale",
+   "fieldtype": "Check",
+   "label": "Pale"
+  },
+  {
+   "default": "0",
+   "fieldname": "cyanosis",
+   "fieldtype": "Check",
+   "label": "Cyanosis"
+  },
+  {
+   "default": "0",
+   "fieldname": "jaundice",
+   "fieldtype": "Check",
+   "label": "Jaundice"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_oedema",
+   "fieldtype": "Check",
+   "label": "No Oedema"
+  },
+  {
+   "default": "0",
+   "fieldname": "bilateral",
+   "fieldtype": "Check",
+   "label": "Bilateral"
+  },
+  {
+   "default": "0",
+   "fieldname": "unilateral",
+   "fieldtype": "Check",
+   "label": "Unilateral"
+  },
+  {
+   "default": "0",
+   "fieldname": "generalized",
+   "fieldtype": "Check",
+   "label": "Generalized"
+  },
+  {
+   "default": "0",
+   "fieldname": "good_feeding",
+   "fieldtype": "Check",
+   "label": "Good Feeding"
+  },
+  {
+   "default": "0",
+   "fieldname": "poor_appetite",
+   "fieldtype": "Check",
+   "label": "Poor Appetite"
+  },
+  {
+   "default": "0",
+   "fieldname": "nau",
+   "fieldtype": "Check",
+   "label": "Nau"
+  },
+  {
+   "fieldname": "column_break_i7hbi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "vomiting",
+   "fieldtype": "Check",
+   "label": "Vomiting"
+  },
+  {
+   "default": "0",
+   "fieldname": "hernatemesis",
+   "fieldtype": "Check",
+   "label": "Hematemesis"
+  },
+  {
+   "default": "0",
+   "fieldname": "hernatochezia",
+   "fieldtype": "Check",
+   "label": "Hematochezia"
+  },
+  {
+   "default": "0",
+   "fieldname": "o2",
+   "fieldtype": "Check",
+   "label": "O2"
+  },
+  {
+   "default": "0",
+   "fieldname": "monitor",
+   "fieldtype": "Check",
+   "label": "Monitor"
+  },
+  {
+   "default": "0",
+   "fieldname": "oleys_cath",
+   "fieldtype": "Check",
+   "label": "Foley's Catheter"
+  },
+  {
+   "fieldname": "drain_type",
+   "fieldtype": "Data",
+   "label": "Drain Type"
+  },
+  {
+   "default": "0",
+   "fieldname": "chest",
+   "fieldtype": "Heading",
+   "label": "Chest"
+  },
+  {
+   "default": "0",
+   "fieldname": "clear",
+   "fieldtype": "Check",
+   "label": "Clear"
+  },
+  {
+   "default": "0",
+   "fieldname": "nvb",
+   "fieldtype": "Check",
+   "label": "NVB"
+  },
+  {
+   "default": "0",
+   "fieldname": "bb",
+   "fieldtype": "Check",
+   "label": "BB"
+  },
+  {
+   "default": "0",
+   "fieldname": "wheeze",
+   "fieldtype": "Check",
+   "label": "Wheeze"
+  },
+  {
+   "default": "0",
+   "fieldname": "crepit",
+   "fieldtype": "Check",
+   "label": "Crepit"
+  },
+  {
+   "default": "0",
+   "fieldname": "gae",
+   "fieldtype": "Check",
+   "label": "GAE"
+  },
+  {
+   "default": "0",
+   "fieldname": "pae",
+   "fieldtype": "Check",
+   "label": "PAE"
+  },
+  {
+   "default": "0",
+   "fieldname": "normal_s1_s2",
+   "fieldtype": "Check",
+   "label": "Normal S1 S2"
+  },
+  {
+   "default": "0",
+   "fieldname": "abn_heart_sounds",
+   "fieldtype": "Check",
+   "label": "Abnormal Heart Sounds"
+  },
+  {
+   "default": "0",
+   "fieldname": "abdomen",
+   "fieldtype": "Heading",
+   "label": "Abdomen"
+  },
+  {
+   "default": "0",
+   "fieldname": "soft",
+   "fieldtype": "Check",
+   "label": "Soft"
+  },
+  {
+   "default": "0",
+   "fieldname": "tender",
+   "fieldtype": "Check",
+   "label": "Tender"
+  },
+  {
+   "default": "0",
+   "fieldname": "rigid",
+   "fieldtype": "Check",
+   "label": "Rigid"
+  },
+  {
+   "fieldname": "bowel_sounds",
+   "fieldtype": "Data",
+   "label": "Bowel Sounds"
+  },
+  {
+   "fieldname": "pr",
+   "fieldtype": "Data",
+   "label": "PR"
+  },
+  {
+   "fieldname": "bpm",
+   "fieldtype": "Data",
+   "label": "BPM"
+  },
+  {
+   "fieldname": "rr",
+   "fieldtype": "Data",
+   "label": "RR"
+  },
+  {
+   "fieldname": "c_m",
+   "fieldtype": "Data",
+   "label": "C M"
+  },
+  {
+   "fieldname": "c",
+   "fieldtype": "Data",
+   "label": "C"
+  },
+  {
+   "fieldname": "spo2",
+   "fieldtype": "Data",
+   "label": "SPO2"
+  },
+  {
+   "fieldname": "rbs",
+   "fieldtype": "Data",
+   "label": "RBS"
+  },
+  {
+   "fieldname": "uop",
+   "fieldtype": "Data",
+   "label": "UOP"
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Time",
+   "options": "Morning\nEvening",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "general",
+   "fieldtype": "Heading",
+   "label": "General"
+  },
+  {
+   "default": "0",
+   "fieldname": "vital_signs",
+   "fieldtype": "Heading",
+   "label": "Vital Signs"
+  },
+  {
+   "fieldname": "doctor_name",
+   "fieldtype": "Link",
+   "label": "Doctor Name",
+   "options": "Healthcare Practitioner"
+  },
+  {
+   "fieldname": "signature",
+   "fieldtype": "Data",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "management",
+   "fieldtype": "Small Text",
+   "label": "Management"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-06-13 11:59:03.354113",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Visit Checks Inpatient",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

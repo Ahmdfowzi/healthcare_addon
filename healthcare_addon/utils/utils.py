@@ -4,6 +4,66 @@ import frappe
 from frappe import _
 from frappe.utils import today
 
+@frappe.whitelist()
+def get_lab_test_prescribed(patient, healthcare_practitioner):
+    return frappe.db.sql(
+        """
+        select
+            lp.name,
+            lp.lab_test_code,
+            concat(lp.parent, ' (Patient Encounter)') as parent,
+            lp.invoiced,
+            lp.lab_test_comment,
+            pe.practitioner_name,
+            pe.encounter_date
+        from
+            `tabLab Prescription` lp
+            inner join `tabPatient Encounter` pe on lp.parent = pe.name
+        where
+            pe.patient = %s
+            and pe.practitioner = %s
+            and lp.lab_test_created = 0
+
+        union all
+
+        select
+            lp.name,
+            lp.lab_test_code,
+            concat(lp.parent, ' (Emergency Medical Services)') as parent,
+            lp.invoiced,
+            lp.lab_test_comment,
+            ems.practitioner_name,
+            ems.entry
+        from
+            `tabLab Prescription` lp
+            inner join `tabEmergency Medical Services` ems on lp.parent = ems.name
+        where
+            ems.patient = %s
+            and ems.practitioner = %s
+            and lp.lab_test_created = 0
+
+        union all
+
+        select
+            lp.name,
+            lp.lab_test_code,
+            concat(lp.parent, ' (Premature)') as parent,
+            lp.invoiced,
+            lp.lab_test_comment,
+            pr.practitioner_name,
+            pr.entry
+        from
+            `tabLab Prescription` lp
+            inner join `tabPremature` pr on lp.parent = pr.name
+        where
+            pr.patient = %s
+            and pr.practitioner = %s
+            and lp.lab_test_created = 0
+        """,
+        (patient, healthcare_practitioner, patient, healthcare_practitioner, patient, healthcare_practitioner),
+    )
+
+
 
 def update_message(doc) -> None:
     if len(doc.references_table) > 0:
@@ -137,6 +197,7 @@ def create_medication_invoice(self) -> None:
     It creates a new Sales Invoice document, populates it with the patient, practitioner, and items from
     the prescription, and then inserts it into the database
     """
+    
     letter_head = frappe.db.get_value(
         'Company', self.company, 'default_letter_head')
     invoice = frappe.new_doc("Sales Invoice")
@@ -144,6 +205,20 @@ def create_medication_invoice(self) -> None:
     invoice.patient = self.patient
     invoice.ref_practitioner = self.practitioner
     invoice.update_stock = True
+    
+    settings = frappe.get_single("Default Healthcare Service Settings")
+    income_account = None
+    if(self.doctype == "Premature"):
+        if(settings.premature_income_account == None):
+            frappe.throw(_("Please set the premature income account in Default 'Healthcare Service Settings'"))
+        income_account = settings.premature_income_account
+    elif(self.doctype == "Emergency Medical Services"):
+        if(settings.medication_income_account == None):
+            frappe.throw(_("Please set the medication income account in Default 'Healthcare Service Settings'"))
+        income_account = settings.medication_income_account
+
+    
+        
     if letter_head != None:
         invoice.letter_head = letter_head
     for item in self.drug_prescription:
@@ -151,9 +226,12 @@ def create_medication_invoice(self) -> None:
             "item_code": item.drug_code,
             'qty': item.quantity,
             'uom': item.uom,
+            'income_account': income_account,
             'drug_prescription': f'Dosage: {item.dosage}|Period: {item.period}|Dosage Form: {item.dosage_form}'
         })
     invoice.insert()
+    invoice.submit()
+
     set_references_table(invoice, self)
 
 
@@ -169,6 +247,14 @@ def create_healthcare_service_invoice(self, item_code, qty) -> None:
     invoice.patient = self.patient
     invoice.ref_practitioner = self.practitioner
     invoice.update_stock = False
+    
+    settings = frappe.get_single("Default Healthcare Service Settings")
+
+    if(settings.healthcare_service_income_account == None):
+        frappe.throw(_("Please set the healthcare service income account in Default 'Healthcare Service Settings'"))
+        
+    income_account = settings.healthcare_service_income_account
+        
     if letter_head is not None:
         invoice.letter_head = letter_head
     if item_code == "":
@@ -176,9 +262,11 @@ def create_healthcare_service_invoice(self, item_code, qty) -> None:
     else:
         invoice.append("items", {
             "item_code": item_code,
+            'income_account': income_account,
             'qty': qty,
         })
     invoice.insert()
+    invoice.submit()
     self.invoiced = True
     set_references_table(invoice, self)
 
@@ -281,8 +369,13 @@ def create_appointment_commission_je(doc_type, docname) -> None:
 
 def calculate_practitioner_contribution(self, rate: int = None) -> None:
     # sourcery skip: assign-if-exp, or-if-exp-identity, swap-if-expression
-    if not rate and not self.service_item:
+    
+    if(hasattr(self, "custom_service_item")):
+        if (self.custom_service_item== None):
+            return {'error': 'Please select a service item'}
+    elif not hasattr(self, "service_item"):
         return {'error': 'Please select a service item'}
+            
     if len(self.healthcare_practitioner_contribution) <= 0:
         return
     for practitioner in self.healthcare_practitioner_contribution:
@@ -290,11 +383,18 @@ def calculate_practitioner_contribution(self, rate: int = None) -> None:
             practitioner.total_commissions = practitioner.fixed_amount
         else:
             if not rate:
-                item_price = frappe.db.get_value(
-                    'Item Price',
-                    {'item_code': self.service_item},
-                    ['price_list_rate'],
-                )
+                if( hasattr(self, "custom_service_item")):
+                    item_price = frappe.db.get_value(
+                        'Item Price',
+                        {'item_code': self.custom_service_item},
+                        ['price_list_rate'],
+                    )
+                else:
+                    item_price = frappe.db.get_value(
+                        'Item Price',
+                        {'item_code': self.service_item},
+                        ['price_list_rate'],
+                    )
             else:
                 item_price = rate
             practitioner.total_commissions = (

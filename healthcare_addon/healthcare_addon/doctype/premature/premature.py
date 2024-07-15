@@ -25,17 +25,20 @@ class Premature(Document):
         if len(self.healthcare_practitioner_contribution) > 0:
             create_commission_je(self)
 
+
+        create_premature_services_invoice(self)
+
     def on_cancel(self) -> None:
         """
         It cancels the references table documents that are related to the current document
         """
         cancel_references_table_docs(self)
 
-    def after_insert(self) -> None:
-        """
-        It creates an invoice for the patient, 
-        """
-        create_premature_services_invoice(self)
+    # def after_insert(self) -> None:
+    #     """
+    #     It creates an invoice for the patient, 
+    #     """
+    #     create_premature_services_invoice(self)
 
     def before_update_after_submit(self) -> None:
         calculate_practitioner_contribution(self)

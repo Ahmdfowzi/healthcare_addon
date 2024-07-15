@@ -7,8 +7,11 @@
  "engine": "InnoDB",
  "field_order": [
   "emergency_medical_services_item",
+  "medication_income_account",
+  "healthcare_service_income_account",
   "column_break_hkonl",
   "premature_service_item",
+  "premature_income_account",
   "accounts_section",
   "default_practitioners_commission_account"
  ],
@@ -39,12 +42,30 @@
    "fieldtype": "Link",
    "label": "Default Practitioners Commission Account",
    "options": "Account"
+  },
+  {
+   "fieldname": "medication_income_account",
+   "fieldtype": "Link",
+   "label": "Medication Income Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "healthcare_service_income_account",
+   "fieldtype": "Link",
+   "label": "Healthcare Service Income Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "premature_income_account",
+   "fieldtype": "Link",
+   "label": "Premature Income Account",
+   "options": "Account"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-03-16 10:23:42.603651",
+ "modified": "2024-07-15 12:18:20.217401",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Default Healthcare Service Settings",
@@ -62,5 +83,6 @@
   }
  ],
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }

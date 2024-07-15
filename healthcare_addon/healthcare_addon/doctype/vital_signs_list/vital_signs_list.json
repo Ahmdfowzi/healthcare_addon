@@ -1,0 +1,77 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-06-13 12:52:40.622924",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "temperature",
+  "heart_rate__pulse",
+  "respiratory_rate",
+  "blood_pressure_systolic",
+  "blood_pressure_diastolic",
+  "uop",
+  "rbs",
+  "spo2"
+ ],
+ "fields": [
+  {
+   "fieldname": "temperature",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Temperature"
+  },
+  {
+   "fieldname": "heart_rate__pulse",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Heart Rate / Pulse"
+  },
+  {
+   "fieldname": "respiratory_rate",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Respiratory rate"
+  },
+  {
+   "fieldname": "blood_pressure_systolic",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Blood Pressure (systolic)"
+  },
+  {
+   "fieldname": "blood_pressure_diastolic",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Blood Pressure (diastolic)"
+  },
+  {
+   "fieldname": "uop",
+   "fieldtype": "Data",
+   "label": "UOP"
+  },
+  {
+   "fieldname": "rbs",
+   "fieldtype": "Data",
+   "label": "RBS"
+  },
+  {
+   "fieldname": "spo2",
+   "fieldtype": "Data",
+   "label": "SPo2"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-06-13 13:04:54.151398",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Vital Signs List",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

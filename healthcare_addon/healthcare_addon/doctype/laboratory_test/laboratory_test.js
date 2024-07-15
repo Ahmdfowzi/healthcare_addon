@@ -3,7 +3,7 @@ let table;
 frappe.ui.form.on('Laboratory Test', {
     refresh(frm) {
         if (frm.doc.__islocal) {
-            frm.add_custom_button(__('Get from Patient Encounter'), () => {
+            frm.add_custom_button(__('Get from Healthcare services'), () => {
                 showGetTestsDialog(frm);
             });
         }
@@ -147,7 +147,7 @@ const renderLabTests = (d, patient_name, lab_test_list) => {
     headerRow.append('<th>Lab Test</th>');
     headerRow.append('<th>Practitioner</th>');
     headerRow.append('<th>Date</th>');
-    headerRow.append('<th>Encounter</th>');
+    headerRow.append('<th>Source</th>');
     headerRow.append('<th>Invoiced</th>');
     headerRow.append('<th>Lab Test Comment</th>');
 

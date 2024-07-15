@@ -24,6 +24,8 @@ class EmergencyMedicalServices(Document):
 		# Creating a Journal Entry for the practitioner.
 		if len(self.healthcare_practitioner_contribution) > 0:
 			create_commission_je(self)
+   
+		create_emergency_services_invoice(self)
 
 	
 	def on_cancel(self) -> None:
@@ -32,11 +34,11 @@ class EmergencyMedicalServices(Document):
 		"""
 		cancel_references_table_docs(self)
 
-	def after_insert(self) -> None:
-		"""
-		It creates an invoice for the patient, 
-		"""
-		create_emergency_services_invoice(self)
+	# def after_insert(self) -> None:
+	# 	"""
+	# 	It creates an invoice for the patient, 
+	# 	"""
+	# 	create_emergency_services_invoice(self)
 		
 
 	def before_update_after_submit(self) -> None:

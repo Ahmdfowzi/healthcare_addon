@@ -159,6 +159,7 @@ def create_medication_invoice(self) -> None:
     It creates a new Sales Invoice document, populates it with the patient, practitioner, and items from
     the prescription, and then inserts it into the database
     """
+    
     letter_head = frappe.db.get_value(
         'Company', self.company, 'default_letter_head')
     invoice = frappe.new_doc("Sales Invoice")
@@ -166,6 +167,20 @@ def create_medication_invoice(self) -> None:
     invoice.patient = self.patient
     invoice.ref_practitioner = self.practitioner
     invoice.update_stock = True
+    
+    settings = frappe.get_single("Default Healthcare Service Settings")
+    income_account = None
+    if(self.doctype == "Premature"):
+        if(settings.premature_income_account == None):
+            frappe.throw(_("Please set the premature income account in Default 'Healthcare Service Settings'"))
+        income_account = settings.premature_income_account
+    elif(self.doctype == "Emergency Medical Services"):
+        if(settings.medication_income_account == None):
+            frappe.throw(_("Please set the medication income account in Default 'Healthcare Service Settings'"))
+        income_account = settings.medication_income_account
+
+    
+        
     if letter_head != None:
         invoice.letter_head = letter_head
     for item in self.drug_prescription:
@@ -173,9 +188,12 @@ def create_medication_invoice(self) -> None:
             "item_code": item.drug_code,
             'qty': item.quantity,
             'uom': item.uom,
+            'income_account': income_account,
             'drug_prescription': f'Dosage: {item.dosage}|Period: {item.period}|Dosage Form: {item.dosage_form}'
         })
     invoice.insert()
+    invoice.submit()
+
     set_references_table(invoice, self)
 
 
@@ -191,6 +209,14 @@ def create_healthcare_service_invoice(self, item_code, qty) -> None:
     invoice.patient = self.patient
     invoice.ref_practitioner = self.practitioner
     invoice.update_stock = False
+    
+    settings = frappe.get_single("Default Healthcare Service Settings")
+
+    if(settings.healthcare_service_income_account == None):
+        frappe.throw(_("Please set the healthcare service income account in Default 'Healthcare Service Settings'"))
+        
+    income_account = settings.healthcare_service_income_account
+        
     if letter_head is not None:
         invoice.letter_head = letter_head
     if item_code == "":
@@ -198,9 +224,11 @@ def create_healthcare_service_invoice(self, item_code, qty) -> None:
     else:
         invoice.append("items", {
             "item_code": item_code,
+            'income_account': income_account,
             'qty': qty,
         })
     invoice.insert()
+    invoice.submit()
     self.invoiced = True
     set_references_table(invoice, self)
 

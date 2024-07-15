@@ -9,6 +9,7 @@
   "fridge",
   "blood_collection_number",
   "blood_group",
+  "consumed",
   "column_break_ccfj",
   "entry_date",
   "expiry_data",
@@ -48,11 +49,18 @@
    "fieldname": "donation_date",
    "fieldtype": "Datetime",
    "label": "Donation Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "consumed",
+   "fieldtype": "Check",
+   "label": "Consumed",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-13 14:23:12.739370",
+ "modified": "2024-07-15 10:39:59.909503",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Blood Collection Bag",

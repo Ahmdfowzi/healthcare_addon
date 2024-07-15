@@ -8,24 +8,62 @@ from frappe.utils import today
 def get_lab_test_prescribed(patient, healthcare_practitioner):
     return frappe.db.sql(
         """
-			select
-				lp.name,
-				lp.lab_test_code,
-				lp.parent,
-				lp.invoiced,
-				lp.lab_test_comment,
-				pe.practitioner_name,
-				pe.encounter_date
-			from
-				`tabPatient Encounter` pe, `tabLab Prescription` lp
-			where
-				pe.patient = %s
-    			and pe.practitioner = %s
-				and lp.parent = pe.name
-				and lp.lab_test_created = 0
-		""",
-        (patient, healthcare_practitioner),
+        select
+            lp.name,
+            lp.lab_test_code,
+            concat(lp.parent, ' (Patient Encounter)') as parent,
+            lp.invoiced,
+            lp.lab_test_comment,
+            pe.practitioner_name,
+            pe.encounter_date
+        from
+            `tabLab Prescription` lp
+            inner join `tabPatient Encounter` pe on lp.parent = pe.name
+        where
+            pe.patient = %s
+            and pe.practitioner = %s
+            and lp.lab_test_created = 0
+
+        union all
+
+        select
+            lp.name,
+            lp.lab_test_code,
+            concat(lp.parent, ' (Emergency Medical Services)') as parent,
+            lp.invoiced,
+            lp.lab_test_comment,
+            ems.practitioner_name,
+            ems.entry
+        from
+            `tabLab Prescription` lp
+            inner join `tabEmergency Medical Services` ems on lp.parent = ems.name
+        where
+            ems.patient = %s
+            and ems.practitioner = %s
+            and lp.lab_test_created = 0
+
+        union all
+
+        select
+            lp.name,
+            lp.lab_test_code,
+            concat(lp.parent, ' (Premature)') as parent,
+            lp.invoiced,
+            lp.lab_test_comment,
+            pr.practitioner_name,
+            pr.entry
+        from
+            `tabLab Prescription` lp
+            inner join `tabPremature` pr on lp.parent = pr.name
+        where
+            pr.patient = %s
+            and pr.practitioner = %s
+            and lp.lab_test_created = 0
+        """,
+        (patient, healthcare_practitioner, patient, healthcare_practitioner, patient, healthcare_practitioner),
     )
+
+
 
 def update_message(doc) -> None:
     if len(doc.references_table) > 0:

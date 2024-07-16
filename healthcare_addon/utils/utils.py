@@ -195,46 +195,64 @@ def set_ip_child_records(inpatient_record, inpatient_record_child, encounter_chi
 def create_medication_invoice(self) -> None:
     """
     It creates a new Sales Invoice document, populates it with the patient, practitioner, and items from
-    the prescription, and then inserts it into the database
+    the prescription, and then inserts it into the database.
     """
-    
-    letter_head = frappe.db.get_value(
-        'Company', self.company, 'default_letter_head')
-    invoice = frappe.new_doc("Sales Invoice")
-    invoice.customer = self.patient
-    invoice.patient = self.patient
-    invoice.ref_practitioner = self.practitioner
-    invoice.update_stock = True
-    
-    settings = frappe.get_single("Default Healthcare Service Settings")
-    income_account = None
-    if(self.doctype == "Premature"):
-        if(settings.premature_income_account == None):
-            frappe.throw(_("Please set the premature income account in Default 'Healthcare Service Settings'"))
-        income_account = settings.premature_income_account
-    elif(self.doctype == "Emergency Medical Services"):
-        if(settings.medication_income_account == None):
-            frappe.throw(_("Please set the medication income account in Default 'Healthcare Service Settings'"))
-        income_account = settings.medication_income_account
 
-    
-        
-    if letter_head != None:
-        invoice.letter_head = letter_head
-    for item in self.drug_prescription:
-        invoice.append("items", {
-            "item_code": item.drug_code,
-            'qty': item.quantity,
-            'uom': item.uom,
-            'income_account': income_account,
-            'drug_prescription': f'Dosage: {item.dosage}|Period: {item.period}|Dosage Form: {item.dosage_form}'
+    try:
+        letter_head = frappe.db.get_value('Company', self.company, 'default_letter_head')
+
+        if not self.patient:
+            frappe.throw(_("Patient is not defined"))
+        if not self.practitioner:
+            frappe.throw(_("Practitioner is not defined"))
+
+        settings = frappe.get_single("Default Healthcare Service Settings")
+        if not settings:
+            frappe.throw(_("Default Healthcare Service Settings not found"))
+
+        income_account = None
+        if self.doctype == "Premature":
+            if not settings.premature_income_account:
+                frappe.throw(_("Please set the premature income account in Default 'Healthcare Service Settings'"))
+            income_account = settings.premature_income_account
+        elif self.doctype == "Emergency Medical Services":
+            if not settings.medication_income_account:
+                frappe.throw(_("Please set the medication income account in Default 'Healthcare Service Settings'"))
+            income_account = settings.medication_income_account
+
+        if not self.drug_prescription:
+            frappe.throw(_("Drug prescription items are not defined"))
+
+        invoice_items = []
+        for item in self.drug_prescription:
+            invoice_items.append({
+                "item_code": item.drug_code,
+                'qty': item.quantity,
+                'uom': item.uom,
+                'income_account': income_account,
+                'drug_prescription': f'Dosage: {item.dosage}|Period: {item.period}|Dosage Form: {item.dosage_form}'
+            })
+
+        invoice = frappe.get_doc({
+            "doctype": "Sales Invoice",
+            "customer": self.patient,
+            "patient": self.patient,
+            "ref_practitioner": self.practitioner,
+            "update_stock": True,
+            "letter_head": letter_head,
+            "items": invoice_items
         })
-    invoice.insert()
-    invoice.submit()
 
-    set_references_table(invoice, self)
+        invoice.insert()
+        invoice.submit()
 
+        set_references_table(invoice, self)
 
+    except Exception as e:
+        frappe.log_error(message=str(e), title="Error creating medication invoice")
+        frappe.throw(_("There was an error creating the medication invoice: {0}").format(str(e)))
+
+    
 def create_healthcare_service_invoice(self, item_code, qty) -> None:
     """
     It creates a new Sales Invoice with the patient as the customer, the practitioner as the reference
@@ -262,6 +280,7 @@ def create_healthcare_service_invoice(self, item_code, qty) -> None:
     else:
         invoice.append("items", {
             "item_code": item_code,
+            "item_name": item_code,
             'income_account': income_account,
             'qty': qty,
         })

@@ -1,0 +1,24 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Patient",
+  "enabled": 1,
+  "modified": "2024-07-17 12:14:52.281385",
+  "module": "Healthcare Addon",
+  "name": "Patient Duplicate Name Message",
+  "script": "frappe.ui.form.on('Patient', {\r\n    validate: function(frm) {\r\n        // Generate the full name as per the set_full_name function\r\n        let full_name = frm.doc.first_name;\r\n        if (frm.doc.last_name) {\r\n            full_name = `${frm.doc.first_name} ${frm.doc.last_name}`;\r\n        }\r\n\r\n        // Check if a patient with the same full name already exists\r\n        if (full_name) {\r\n            frappe.call({\r\n                method: 'frappe.client.get_list',\r\n                args: {\r\n                    doctype: 'Patient',\r\n                    filters: {\r\n                        patient_name: full_name\r\n                    },\r\n                    limit: 1\r\n                },\r\n                callback: function(r) {\r\n                    if (r.message.length > 0) {\r\n                        frappe.msgprint(__('A patient with the name \"{0}\" already exists.', [full_name]));\r\n                        frappe.validated = false;\r\n                    }\r\n                }\r\n            });\r\n        }\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Healthcare Practitioner",
+  "enabled": 1,
+  "modified": "2024-07-17 12:18:21.702103",
+  "module": "Healthcare Addon",
+  "name": "Healthcare Practitioner Duplicate Name Message",
+  "script": "frappe.ui.form.on('Healthcare Practitioner', {\r\n    validate: function(frm) {\r\n        // Generate the full name as per the set_full_name function\r\n        let full_name = frm.doc.first_name;\r\n        if (frm.doc.last_name) {\r\n            full_name = `${frm.doc.first_name} ${frm.doc.last_name}`;\r\n        }\r\n\r\n        // Check if a patient with the same full name already exists\r\n        if (full_name) {\r\n            frappe.call({\r\n                method: 'frappe.client.get_list',\r\n                args: {\r\n                    doctype: 'Healthcare Practitioner',\r\n                    filters: {\r\n                        practitioner_name: full_name\r\n                    },\r\n                    limit: 1\r\n                },\r\n                callback: function(r) {\r\n                    if (r.message.length > 0) {\r\n                        frappe.msgprint(__('A Healthcare Practitioner with the name \"{0}\" already exists.', [full_name]));\r\n                        frappe.validated = false;\r\n                    }\r\n                }\r\n            });\r\n        }\r\n    }\r\n});\r\n",
+  "view": "Form"
+ }
+]

@@ -34,6 +34,7 @@
   "drug_prescription",
   "sb_test_prescription",
   "lab_test_prescription",
+  "imaging_tests",
   "section_break_33",
   "encounter_comment",
   "sb_refs",
@@ -271,11 +272,17 @@
    "fieldname": "clear_linked_je",
    "fieldtype": "Button",
    "label": "Clear Linked JE"
+  },
+  {
+   "fieldname": "imaging_tests",
+   "fieldtype": "Table",
+   "label": "Imaging Tests",
+   "options": "Imaging Prescription"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2024-07-15 13:44:23.676823",
+ "modified": "2024-07-17 15:28:08.888460",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Emergency Medical Services",

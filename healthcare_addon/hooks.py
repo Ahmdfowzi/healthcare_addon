@@ -20,6 +20,14 @@ fixtures = [
             ],
         ],
     },
+    {
+        "dt": "Client Script",
+        "filters": [
+            [
+                "name", "in", ["Patient Duplicate Name Message","Healthcare Practitioner Duplicate Name Message"],
+            ],
+        ],
+    },
 ]
 # Includes in <head>
 # ------------------

@@ -185,7 +185,7 @@
    "fieldname": "drug_prescription",
    "fieldtype": "Table",
    "label": "Drug Prescription",
-   "options": "Drug Prescription"
+   "options": "Items Table"
   },
   {
    "fieldname": "sb_test_prescription",
@@ -196,7 +196,7 @@
    "fieldname": "lab_test_prescription",
    "fieldtype": "Table",
    "label": "Lab Tests",
-   "options": "Lab Prescription"
+   "options": "Items Table"
   },
   {
    "fieldname": "section_break_33",
@@ -277,7 +277,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2024-07-15 13:41:08.308275",
+ "modified": "2024-07-16 14:12:07.014866",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Premature",

@@ -188,7 +188,7 @@
    "fieldname": "drug_prescription",
    "fieldtype": "Table",
    "label": "Drug Prescription",
-   "options": "Drug Prescription"
+   "options": "Items Table"
   },
   {
    "fieldname": "sb_test_prescription",

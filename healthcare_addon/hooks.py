@@ -16,7 +16,9 @@ fixtures = [
         "dt": "Letter Head",
         "filters": [
             [
-                "name", "in", ["Base Header"],
+                "name",
+                "in",
+                ["Base Header"],
             ],
         ],
     },
@@ -24,7 +26,23 @@ fixtures = [
         "dt": "Client Script",
         "filters": [
             [
-                "name", "in", ["Patient Duplicate Name Message","Healthcare Practitioner Duplicate Name Message"],
+                "name",
+                "in",
+                [
+                    "Patient Duplicate Name Message",
+                    "Healthcare Practitioner Duplicate Name Message",
+                    "Patient Encounter Customizations",
+                ],
+            ],
+        ],
+    },
+    {
+        "dt": "Item Group",
+        "filters": [
+            [
+                "name",
+                "in",
+                ["Imaging"],
             ],
         ],
     },
@@ -60,7 +78,6 @@ doctype_js = {
     "Lab Test": "public/js/lab_test.js",
     "Item Group": "public/js/item_group.js",
     "Patient History Settings": "public/js/patient_list_edit.js",
-
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -144,7 +161,7 @@ doc_events = {
         "on_submit": "healthcare_addon.utils.events.patient_appointment.on_submit",
         "after_delete": "healthcare_addon.utils.events.patient_appointment.after_delete",
         "on_update": "healthcare_addon.utils.events.patient_appointment.on_update",
-        "validate": "healthcare_addon.utils.events.patient_appointment.validate"
+        "validate": "healthcare_addon.utils.events.patient_appointment.validate",
     },
     "Lab Test": {
         "before_save": "healthcare_addon.utils.events.lab_test.before_save",
@@ -217,26 +234,24 @@ doc_events = {
 # User Data Protection
 # --------------------
 
-user_data_fields = [
-    {
-        "doctype": "{doctype_1}",
-        "filter_by": "{filter_by}",
-        "redact_fields": ["{field_1}", "{field_2}"],
-        "partial": 1,
-    },
-    {
-        "doctype": "{doctype_2}",
-        "filter_by": "{filter_by}",
-        "partial": 1,
-    },
-    {
-        "doctype": "{doctype_3}",
-        "strict": False,
-    },
-    {
-        "doctype": "{doctype_4}"
-    }
-]
+# user_data_fields = [
+#     {
+#         "doctype": "{doctype_1}",
+#         "filter_by": "{filter_by}",
+#         "redact_fields": ["{field_1}", "{field_2}"],
+#         "partial": 1,
+#     },
+#     {
+#         "doctype": "{doctype_2}",
+#         "filter_by": "{filter_by}",
+#         "partial": 1,
+#     },
+#     {
+#         "doctype": "{doctype_3}",
+#         "strict": False,
+#     },
+#     {"doctype": "{doctype_4}"},
+# ]
 
 # Authentication and authorization
 # --------------------------------

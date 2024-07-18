@@ -4,7 +4,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from healthcare_addon.utils.utils import create_medication_invoice, create_commission_je, cancel_references_table_docs, create_healthcare_service_invoice, calculate_practitioner_contribution, update_message
+from healthcare_addon.utils.utils import create_medication_invoice, create_healthcare_service_invoice
 
 
 class EmergencyMedicalServices(Document):
@@ -13,7 +13,7 @@ class EmergencyMedicalServices(Document):
 		"""
 		It calculates the practitioner's contribution to the total amount of the bill
 		"""
-		calculate_practitioner_contribution(self)
+		pass
 		
 	def on_submit(self) -> None:
 
@@ -21,9 +21,6 @@ class EmergencyMedicalServices(Document):
 		if len(self.drug_prescription) > 0:
 			create_medication_invoice(self)
 
-		# Creating a Journal Entry for the practitioner.
-		if len(self.healthcare_practitioner_contribution) > 0:
-			create_commission_je(self)
    
 		create_emergency_services_invoice(self)
 
@@ -32,18 +29,10 @@ class EmergencyMedicalServices(Document):
 		"""
 		It cancels the references table documents that are related to the current document
 		"""
-		cancel_references_table_docs(self)
-
-	# def after_insert(self) -> None:
-	# 	"""
-	# 	It creates an invoice for the patient, 
-	# 	"""
-	# 	create_emergency_services_invoice(self)
-		
+		pass
 
 	def before_update_after_submit(self) -> None:
-		calculate_practitioner_contribution(self)
-		update_message(self)
+		pass
 
 def create_emergency_services_invoice(self) -> None:
 	"""

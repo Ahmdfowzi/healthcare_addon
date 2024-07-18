@@ -1,6 +1,21 @@
 // Copyright (c) 2023, Ahmed Ghazi and contributors
 // For license information, please see license.txt
 
+
+frappe.ui.form.on('Emergency Medical Services', {
+    refresh(frm) {
+        frm.fields_dict['imaging_tests'].grid.get_field('imaging_scan_template').get_query = function(doc, cdt, cdn) {
+            let row = locals[cdt][cdn];
+            return {
+                filters: {
+                    scan_type: row.scan_type
+                }
+            };
+        };
+    }
+});
+
+
 frappe.ui.form.on('Emergency Medical Services', {
 
 	/* Getting the default item for the emergency medical services from the Default Healthcare Service

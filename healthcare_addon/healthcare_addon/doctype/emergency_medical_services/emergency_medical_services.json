@@ -37,11 +37,7 @@
   "imaging_tests",
   "section_break_33",
   "encounter_comment",
-  "sb_refs",
-  "healthcare_practitioner_contribution",
   "more_info_section",
-  "clear_linked_je",
-  "references_table",
   "amended_from"
  ],
  "fields": [
@@ -188,7 +184,7 @@
    "fieldname": "drug_prescription",
    "fieldtype": "Table",
    "label": "Drug Prescription",
-   "options": "Items Table"
+   "options": "Drug Prescription"
   },
   {
    "fieldname": "sb_test_prescription",
@@ -213,10 +209,6 @@
    "no_copy": 1
   },
   {
-   "fieldname": "sb_refs",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -239,24 +231,9 @@
    "reqd": 1
   },
   {
-   "allow_on_submit": 1,
-   "fieldname": "healthcare_practitioner_contribution",
-   "fieldtype": "Table",
-   "label": "Healthcare Practitioner Contribution",
-   "options": "Healthcare Practitioner Contribution Table"
-  },
-  {
    "fieldname": "more_info_section",
    "fieldtype": "Section Break",
    "label": "More Info"
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "references_table",
-   "fieldtype": "Table",
-   "label": "References Table",
-   "options": "References Table",
-   "read_only": 1
   },
   {
    "allow_on_submit": 1,
@@ -268,12 +245,6 @@
    "reqd": 1
   },
   {
-   "depends_on": "eval:doc.docstatus == 1;",
-   "fieldname": "clear_linked_je",
-   "fieldtype": "Button",
-   "label": "Clear Linked JE"
-  },
-  {
    "fieldname": "imaging_tests",
    "fieldtype": "Table",
    "label": "Imaging Tests",
@@ -282,7 +253,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2024-07-17 15:28:08.888460",
+ "modified": "2024-07-18 13:01:47.287023",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Emergency Medical Services",

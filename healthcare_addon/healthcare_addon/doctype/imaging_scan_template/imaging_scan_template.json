@@ -1,0 +1,118 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:scan_template_name",
+ "creation": "2024-07-18 10:30:49.485908",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "scan_template_name",
+  "scan_type",
+  "imaging_room",
+  "column_break_lcdj",
+  "is_billable",
+  "currency",
+  "rate",
+  "item_code",
+  "information_tab",
+  "scan_result_details",
+  "examination_protocol"
+ ],
+ "fields": [
+  {
+   "fieldname": "scan_template_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Scan Template Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "scan_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Scan Type",
+   "link_filters": "[[\"DocType\",\"name\",\"in\",[\"CT Scan\",\"X-ray\",\"MRI\"]]]",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "imaging_room",
+   "fieldtype": "Link",
+   "label": "Imaging Room",
+   "options": "Healthcare Service Unit"
+  },
+  {
+   "fieldname": "column_break_lcdj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_billable",
+   "fieldtype": "Check",
+   "label": "Is Billable"
+  },
+  {
+   "depends_on": "eval:doc.is_billable == 1",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "mandatory_depends_on": "eval:doc.is_billable == 1",
+   "options": "Currency"
+  },
+  {
+   "depends_on": "eval:doc.is_billable == 1",
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "label": "Rate",
+   "mandatory_depends_on": "eval:doc.is_billable == 1",
+   "options": "currency"
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "fieldname": "information_tab",
+   "fieldtype": "Tab Break",
+   "label": "Information"
+  },
+  {
+   "fieldname": "scan_result_details",
+   "fieldtype": "Text Editor",
+   "label": "Scan Result Details"
+  },
+  {
+   "fieldname": "examination_protocol",
+   "fieldtype": "Text Editor",
+   "label": "Examination Protocol"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-18 10:40:09.864994",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Imaging Scan Template",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

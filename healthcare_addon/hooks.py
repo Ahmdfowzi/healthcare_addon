@@ -71,11 +71,11 @@ app_include_css = "/assets/healthcare_addon/css/app.css"
 # include js in doctype views
 doctype_js = {
     "Sales Invoice": "public/js/sales_invoice.js",
-    "Clinical Procedure": "public/js/clinical_procedure.js",
-    "Patient Appointment": "public/js/patient_appointment.js",
+    # "Clinical Procedure": "public/js/clinical_procedure.js",
+    # "Patient Appointment": "public/js/patient_appointment.js",
     # "Patient Encounter": "public/js/patient_encounter.js",
     "Lab Test Template": "public/js/lab_test_template.js",
-    "Lab Test": "public/js/lab_test.js",
+    # "Lab Test": "public/js/lab_test.js",
     "Item Group": "public/js/item_group.js",
     "Patient History Settings": "public/js/patient_list_edit.js",
 }

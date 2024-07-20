@@ -16,7 +16,9 @@ fixtures = [
         "dt": "Letter Head",
         "filters": [
             [
-                "name", "in", ["Base Header"],
+                "name",
+                "in",
+                ["Base Header"],
             ],
         ],
     },
@@ -24,7 +26,23 @@ fixtures = [
         "dt": "Client Script",
         "filters": [
             [
-                "name", "in", ["Patient Duplicate Name Message","Healthcare Practitioner Duplicate Name Message"],
+                "name",
+                "in",
+                [
+                    "Patient Duplicate Name Message",
+                    "Healthcare Practitioner Duplicate Name Message",
+                    "Patient Encounter Customizations",
+                ],
+            ],
+        ],
+    },
+    {
+        "dt": "Item Group",
+        "filters": [
+            [
+                "name",
+                "in",
+                ["Imaging"],
             ],
         ],
     },
@@ -33,7 +51,7 @@ fixtures = [
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/healthcare_addon/css/healthcare_addon.css"
+app_include_css = "/assets/healthcare_addon/css/app.css"
 # app_include_js = "/assets/healthcare_addon/js/healthcare_addon.js"
 
 # include js, css files in header of web template
@@ -53,14 +71,9 @@ fixtures = [
 # include js in doctype views
 doctype_js = {
     "Sales Invoice": "public/js/sales_invoice.js",
-    "Clinical Procedure": "public/js/clinical_procedure.js",
-    "Patient Appointment": "public/js/patient_appointment.js",
-    "Patient Encounter": "public/js/patient_encounter.js",
     "Lab Test Template": "public/js/lab_test_template.js",
-    "Lab Test": "public/js/lab_test.js",
     "Item Group": "public/js/item_group.js",
     "Patient History Settings": "public/js/patient_list_edit.js",
-
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -133,28 +146,6 @@ doc_events = {
     "Inpatient Medication Entry": {
         "on_submit": "healthcare_addon.utils.medication_entry.new_medication"
     },
-    "Clinical Procedure": {
-        "before_save": "healthcare_addon.utils.events.clinical_procedure.before_save",
-        "on_submit": "healthcare_addon.utils.events.clinical_procedure.on_submit",
-        "on_cancel": "healthcare_addon.utils.events.clinical_procedure.on_cancel",
-        "before_update_after_submit": "healthcare_addon.utils.events.clinical_procedure.before_update_after_submit",
-    },
-    "Patient Appointment": {
-        "before_save": "healthcare_addon.utils.events.patient_appointment.before_save",
-        "on_submit": "healthcare_addon.utils.events.patient_appointment.on_submit",
-        "after_delete": "healthcare_addon.utils.events.patient_appointment.after_delete",
-        "on_update": "healthcare_addon.utils.events.patient_appointment.on_update",
-        "validate": "healthcare_addon.utils.events.patient_appointment.validate"
-    },
-    "Lab Test": {
-        "before_save": "healthcare_addon.utils.events.lab_test.before_save",
-    },
-    "Patient Encounter": {
-        "before_save": "healthcare_addon.utils.events.patient_encounter.before_save",
-        "on_submit": "healthcare_addon.utils.events.patient_encounter.on_submit",
-        "on_cancel": "healthcare_addon.utils.events.patient_encounter.on_cancel",
-        "before_update_after_submit": "healthcare_addon.utils.events.patient_encounter.before_update_after_submit",
-    },
     "Inpatient Medication Order": {
         "on_submit": "healthcare_addon.utils.events.inpatient_medication_order.on_submit",
     },
@@ -217,26 +208,24 @@ doc_events = {
 # User Data Protection
 # --------------------
 
-user_data_fields = [
-    {
-        "doctype": "{doctype_1}",
-        "filter_by": "{filter_by}",
-        "redact_fields": ["{field_1}", "{field_2}"],
-        "partial": 1,
-    },
-    {
-        "doctype": "{doctype_2}",
-        "filter_by": "{filter_by}",
-        "partial": 1,
-    },
-    {
-        "doctype": "{doctype_3}",
-        "strict": False,
-    },
-    {
-        "doctype": "{doctype_4}"
-    }
-]
+# user_data_fields = [
+#     {
+#         "doctype": "{doctype_1}",
+#         "filter_by": "{filter_by}",
+#         "redact_fields": ["{field_1}", "{field_2}"],
+#         "partial": 1,
+#     },
+#     {
+#         "doctype": "{doctype_2}",
+#         "filter_by": "{filter_by}",
+#         "partial": 1,
+#     },
+#     {
+#         "doctype": "{doctype_3}",
+#         "strict": False,
+#     },
+#     {"doctype": "{doctype_4}"},
+# ]
 
 # Authentication and authorization
 # --------------------------------

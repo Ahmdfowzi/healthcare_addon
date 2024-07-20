@@ -1,26 +1,4 @@
-// frappe.pages['rooms-monitor'].on_page_load = function(wrapper) {
-// 	var page = frappe.ui.make_app_page({
-// 		parent: wrapper,
-// 		title: 'Rooms Dashboard',
-// 		single_column: true
-// 	});
-// 	page.html(frappe.render_template("rooms_monitor"));
-// }
 
-
-/**
- * It takes the data from the database and maps it to a data structure that is easy to use in the
- * frontend
- * @returns [
- * 		{
- * 			floor_name : "Floor 1",
- * 			floor_sections : [
- * 				{
- * 					section_name : "Section 1",
- * 					section_rooms : [
- * 						{
- * 							room_name
- */
 async function MapThroughTables() {
 	let data = []
 	let floor_section_room = await frappe.call({
@@ -365,5 +343,3 @@ frappe.pages['rooms-monitor'].on_page_load = async function (wrapper) {
 	console.log(newResult);
 	parent.html(frappe.render_template("rooms_monitor", { floors: data, timer: newResult }));
 }
-
-

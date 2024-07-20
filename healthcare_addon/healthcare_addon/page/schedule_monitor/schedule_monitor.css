@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
 .app *{
   font-family: 'Cairo', sans-serif;
 }
@@ -54,4 +54,85 @@ h1,h2,h3,h4,h5,h6,p{
     align-items: center;
     justify-content: center;
   }
-  
+   */
+
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap");
+
+.app * {
+  font-family: "Cairo", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+.flex-table {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.flex-row {
+  display: flex;
+  background-color: #eef1f9;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+[data-theme="dark"] .flex-row {
+  background-color: var(--dark);
+}
+
+.flex-row * {
+  font-size: 25px;
+}
+
+.istime.active {
+  background-color: #6c6cee;
+  color: white;
+}
+
+.istime.active * {
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.istime.active svg {
+  width: 20px;
+  height: 20px;
+}
+
+.flex-header {
+  display: flex;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.flex-header * {
+  font-size: 35px;
+}
+
+.flex-cell {
+  flex: 1;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

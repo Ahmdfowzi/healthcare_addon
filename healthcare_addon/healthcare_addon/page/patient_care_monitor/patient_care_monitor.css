@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap");
+
+.app * {
+  font-family: "Cairo", sans-serif;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vacant {
+  background-color: #14cc60;
+}
+
+.occupied {
+  background-color: #fb347a;
+}
+
+.vacant h4,
+.occupied h4,
+.occupied h5 {
+  color: white;
+}
+
+[data-theme="dark"] .vacant {
+  background-color: #14cc6119;
+  border: 1px solid #14cc6160 !important;
+}
+
+[data-theme="dark"] .vacant h4 {
+  color: #14cc60 !important;
+}
+
+[data-theme="dark"] .occupied {
+  background-color: #fb347a24;
+  border: 1px solid #fb347a77 !important;
+}
+
+[data-theme="dark"] .occupied h4,
+[data-theme="dark"] .occupied h5 {
+  color: #fb347a !important;
+}
+
+.section {
+  background-color: white;
+  color: var(--dark);
+}
+
+[data-theme="dark"] .section {
+  color: #ffffff !important;
+  background-color: var(--dark);
+}
+
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+[data-floor].active {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+[data-floor] {
+  display: none;
+}
+
+[data-name].active {
+  font-size: 40px !important;
+}
+
+[data-time] {
+  display: none;
+}
+
+[data-time].active {
+  display: block;
+}
+
+.scrol {
+  height: 800px;
+  overflow-y: scroll;
+}
+
+.mborder {
+  border: 1px solid rgb(186, 186, 186);
+}
+
+.timer-item {
+  cursor: pointer;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0, 0) rotate(0deg) translateY(0);
+  }
+  10% {
+    transform: translate(-4px, 0) rotate(-10deg) translateY(-5px);
+  }
+  20% {
+    transform: translate(4px, 0) rotate(10deg) translateY(-5px);
+  }
+  30% {
+    transform: translate(-4px, 0) rotate(-10deg) translateY(-5px);
+  }
+  40% {
+    transform: translate(4px, 0) rotate(10deg) translateY(-5px);
+  }
+  50% {
+    transform: translate(-4px, 0) rotate(-10deg) translateY(-5px);
+  }
+  60% {
+    transform: translate(4px, 0) rotate(10deg) translateY(-5px);
+  }
+  70% {
+    transform: translate(-4px, 0) rotate(-10deg) translateY(-5px);
+  }
+  80% {
+    transform: translate(4px, 0) rotate(10deg) translateY(-5px);
+  }
+  90% {
+    transform: translate(-4px, 0) rotate(-10deg) translateY(-5px);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg) translateY(0);
+  }
+}
+
+.alarm-ring {
+  animation: shake 0.8s ease-in-out 5;
+}

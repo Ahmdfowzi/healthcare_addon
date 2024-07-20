@@ -1,0 +1,24 @@
+{
+ "content": null,
+ "creation": "2024-07-20 14:27:02.786127",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2024-07-20 14:27:02.786127",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "patient-care-monitor",
+ "owner": "Administrator",
+ "page_name": "patient-care-monitor",
+ "restrict_to_domain": "Healthcare",
+ "roles": [
+  {
+   "role": "All"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 1,
+ "title": "Patient Care Monitor"
+}

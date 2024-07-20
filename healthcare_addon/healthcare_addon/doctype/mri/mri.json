@@ -1,0 +1,334 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:MRI:{YYYY}-{#####}",
+ "creation": "2024-07-17 14:41:17.905990",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_hi4u",
+  "patient",
+  "patient_age",
+  "patient_gender",
+  "imaging_date",
+  "referring_doctor",
+  "technician_name",
+  "assistant_technician_name",
+  "column_break_qifv",
+  "imaging_scan_template",
+  "mri_id",
+  "image_file",
+  "image_quality",
+  "report_status",
+  "imaging_center",
+  "section_break_ghzz",
+  "scan_result_summary",
+  "scan_result_details",
+  "more_info_tab",
+  "section_break_gidv",
+  "follow_up_required",
+  "follow_up_date",
+  "comments",
+  "clinical_indication",
+  "radiation_dose",
+  "equipment_used",
+  "approval_status",
+  "column_break_lshd",
+  "previous_imaging",
+  "previous_imaging_details",
+  "contrast_agent_used",
+  "contrast_agent_details",
+  "imaging_room",
+  "imaging_end_time",
+  "imaging_start_time",
+  "section_break_ckda",
+  "examination_protocol",
+  "imaging_technician_notes",
+  "source_document_type",
+  "source_document",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_hi4u",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Patient",
+   "options": "Patient",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "patient.patient_age",
+   "fieldname": "patient_age",
+   "fieldtype": "Int",
+   "label": "Patient Age",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "patient.sex",
+   "fieldname": "patient_gender",
+   "fieldtype": "Data",
+   "label": "Patient Gender",
+   "read_only": 1
+  },
+  {
+   "fieldname": "imaging_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Imaging Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "referring_doctor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Referring Doctor",
+   "options": "Healthcare Practitioner",
+   "reqd": 1
+  },
+  {
+   "fieldname": "technician_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Technician Name",
+   "options": "Healthcare Practitioner",
+   "reqd": 1
+  },
+  {
+   "fieldname": "assistant_technician_name",
+   "fieldtype": "Link",
+   "label": "Assistant Technician Name",
+   "options": "Healthcare Practitioner"
+  },
+  {
+   "fieldname": "column_break_qifv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "image_file",
+   "fieldtype": "Attach Image",
+   "label": "Image File"
+  },
+  {
+   "fieldname": "image_quality",
+   "fieldtype": "Select",
+   "label": "Image Quality",
+   "options": "Poor\nFair\nGood\nExcellent",
+   "reqd": 1
+  },
+  {
+   "fieldname": "report_status",
+   "fieldtype": "Select",
+   "label": "Report Status",
+   "options": "Draft\nCompleted\nReviewed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "imaging_center",
+   "fieldtype": "Data",
+   "label": "Imaging Center"
+  },
+  {
+   "fieldname": "section_break_ghzz",
+   "fieldtype": "Section Break",
+   "label": "Summary"
+  },
+  {
+   "fieldname": "scan_result_summary",
+   "fieldtype": "Small Text",
+   "label": "Scan Result Summary",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "imaging_scan_template.scan_result_details",
+   "fieldname": "scan_result_details",
+   "fieldtype": "Text Editor",
+   "label": "Scan Result Details"
+  },
+  {
+   "fieldname": "more_info_tab",
+   "fieldtype": "Tab Break",
+   "label": "More Info"
+  },
+  {
+   "fieldname": "section_break_gidv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "follow_up_required",
+   "fieldtype": "Check",
+   "label": "Follow-up Required"
+  },
+  {
+   "fieldname": "follow_up_date",
+   "fieldtype": "Date",
+   "label": "Follow-up Date"
+  },
+  {
+   "fieldname": "comments",
+   "fieldtype": "Small Text",
+   "label": "Comments"
+  },
+  {
+   "fieldname": "clinical_indication",
+   "fieldtype": "Small Text",
+   "label": "Clinical Indication"
+  },
+  {
+   "fieldname": "radiation_dose",
+   "fieldtype": "Data",
+   "label": "Radiation Dose"
+  },
+  {
+   "fieldname": "equipment_used",
+   "fieldtype": "Data",
+   "label": "Equipment Used"
+  },
+  {
+   "fieldname": "approval_status",
+   "fieldtype": "Select",
+   "label": "Approval Status",
+   "options": "Pending\nApproved\nRejected",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_lshd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "previous_imaging",
+   "fieldtype": "Check",
+   "label": "Previous Imaging"
+  },
+  {
+   "fieldname": "previous_imaging_details",
+   "fieldtype": "Small Text",
+   "label": "Previous Imaging Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "contrast_agent_used",
+   "fieldtype": "Check",
+   "label": "Contrast Agent Used"
+  },
+  {
+   "fieldname": "contrast_agent_details",
+   "fieldtype": "Data",
+   "label": "Contrast Agent Details"
+  },
+  {
+   "fetch_from": "imaging_scan_template.imaging_room",
+   "fieldname": "imaging_room",
+   "fieldtype": "Link",
+   "label": "Imaging Room",
+   "options": "Healthcare Service Unit"
+  },
+  {
+   "fieldname": "imaging_end_time",
+   "fieldtype": "Time",
+   "label": "Imaging End Time"
+  },
+  {
+   "fieldname": "imaging_start_time",
+   "fieldtype": "Time",
+   "label": "Imaging Start Time"
+  },
+  {
+   "fieldname": "section_break_ckda",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "imaging_scan_template.examination_protocol",
+   "fieldname": "examination_protocol",
+   "fieldtype": "Text Editor",
+   "label": "Examination Protocol"
+  },
+  {
+   "fieldname": "imaging_technician_notes",
+   "fieldtype": "Text Editor",
+   "label": "Imaging Technician Notes"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "MRI",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "MRI",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "mri_id",
+   "fieldtype": "Barcode",
+   "label": "MRI ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "imaging_scan_template",
+   "fieldtype": "Link",
+   "label": "Imaging Scan Template",
+   "link_filters": "[[\"Imaging Scan Template\",\"scan_type\",\"=\",\"MRI\"]]",
+   "options": "Imaging Scan Template",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_document_type",
+   "fieldtype": "Link",
+   "label": "Source Document Type",
+   "options": "DocType",
+   "read_only": 1
+  },
+  {
+   "fieldname": "source_document",
+   "fieldtype": "Dynamic Link",
+   "label": "Source Document",
+   "options": "source_document_type",
+   "read_only": 1
+  }
+ ],
+ "image_field": "image_file",
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-07-20 12:51:47.596818",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "MRI",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

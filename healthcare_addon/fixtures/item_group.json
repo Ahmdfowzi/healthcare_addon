@@ -1,0 +1,17 @@
+[
+ {
+  "barcode_label": null,
+  "docstatus": 0,
+  "doctype": "Item Group",
+  "group_code": "Imaging",
+  "image": null,
+  "is_group": 0,
+  "item_group_defaults": [],
+  "item_group_name": "Imaging",
+  "modified": "2024-07-18 10:55:45.109482",
+  "name": "Imaging",
+  "old_parent": "All Item Groups",
+  "parent_item_group": "All Item Groups",
+  "taxes": []
+ }
+]

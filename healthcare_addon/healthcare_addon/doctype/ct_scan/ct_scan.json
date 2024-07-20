@@ -15,6 +15,7 @@
   "technician_name",
   "assistant_technician_name",
   "column_break_qifv",
+  "imaging_scan_template",
   "ct_scan_id",
   "image_file",
   "image_quality",
@@ -43,7 +44,9 @@
   "amended_from",
   "section_break_ckda",
   "examination_protocol",
-  "imaging_technician_notes"
+  "imaging_technician_notes",
+  "source_document_type",
+  "source_document"
  ],
  "fields": [
   {
@@ -147,6 +150,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "imaging_scan_template.scan_result_details",
    "fieldname": "scan_result_details",
    "fieldtype": "Text Editor",
    "label": "Scan Result Details"
@@ -163,6 +167,7 @@
    "label": "Previous Imaging Details"
   },
   {
+   "fetch_from": "imaging_scan_template.imaging_room",
    "fieldname": "imaging_room",
    "fieldtype": "Link",
    "label": "Imaging Room",
@@ -232,6 +237,7 @@
    "label": "Comments"
   },
   {
+   "fetch_from": "imaging_scan_template.examination_protocol",
    "fieldname": "examination_protocol",
    "fieldtype": "Text Editor",
    "label": "Examination Protocol"
@@ -264,13 +270,35 @@
    "fieldtype": "Link",
    "label": "Assistant Technician Name",
    "options": "Healthcare Practitioner"
+  },
+  {
+   "fieldname": "imaging_scan_template",
+   "fieldtype": "Link",
+   "label": "Imaging Scan Template",
+   "link_filters": "[[\"Imaging Scan Template\",\"scan_type\",\"=\",\"CT Scan\"]]",
+   "options": "Imaging Scan Template",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_document_type",
+   "fieldtype": "Link",
+   "label": "Source Document Type",
+   "options": "DocType",
+   "read_only": 1
+  },
+  {
+   "fieldname": "source_document",
+   "fieldtype": "Dynamic Link",
+   "label": "Source Document",
+   "options": "source_document_type",
+   "read_only": 1
   }
  ],
  "image_field": "image_file",
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-07-17 14:02:59.646271",
+ "modified": "2024-07-20 12:53:06.400166",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "CT Scan",

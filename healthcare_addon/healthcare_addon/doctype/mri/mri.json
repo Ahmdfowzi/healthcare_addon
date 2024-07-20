@@ -15,6 +15,7 @@
   "technician_name",
   "assistant_technician_name",
   "column_break_qifv",
+  "imaging_scan_template",
   "mri_id",
   "image_file",
   "image_quality",
@@ -43,6 +44,8 @@
   "section_break_ckda",
   "examination_protocol",
   "imaging_technician_notes",
+  "source_document_type",
+  "source_document",
   "amended_from"
  ],
  "fields": [
@@ -108,8 +111,7 @@
   {
    "fieldname": "image_file",
    "fieldtype": "Attach Image",
-   "label": "Image File",
-   "reqd": 1
+   "label": "Image File"
   },
   {
    "fieldname": "image_quality",
@@ -142,6 +144,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "imaging_scan_template.scan_result_details",
    "fieldname": "scan_result_details",
    "fieldtype": "Text Editor",
    "label": "Scan Result Details"
@@ -220,6 +223,7 @@
    "label": "Contrast Agent Details"
   },
   {
+   "fetch_from": "imaging_scan_template.imaging_room",
    "fieldname": "imaging_room",
    "fieldtype": "Link",
    "label": "Imaging Room",
@@ -240,6 +244,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "fetch_from": "imaging_scan_template.examination_protocol",
    "fieldname": "examination_protocol",
    "fieldtype": "Text Editor",
    "label": "Examination Protocol"
@@ -274,13 +279,35 @@
    "fieldtype": "Barcode",
    "label": "MRI ID",
    "read_only": 1
+  },
+  {
+   "fieldname": "imaging_scan_template",
+   "fieldtype": "Link",
+   "label": "Imaging Scan Template",
+   "link_filters": "[[\"Imaging Scan Template\",\"scan_type\",\"=\",\"MRI\"]]",
+   "options": "Imaging Scan Template",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_document_type",
+   "fieldtype": "Link",
+   "label": "Source Document Type",
+   "options": "DocType",
+   "read_only": 1
+  },
+  {
+   "fieldname": "source_document",
+   "fieldtype": "Dynamic Link",
+   "label": "Source Document",
+   "options": "source_document_type",
+   "read_only": 1
   }
  ],
  "image_field": "image_file",
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-07-17 14:45:45.034440",
+ "modified": "2024-07-20 12:51:47.596818",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "MRI",

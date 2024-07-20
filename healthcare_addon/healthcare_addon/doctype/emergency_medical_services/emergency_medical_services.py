@@ -31,8 +31,6 @@ class EmergencyMedicalServices(Document):
 		"""
 		pass
 
-	def before_update_after_submit(self) -> None:
-		pass
 
 def create_emergency_services_invoice(self) -> None:
 	"""

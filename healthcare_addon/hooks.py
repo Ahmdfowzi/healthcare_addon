@@ -51,7 +51,7 @@ fixtures = [
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/healthcare_addon/css/healthcare_addon.css"
+app_include_css = "/assets/healthcare_addon/css/app.css"
 # app_include_js = "/assets/healthcare_addon/js/healthcare_addon.js"
 
 # include js, css files in header of web template
@@ -73,7 +73,7 @@ doctype_js = {
     "Sales Invoice": "public/js/sales_invoice.js",
     "Clinical Procedure": "public/js/clinical_procedure.js",
     "Patient Appointment": "public/js/patient_appointment.js",
-    "Patient Encounter": "public/js/patient_encounter.js",
+    # "Patient Encounter": "public/js/patient_encounter.js",
     "Lab Test Template": "public/js/lab_test_template.js",
     "Lab Test": "public/js/lab_test.js",
     "Item Group": "public/js/item_group.js",
@@ -166,12 +166,12 @@ doc_events = {
     "Lab Test": {
         "before_save": "healthcare_addon.utils.events.lab_test.before_save",
     },
-    "Patient Encounter": {
-        "before_save": "healthcare_addon.utils.events.patient_encounter.before_save",
-        "on_submit": "healthcare_addon.utils.events.patient_encounter.on_submit",
-        "on_cancel": "healthcare_addon.utils.events.patient_encounter.on_cancel",
-        "before_update_after_submit": "healthcare_addon.utils.events.patient_encounter.before_update_after_submit",
-    },
+    # "Patient Encounter": {
+    #     "before_save": "healthcare_addon.utils.events.patient_encounter.before_save",
+    #     "on_submit": "healthcare_addon.utils.events.patient_encounter.on_submit",
+    #     "on_cancel": "healthcare_addon.utils.events.patient_encounter.on_cancel",
+    #     "before_update_after_submit": "healthcare_addon.utils.events.patient_encounter.before_update_after_submit",
+    # },
     "Inpatient Medication Order": {
         "on_submit": "healthcare_addon.utils.events.inpatient_medication_order.on_submit",
     },

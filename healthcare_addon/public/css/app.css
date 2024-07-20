@@ -1,0 +1,27 @@
+.imaging-test-card {
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.imaging-test-card:hover {
+  background-color: #f9f9f9;
+}
+
+.imaging-test-card.selected {
+  border: 2px solid #007bff;
+  background-color: #f0f8ff;
+  position: relative;
+}
+
+.imaging-test-card.selected::after {
+  content: "✔";
+  font-size: 20px;
+  color: #007bff;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}

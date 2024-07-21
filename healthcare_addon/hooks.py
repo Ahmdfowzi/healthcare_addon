@@ -2,11 +2,11 @@ from . import __version__ as app_version
 
 app_name = "healthcare_addon"
 app_title = "Healthcare Addon"
-app_publisher = "Ahmed Ghazi"
-app_description = "healthcare application for marina hospital"
+app_publisher = "Osama Muhammed Abd"
+app_description = "an extention app for the healthcare module"
 app_icon = "octicon octicon-file-directory"
 app_color = "grey"
-app_email = "ahmedgzi07@gmail.com"
+app_email = "osama@aoai.io"
 app_license = "MIT"
 
 
@@ -31,7 +31,6 @@ fixtures = [
                 [
                     "Patient Duplicate Name Message",
                     "Healthcare Practitioner Duplicate Name Message",
-                    "Patient Encounter Customizations",
                 ],
             ],
         ],
@@ -73,6 +72,7 @@ doctype_js = {
     "Sales Invoice": "public/js/sales_invoice.js",
     "Lab Test Template": "public/js/lab_test_template.js",
     "Item Group": "public/js/item_group.js",
+    "Patient Encounter": "public/js/patient_encounter.js",
     "Patient History Settings": "public/js/patient_list_edit.js",
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}

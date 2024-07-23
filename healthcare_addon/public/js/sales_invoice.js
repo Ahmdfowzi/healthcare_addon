@@ -130,7 +130,7 @@ frappe.ui.form.on("Sales Invoice", {
         },
         callback: function (r) {
           if (r.message) {
-            frappe.msgprint(__("Imaging tests marked as invoiced."));
+            frappe.msgprint(__("Imaging Tests Marked As Invoiced"));
           }
         },
       });

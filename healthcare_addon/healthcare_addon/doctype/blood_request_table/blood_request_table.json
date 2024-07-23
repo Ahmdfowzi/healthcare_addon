@@ -64,16 +64,16 @@
    "fetch_from": "blood_collection_bag.blood_collection_number",
    "fieldname": "blood_collection_number",
    "fieldtype": "Data",
-   "label": "Blood Collection number"
+   "label": "Blood Collection Number"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-07-14 15:35:46.369268",
+ "modified": "2024-07-23 12:22:01.582334",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
- "name": "Blood Request Execution",
+ "name": "Blood Request Table",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

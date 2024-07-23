@@ -4,7 +4,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from healthcare_addon.utils.utils import create_medication_invoice, create_healthcare_service_invoice
+from utils.utils import create_medication_invoice, create_healthcare_service_invoice
 
 
 class EmergencyMedicalServices(Document):

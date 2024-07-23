@@ -19,17 +19,23 @@
   {
    "fieldname": "fridge",
    "fieldtype": "Data",
-   "label": "Fridge"
+   "in_list_view": 1,
+   "label": "Fridge",
+   "reqd": 1
   },
   {
    "fieldname": "blood_collection_number",
    "fieldtype": "Data",
-   "label": "Blood Collection number"
+   "in_list_view": 1,
+   "label": "Blood Collection Number",
+   "reqd": 1
   },
   {
    "fieldname": "blood_group",
    "fieldtype": "Data",
-   "label": "Blood group"
+   "in_list_view": 1,
+   "label": "Blood group",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_ccfj",
@@ -60,7 +66,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-15 10:39:59.909503",
+ "modified": "2024-07-23 12:21:25.231936",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Blood Collection Bag",

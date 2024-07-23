@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class BloodRequestExecution(Document):
+class BloodRequestTable(Document):
 	pass

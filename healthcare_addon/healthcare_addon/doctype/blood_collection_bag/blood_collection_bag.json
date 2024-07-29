@@ -10,6 +10,7 @@
   "blood_collection_number",
   "blood_group",
   "consumed",
+  "returned",
   "column_break_ccfj",
   "entry_date",
   "expiry_data",
@@ -62,11 +63,17 @@
    "fieldtype": "Check",
    "label": "Consumed",
    "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "returned",
+   "fieldtype": "Check",
+   "label": "Returned"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-23 12:21:25.231936",
+ "modified": "2024-07-29 14:24:40.412836",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Blood Collection Bag",

@@ -875,7 +875,7 @@ def create_medication_invoice(self) -> None:
         )
 
         invoice.insert()
-        invoice.submit()
+        # invoice.submit()
 
     except Exception as e:
         frappe.log_error(message=str(e), title="Error creating medication invoice")

@@ -5,6 +5,7 @@ import frappe
 from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
 
+
 class LaboratoryTest(Document):
     def before_save(self):
         # Check if it's the first time the document is being saved
@@ -22,6 +23,7 @@ class LaboratoryTest(Document):
                             "lab_test_event": test_event.lab_test_event,
                             "lab_test_uom": test_event.lab_test_uom,
                             "normal_range": test_event.normal_range,
+                            "custom_test_event_group": test_event.custom_test_event_group,
                         },
                     )
             if lab_test_template.custom_allow_stock_consumption:
@@ -38,11 +40,13 @@ class LaboratoryTest(Document):
         # self.patient_age= calculate_age_from_dob(self.patient)
 
     def on_submit(self):
-        
+
         if self.lab_tests:
             for test in self.lab_tests:
-                if(test.custom_encounter != None):
-                    create_lab_test_from_encounter(test.custom_encounter, test.lab_test_code)
+                if test.custom_encounter != None:
+                    create_lab_test_from_encounter(
+                        test.custom_encounter, test.lab_test_code
+                    )
 
 
 @frappe.whitelist()
@@ -78,6 +82,7 @@ def map_laboratory_test_to_stock_entry(source_name, target_doc=None):
         )
 
     return mapped_stock_entry
+
 
 @frappe.whitelist()
 def create_stock_entry_from_clinical_proc(source_name):
@@ -118,8 +123,9 @@ def create_lab_test_from_encounter(encounter, lab_test_template):
         if encounter and encounter.lab_test_prescription:
             for test in encounter.lab_test_prescription:
                 if test.lab_test_code == lab_test_template:
-                    frappe.db.set_value("Lab Prescription", test.name, "lab_test_created", 1)
+                    frappe.db.set_value(
+                        "Lab Prescription", test.name, "lab_test_created", 1
+                    )
     except Exception as e:
         # Handle the exception (e.g., log the error or raise it)
         frappe.throw(f"Error in create_lab_test_from_encounter: {e}")
-

@@ -23,15 +23,11 @@
   "patient_name",
   "patient_age",
   "patient_sex",
-  "vial_count",
-  "vial_code",
   "inpatient_record",
   "report_preference",
-  "email",
   "mobile",
   "c_b",
-  "user",
-  "sample",
+  "referred_by_practitioner",
   "sb_normal",
   "lab_test_html",
   "normal_test_items",
@@ -105,8 +101,7 @@
    "allow_on_submit": 1,
    "fieldname": "printed_on",
    "fieldtype": "Datetime",
-   "label": "Printed on",
-   "read_only": 1
+   "label": "Printed on"
   },
   {
    "fieldname": "sb_first",
@@ -172,16 +167,6 @@
    "report_hide": 1
   },
   {
-   "fetch_from": "patient.email",
-   "fieldname": "email",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Email",
-   "print_hide": 1,
-   "read_only": 1,
-   "report_hide": 1
-  },
-  {
    "fetch_from": "patient.mobile",
    "fieldname": "mobile",
    "fieldtype": "Data",
@@ -196,27 +181,6 @@
    "fieldname": "c_b",
    "fieldtype": "Column Break",
    "print_hide": 1
-  },
-  {
-   "fieldname": "user",
-   "fieldtype": "Link",
-   "hidden": 1,
-   "label": "User",
-   "no_copy": 1,
-   "options": "User",
-   "print_hide": 1,
-   "report_hide": 1
-  },
-  {
-   "fieldname": "sample",
-   "fieldtype": "Link",
-   "ignore_user_permissions": 1,
-   "in_filter": 1,
-   "label": "Sample ID",
-   "options": "Sample Collection",
-   "print_hide": 1,
-   "read_only": 1,
-   "report_hide": 1
   },
   {
    "fieldname": "sb_normal",
@@ -326,16 +290,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "vial_count",
-   "fieldtype": "Int",
-   "label": "Vial Count"
-  },
-  {
-   "fieldname": "vial_code",
-   "fieldtype": "Data",
-   "label": "Vial Code"
-  },
-  {
    "fieldname": "clinician",
    "fieldtype": "Link",
    "label": "Clinician",
@@ -348,6 +302,13 @@
   {
    "fieldname": "column_break_clo19",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "referred_by_practitioner",
+   "fieldtype": "Link",
+   "label": "Referred By Practitioner",
+   "options": "Healthcare Practitioner",
+   "read_only": 1
   }
  ],
  "is_submittable": 1,
@@ -357,7 +318,7 @@
    "link_fieldname": "patient"
   }
  ],
- "modified": "2024-06-27 14:08:39.677146",
+ "modified": "2024-07-27 12:34:39.685401",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Laboratory Test",
@@ -413,7 +374,7 @@
   }
  ],
  "restrict_to_domain": "Healthcare",
- "search_fields": "patient,sample",
+ "search_fields": "patient",
  "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",

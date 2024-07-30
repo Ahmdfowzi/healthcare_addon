@@ -3,7 +3,7 @@ let table;
 frappe.ui.form.on('Laboratory Test', {
     refresh(frm) {
         if (frm.doc.__islocal) {
-            frm.add_custom_button(__('Get from Healthcare services'), () => {
+            frm.add_custom_button(__('Get From Healthcare Services'), () => {
                 showGetTestsDialog(frm);
             });
         }
@@ -83,7 +83,7 @@ const showGetTestsDialog = (frm) => {
                 return;
             }
 
-            console.table(values);
+            // console.table(values);
 
             values.forEach(row => {
                 frm.add_child('lab_tests', {
@@ -95,8 +95,10 @@ const showGetTestsDialog = (frm) => {
             });
 
             frm.set_value('patient', labTestsDialog.get_value('patient'));
+            frm.set_value('referred_by_practitioner', labTestsDialog.get_value('healthcare_practitioner'));
             frm.refresh_field('lab_tests');
             frm.refresh_field('patient');
+            frm.refresh_field('referred_by_practitioner');
             labTestsDialog.hide();
         },
         secondary_action_label: 'Cancel',

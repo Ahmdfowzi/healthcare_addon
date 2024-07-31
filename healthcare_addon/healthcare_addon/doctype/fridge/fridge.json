@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:FRG:{#####}",
+ "creation": "2024-07-31 09:50:04.240008",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "fridge_name",
+  "capacity",
+  "temperature_range",
+  "column_break_bjjw",
+  "location",
+  "last_maintenance_date",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "fridge_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Fridge Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "capacity",
+   "fieldtype": "Int",
+   "label": "Capacity",
+   "non_negative": 1
+  },
+  {
+   "description": "ex: 2-8\u00b0C",
+   "fieldname": "temperature_range",
+   "fieldtype": "Data",
+   "label": "Temperature Range"
+  },
+  {
+   "fieldname": "column_break_bjjw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Location",
+   "reqd": 1
+  },
+  {
+   "fieldname": "last_maintenance_date",
+   "fieldtype": "Date",
+   "label": "Last Maintenance Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Operational\nUnder Maintenance\nOut of Order"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-31 09:59:16.321469",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Fridge",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "fridge_name,capacity,temperature_range,location",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

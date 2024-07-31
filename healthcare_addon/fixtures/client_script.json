@@ -1,13 +1,1 @@
-[
- {
-  "docstatus": 0,
-  "doctype": "Client Script",
-  "dt": "Patient Encounter",
-  "enabled": 1,
-  "modified": "2024-07-18 11:27:42.193015",
-  "module": "Healthcare Addon",
-  "name": "Patient Encounter Customizations",
-  "script": "frappe.ui.form.on('Patient Encounter', {\n    refresh(frm) {\n        frm.fields_dict['imaging_tests'].grid.get_field('imaging_scan_template').get_query = function(doc, cdt, cdn) {\n            let row = locals[cdt][cdn];\n            return {\n                filters: {\n                    scan_type: row.scan_type\n                }\n            };\n        };\n    }\n});",
-  "view": "Form"
- }
-]
+[]

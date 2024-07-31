@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "fridge",
+  "type",
   "blood_collection_number",
   "blood_group",
   "consumed",
@@ -19,9 +20,11 @@
  "fields": [
   {
    "fieldname": "fridge",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Fridge",
+   "link_filters": "[[\"Fridge\",\"status\",\"=\",\"Operational\"]]",
+   "options": "Fridge",
    "reqd": 1
   },
   {
@@ -69,11 +72,17 @@
    "fieldname": "returned",
    "fieldtype": "Check",
    "label": "Returned"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "Blood\nPlasma\nPlatelet\nCryo"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-29 14:24:40.412836",
+ "modified": "2024-07-31 09:57:39.177000",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Blood Collection Bag",

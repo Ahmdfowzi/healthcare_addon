@@ -11,7 +11,22 @@ frappe.ui.form.on('Inpatient Record', {
                     fieldname: 'medications',
                     fieldtype: 'Small Text',
                 }, (values) => {
-                    console.log(values.date);
+                    // here we should create new doc of the prescripton doctype with patient from the doc and the healthcare preactitioner also from the frm and the medications field from the prompt medication values
+
+                    frappe.call({
+                        method: 'healthcare_addon.healthcare_addon.doctype.prescription.prescription.create_prescription_doc',
+                        args: {
+                            patient: frm.doc.patient,
+                            healthcare_practitioner: frm.doc.primary_practitioner,
+                            medications: values.medications
+                        },
+                        callback: function (r) {
+                            if (r && r.message) {
+                                frappe.msgprint(__("Medication For {0} created successfully", [frm.patient]));
+                            }
+                        }
+                    })
+                    
                 })
             }, __('Create'));
 

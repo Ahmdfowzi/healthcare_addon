@@ -54,8 +54,13 @@ app_include_css = "/assets/healthcare_addon/css/app.css"
 # app_include_js = "/assets/healthcare_addon/js/healthcare_addon.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/healthcare_addon/css/healthcare_addon.css"
-# web_include_js = "/assets/healthcare_addon/js/healthcare_addon.js"
+app_include_js = [
+    "/assets/healthcare_addon/js/prescription_popup.js"
+]
+
+app_include_css = [
+    "/assets/healthcare_addon/css/prescription_popup.css"
+]
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "healthcare_addon/public/scss/website"
@@ -67,6 +72,8 @@ app_include_css = "/assets/healthcare_addon/css/app.css"
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
 
+
+
 # include js in doctype views
 doctype_js = {
     "Sales Invoice": "public/js/sales_invoice.js",
@@ -74,6 +81,8 @@ doctype_js = {
     "Item Group": "public/js/item_group.js",
     "Patient Encounter": "public/js/patient_encounter.js",
     "Patient History Settings": "public/js/patient_list_edit.js",
+    "Inpatient Record": "public/js/inpatient_record.js",
+    "Clinical Procedure": "public/js/clinical_procedure.js",
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}

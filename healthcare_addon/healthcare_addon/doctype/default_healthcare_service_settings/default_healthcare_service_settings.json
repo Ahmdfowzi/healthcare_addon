@@ -13,7 +13,15 @@
   "premature_service_item",
   "premature_income_account",
   "accounts_section",
-  "default_practitioners_commission_account"
+  "default_practitioners_commission_account",
+  "section_break_ushh",
+  "inpatient_record_invoice_item",
+  "column_break_ptnq",
+  "inpatient_record_income_account",
+  "column_break_pqui",
+  "inpatient_record_invoice_fees",
+  "laboratory_settings_section",
+  "hospital_laboratory_entity"
  ],
  "fields": [
   {
@@ -60,12 +68,62 @@
    "fieldtype": "Link",
    "label": "Premature Income Account",
    "options": "Account"
+  },
+  {
+   "fieldname": "section_break_ushh",
+   "fieldtype": "Section Break",
+   "label": "Inpatient Settings"
+  },
+  {
+   "fieldname": "inpatient_record_invoice_item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Inpatient Record Invoice Item",
+   "link_filters": "[[\"Item\",\"is_stock_item\",\"=\",0]]",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ptnq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "inpatient_record_income_account",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Inpatient Record Income Account",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_pqui",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "inpatient_record_invoice_fees",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Inpatient Record Invoice Fees",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "laboratory_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Laboratory Settings"
+  },
+  {
+   "fieldname": "hospital_laboratory_entity",
+   "fieldtype": "Link",
+   "label": "Hospital Laboratory Entity",
+   "options": "Company",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-07-15 12:18:20.217401",
+ "modified": "2024-08-04 09:07:12.907658",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Default Healthcare Service Settings",

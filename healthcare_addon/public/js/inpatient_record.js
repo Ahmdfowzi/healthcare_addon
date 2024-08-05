@@ -54,7 +54,8 @@ function showClinicalProcedureDialog(frm) {
         fieldtype: 'Link',
         options: 'Clinical Procedure Template',
     }, (values) => {
-        console.log(values.date);
+        createClinicalProcedureInvoice(frm, values.procedure_template);
+        createClinicalProcedureDoc(frm, values.procedure_template);
     });
 }
 
@@ -181,5 +182,41 @@ function createImagingTestInvoice(frm, selections) {
                 frappe.msgprint(__("Invoice {0} created successfully", [r.message]));
             }
         }
+    });
+}
+
+function createClinicalProcedureInvoice(frm, procedure_template) {
+    frappe.call({
+        method: 'healthcare_addon.utils.utils.create_clinical_procedure_invoice',
+        args: {
+            patient: frm.doc.patient,
+            company: frm.doc.company,
+            clinical_procedure_template: procedure_template,
+            healthcare_practitioner: frm.doc.primary_practitioner
+        },
+        callback: function (r) {
+            if (r.message) {
+                frappe.msgprint(__("Invoice {0} created successfully", [r.message]));
+            }
+        }
+    });
+}
+
+
+
+function createClinicalProcedureDoc(frm, procedure_template) {
+    frappe.call({
+        method: 'healthcare_addon.utils.utils.create_clinical_procedure_doc',
+        args: {
+            patient: frm.doc.patient,
+            company: frm.doc.company,
+            healthcare_practitioner: frm.doc.primary_practitioner,
+            clinical_procedure_template: procedure_template
+        },
+        callback: function (r) {
+            if (r && r.message) {
+                frappe.msgprint(__("Clinical Procedure For {0} created successfully", [frm.doc.patient]));
+            }
+        }   
     });
 }

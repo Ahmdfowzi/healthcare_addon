@@ -7,6 +7,48 @@ from frappe.utils import today
 
 
 @frappe.whitelist()
+def create_clinical_procedure_doc(patient, company, clinical_procedure_template):
+    clinical_procedure = frappe.new_doc("Clinical Procedure")
+    clinical_procedure.patient = patient
+    clinical_procedure.company = company
+    clinical_procedure.clinical_procedure_template = clinical_procedure_template
+
+    clinical_procedure.insert(ignore_mandatory=True, ignore_permissions=True)
+
+
+@frappe.whitelist()
+def create_clinical_procedure_invoice(
+    patient, company, clinical_procedure_template, healthcare_practitioner=None
+):
+    clinical_procedure_template = frappe.get_doc(
+        "Clinical Procedure Template", clinical_procedure_template
+    )
+    income_account = frappe.get_cached_value(
+        "Company", company, "default_income_account"
+    )
+    items = []
+    items.append(
+        {
+            "item_code": clinical_procedure_template.item,
+            "qty": 1,
+            "rate": clinical_procedure_template.rate,
+        }
+    )
+
+    # Create Sales Invoice
+    invoice = create_draft_sales_invoice(
+        account=income_account,
+        company=company,
+        customer=patient,
+        patient=patient,
+        practitioner=healthcare_practitioner,
+        items=items,
+    )
+
+    pass
+
+
+@frappe.whitelist()
 def create_imaging_test_from_inpatient_record(
     patient, healthcare_practitioner, imaging_scan_templates
 ):
@@ -23,6 +65,7 @@ def create_imaging_test_from_inpatient_record(
 
     frappe.db.commit()
     return imaging_scan
+
 
 @frappe.whitelist()
 def get_terms_and_conditions(template_name, doc):

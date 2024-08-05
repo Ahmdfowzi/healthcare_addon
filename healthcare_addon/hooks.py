@@ -81,7 +81,8 @@ doctype_js = {
     "Item Group": "public/js/item_group.js",
     "Patient Encounter": "public/js/patient_encounter.js",
     "Patient History Settings": "public/js/patient_list_edit.js",
-    "Inpatient Record": "public/js/inpatient_record.js"
+    "Inpatient Record": "public/js/inpatient_record.js",
+    "Clinical Procedure": "public/js/clinical_procedure.js",
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}

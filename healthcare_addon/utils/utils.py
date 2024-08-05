@@ -6,6 +6,19 @@ from frappe import _
 from frappe.utils import today
 
 
+
+@frappe.whitelist()
+def get_terms_and_conditions(template_name, doc):
+    if isinstance(doc, str):
+        doc = json.loads(doc)
+
+    terms_and_conditions = frappe.get_doc("Terms and Conditions", template_name)
+
+    if terms_and_conditions.terms:
+        context = {"doc": doc}  # Create a context dictionary with 'doc'
+        return frappe.render_template(terms_and_conditions.terms, context)
+    
+
 @frappe.whitelist()
 def create_lab_test_invoice(patient, company, lab_test_templates):
     lab_test_templates = frappe.parse_json(lab_test_templates)

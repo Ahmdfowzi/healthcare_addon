@@ -129,3 +129,16 @@ def create_lab_test_from_encounter(encounter, lab_test_template):
     except Exception as e:
         # Handle the exception (e.g., log the error or raise it)
         frappe.throw(f"Error in create_lab_test_from_encounter: {e}")
+
+
+@frappe.whitelist()
+def create_lab_test_from_inpatient_record(
+    patient, healthcare_practitioner, lab_test_templates
+):
+    laboratory_test = frappe.new_doc("Laboratory Test")
+    laboratory_test.patient = patient
+    laboratory_test.primary_practitioner = healthcare_practitioner
+    for test in frappe.parse_json(lab_test_templates):
+        laboratory_test.append("lab_tests", {"lab_test_code": test})
+    laboratory_test.insert(ignore_permissions=True, ignore_mandatory=True)
+    return laboratory_test

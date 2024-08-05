@@ -6,6 +6,23 @@ from frappe import _
 from frappe.utils import today
 
 
+@frappe.whitelist()
+def create_imaging_test_from_inpatient_record(
+    patient, healthcare_practitioner, imaging_scan_templates
+):
+    imaging_scan = []
+    for template in frappe.parse_json(imaging_scan_templates):
+        imaging_scan_template = frappe.get_doc("Imaging Scan Template", template)
+        imaging_test = frappe.new_doc(imaging_scan_template.scan_type)
+        imaging_test.patient = patient
+        imaging_test.referring_doctor = healthcare_practitioner
+        imaging_test.imaging_scan_template = imaging_scan_template.name
+        imaging_test.insert(ignore_mandatory=True, ignore_permissions=True)
+
+        imaging_scan.append(imaging_test.name)
+
+    frappe.db.commit()
+    return imaging_scan
 
 @frappe.whitelist()
 def get_terms_and_conditions(template_name, doc):
@@ -17,69 +34,71 @@ def get_terms_and_conditions(template_name, doc):
     if terms_and_conditions.terms:
         context = {"doc": doc}  # Create a context dictionary with 'doc'
         return frappe.render_template(terms_and_conditions.terms, context)
-    
+
 
 @frappe.whitelist()
 def create_lab_test_invoice(patient, company, lab_test_templates):
     lab_test_templates = frappe.parse_json(lab_test_templates)
-    
+
     items = []
     for template in lab_test_templates:
         template_doc = frappe.get_doc("Lab Test Template", template)
-        items.append({
-            "item_code": template_doc.item,
-            "qty": 1,
-            "rate": template_doc.lab_test_rate
-        })
+        items.append(
+            {
+                "item_code": template_doc.item,
+                "qty": 1,
+                "rate": template_doc.lab_test_rate,
+            }
+        )
 
-    income_account = frappe.get_cached_value('Company', company, 'default_income_account')
+    income_account = frappe.get_cached_value(
+        "Company", company, "default_income_account"
+    )
     customer = patient
-    practitioner = frappe.get_value("Inpatient Record", {"patient": patient, "status": "Admitted"}, "primary_practitioner")
+    practitioner = frappe.get_value(
+        "Inpatient Record",
+        {"patient": patient, "status": "Admitted"},
+        "primary_practitioner",
+    )
     if not practitioner:
         practitioner = None  # or any default value you want to use
     if not customer:
         frappe.throw(_("Please link a Customer to the Patient {0}").format(patient))
 
     invoice = create_draft_sales_invoice(
-        income_account,
-        company,
-        customer,
-        patient,
-        practitioner,
-        items
+        income_account, company, customer, patient, practitioner, items
     )
 
     return invoice.name
 
 
 @frappe.whitelist()
-def create_imaging_test_invoice(patient, company, image_test_templates):
+def create_imaging_test_invoice(
+    patient, company, image_test_templates, healthcare_practitioner=None
+):
     image_test_templates = frappe.parse_json(image_test_templates)
-    
+
     items = []
     for template in image_test_templates:
-        template_doc = frappe.get_doc("Lab Test Template", template)
-        items.append({
-            "item_code": template_doc.item,
-            "qty": 1,
-            "rate": template_doc.lab_test_rate
-        })
+        template_doc = frappe.get_doc("Imaging Scan Template", template)
+        items.append(
+            {"item_code": template_doc.item_code, "qty": 1, "rate": template_doc.rate}
+        )
 
-    income_account = frappe.get_cached_value('Company', company, 'default_income_account')
-    customer = patient
-    practitioner = frappe.get_value("Inpatient Record", {"patient": patient, "status": "Admitted"}, "primary_practitioner")
-    if not practitioner:
-        practitioner = None  # or any default value you want to use
+    income_account = frappe.get_cached_value(
+        "Company", company, "default_income_account"
+    )
+    customer = frappe.get_value("Patient", patient, "customer")
     if not customer:
         frappe.throw(_("Please link a Customer to the Patient {0}").format(patient))
 
     invoice = create_draft_sales_invoice(
-        income_account,
-        company,
-        customer,
-        patient,
-        practitioner,
-        items
+        company=company,
+        customer=customer,
+        patient=patient,
+        practitioner=healthcare_practitioner,
+        items=items,  # Add this line
+        account=income_account,  # Add this line if needed
     )
 
     return invoice.name
@@ -93,11 +112,11 @@ def create_draft_sales_invoice(
     practitioner,
     items,
     posting_date=None,
-    due_date=None
+    due_date=None,
 ):
     """
     Create a draft Sales Invoice from various doctypes.
-    
+
     Args:
         account (str): Income account for the invoice
         company (str): Company name
@@ -106,41 +125,48 @@ def create_draft_sales_invoice(
         items (list): List of dictionaries containing item details
         posting_date (str, optional): Posting date for the invoice
         due_date (str, optional): Due date for the invoice
-    
+
     Returns:
         object: Created Sales Invoice document
     """
     try:
         # Create a new Sales Invoice
         invoice = frappe.new_doc("Sales Invoice")
-        
+
         # Set basic details
-        invoice.update({
-            "company": company,
-            "customer": customer,
-            "patient": patient,
-            "ref_practitioner": practitioner,
-            "posting_date": posting_date or frappe.utils.today(),
-            "due_date": due_date,
-        })
-        
+        invoice.update(
+            {
+                "company": company,
+                "customer": customer,
+                "patient": patient,
+                "ref_practitioner": practitioner,
+                "posting_date": posting_date or frappe.utils.today(),
+                "due_date": due_date,
+            }
+        )
+
         # Add items to the invoice
         for item in items:
-            invoice.append("items", {
-                "item_code": item.get("item_code"),
-                "qty": item.get("qty", 1),
-                "rate": item.get("rate"),
-                "income_account": account
-            })
-        
+            invoice.append(
+                "items",
+                {
+                    "item_code": item.get("item_code"),
+                    "qty": item.get("qty", 1),
+                    "rate": item.get("rate"),
+                    "income_account": account,
+                },
+            )
+
         # Save the invoice
         invoice.save()
-        
+
         return invoice
-    
+
     except Exception as e:
         frappe.log_error(f"Error creating draft sales invoice: {str(e)}")
-        frappe.throw(_("Error creating draft sales invoice. Please check the error log."))
+        frappe.throw(
+            _("Error creating draft sales invoice. Please check the error log.")
+        )
 
 
 def mark_imaging_tests_created(doc):

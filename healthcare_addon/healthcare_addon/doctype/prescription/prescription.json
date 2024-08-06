@@ -14,8 +14,10 @@
   {
    "fieldname": "patient",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Patient",
-   "options": "Patient"
+   "options": "Patient",
+   "reqd": 1
   },
   {
    "fieldname": "healthcare_practitioner",
@@ -38,7 +40,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-05 00:03:03.231578",
+ "modified": "2024-08-06 14:46:26.497845",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Prescription",

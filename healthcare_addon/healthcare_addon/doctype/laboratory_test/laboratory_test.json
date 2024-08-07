@@ -262,15 +262,6 @@
    "report_hide": 1
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Laboratory Test",
-   "print_hide": 1,
-   "read_only": 1
-  },
-  {
    "fieldname": "consumable_items",
    "fieldtype": "Table",
    "label": "Consumable Items",
@@ -318,7 +309,7 @@
    "link_fieldname": "patient"
   }
  ],
- "modified": "2024-07-27 12:34:39.685401",
+ "modified": "2024-08-07 12:09:38.116685",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Laboratory Test",

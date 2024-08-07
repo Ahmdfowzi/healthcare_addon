@@ -217,6 +217,6 @@ function createClinicalProcedureDoc(frm, procedure_template) {
             if (r && r.message) {
                 frappe.msgprint(__("Clinical Procedure For {0} created successfully", [frm.doc.patient]));
             }
-        }   
+        }
     });
 }

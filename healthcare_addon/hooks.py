@@ -54,13 +54,9 @@ app_include_css = "/assets/healthcare_addon/css/app.css"
 # app_include_js = "/assets/healthcare_addon/js/healthcare_addon.js"
 
 # include js, css files in header of web template
-app_include_js = [
-    "/assets/healthcare_addon/js/prescription_popup.js"
-]
+app_include_js = ["/assets/healthcare_addon/js/prescription_popup.js"]
 
-app_include_css = [
-    "/assets/healthcare_addon/css/prescription_popup.css"
-]
+app_include_css = ["/assets/healthcare_addon/css/prescription_popup.css"]
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "healthcare_addon/public/scss/website"
@@ -73,7 +69,6 @@ app_include_css = [
 # page_js = {"page" : "public/js/file.js"}
 
 
-
 # include js in doctype views
 doctype_js = {
     "Sales Invoice": "public/js/sales_invoice.js",
@@ -83,6 +78,7 @@ doctype_js = {
     "Patient History Settings": "public/js/patient_list_edit.js",
     "Inpatient Record": "public/js/inpatient_record.js",
     "Clinical Procedure": "public/js/clinical_procedure.js",
+    "POS Closing Entry": "public/js/pos_closing_entry.js",
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -158,6 +154,9 @@ doc_events = {
     "Inpatient Medication Order": {
         "on_submit": "healthcare_addon.utils.events.inpatient_medication_order.on_submit",
     },
+    # "POS Closing Entry": {
+    #     "before_save": "healthcare_addon.utils.events.pos_closing_entry.adjust_payment_reconciliation",   
+    # }
 }
 
 # Scheduled Tasks

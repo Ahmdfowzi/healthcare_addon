@@ -139,6 +139,10 @@ doctype_js = {
 # "Patient Encounter": "healthcare_addon.overrides.custom_patient_encounter.CustomPatientEncounter"
 # }
 
+override_doctype_class = {
+    "POS Closing Entry": "healthcare_addon.utils.events.custom_pos_closing.CustomPOSClosingEntry"
+}
+
 # Document Events
 # ---------------
 # Hook on document methods and events
@@ -155,7 +159,7 @@ doc_events = {
         "on_submit": "healthcare_addon.utils.events.inpatient_medication_order.on_submit",
     },
     # "POS Closing Entry": {
-    #     "before_save": "healthcare_addon.utils.events.pos_closing_entry.adjust_payment_reconciliation",   
+    #     "before_save": "healthcare_addon.utils.events.pos_closing_entry.adjust_payment_reconciliation",
     # }
 }
 

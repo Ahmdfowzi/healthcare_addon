@@ -11,7 +11,7 @@ def create_clinical_procedure_doc(patient, company, clinical_procedure_template)
     clinical_procedure = frappe.new_doc("Clinical Procedure")
     clinical_procedure.patient = patient
     clinical_procedure.company = company
-    clinical_procedure.clinical_procedure_template = clinical_procedure_template
+    clinical_procedure.procedure_template = clinical_procedure_template
 
     clinical_procedure.insert(ignore_mandatory=True, ignore_permissions=True)
 
@@ -44,8 +44,6 @@ def create_clinical_procedure_invoice(
         practitioner=healthcare_practitioner,
         items=items,
     )
-
-    pass
 
 
 @frappe.whitelist()

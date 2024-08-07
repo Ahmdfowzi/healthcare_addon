@@ -144,9 +144,9 @@ function showImagingTestDialog(frm, scan_type) {
 
 function createLabTestInvoice(frm, selections) {
     frappe.db.get_single_value('Default Healthcare Service Settings', 'hospital_laboratory_entity')
-        .then(settings => {
-            if (!settings.company) {
-                console.log(settings);
+        .then(company => {
+            if (!company) {
+                console.log(company);
                 frappe.msgprint(__("Please set default Laboratory Entity in Healthcare Settings."));
                 return;
             }
@@ -155,7 +155,7 @@ function createLabTestInvoice(frm, selections) {
                 method: 'healthcare_addon.utils.utils.create_lab_test_invoice',
                 args: {
                     patient: frm.doc.patient,
-                    company: settings.company,
+                    company: company,
                     lab_test_templates: selections,
                     healthcare_practitioner: frm.doc.primary_practitioner
                 },

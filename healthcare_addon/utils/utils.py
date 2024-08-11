@@ -589,5 +589,4 @@ def create_healthcare_service_invoice(self, item_code, qty) -> None:
     )
 
     invoice.insert()
-    invoice.submit()
     self.invoiced = True

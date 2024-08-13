@@ -12,8 +12,8 @@ def create_clinical_procedure_doc(patient, company, clinical_procedure_template)
     clinical_procedure.patient = patient
     clinical_procedure.company = company
     clinical_procedure.procedure_template = clinical_procedure_template
-
     clinical_procedure.insert(ignore_mandatory=True, ignore_permissions=True)
+    return clinical_procedure
 
 
 @frappe.whitelist()
@@ -110,7 +110,7 @@ def create_lab_test_invoice(patient, company, lab_test_templates):
         income_account, company, customer, patient, practitioner, items
     )
 
-    return invoice.name
+    return invoice
 
 
 @frappe.whitelist()
@@ -142,7 +142,7 @@ def create_imaging_test_invoice(
         account=income_account,  # Add this line if needed
     )
 
-    return invoice.name
+    return invoice
 
 
 def create_draft_sales_invoice(

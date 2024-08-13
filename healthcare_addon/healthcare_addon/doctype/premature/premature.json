@@ -39,6 +39,7 @@
   "section_break_33",
   "encounter_comment",
   "more_info_section",
+  "healthcare_references",
   "amended_from"
  ],
  "fields": [
@@ -251,11 +252,17 @@
    "fieldtype": "Table",
    "label": "Imaging Tests",
    "options": "Imaging Prescription"
+  },
+  {
+   "fieldname": "healthcare_references",
+   "fieldtype": "Table",
+   "label": "Healthcare References",
+   "options": "Healthcare References"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2024-07-18 13:02:06.074565",
+ "modified": "2024-08-13 22:52:30.123103",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Premature",

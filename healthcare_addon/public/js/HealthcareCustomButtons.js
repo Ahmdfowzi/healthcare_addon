@@ -41,8 +41,10 @@ class HealthcareCustomButtons {
                     medications: values.medications
                 },
                 callback: function (r) {
+                    console.log(r.message)
                     if (r && r.message) {
                         frappe.msgprint(__(`Medication For ${this.frm.doc.patient} created successfully`));
+                        // console.log(r.message)
                     }
                 }
             });

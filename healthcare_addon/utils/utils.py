@@ -59,7 +59,10 @@ def create_imaging_test_from_inpatient_record(
         imaging_test.imaging_scan_template = imaging_scan_template.name
         imaging_test.insert(ignore_mandatory=True, ignore_permissions=True)
 
-        imaging_scan.append(imaging_test.name)
+        imaging_scan.append({
+            "imaging_test": imaging_test.name,
+            "scan_type": imaging_scan_template.scan_type,
+        })
 
     frappe.db.commit()
     return imaging_scan

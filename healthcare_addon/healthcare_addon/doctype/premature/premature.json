@@ -254,6 +254,7 @@
    "options": "Imaging Prescription"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "healthcare_references",
    "fieldtype": "Table",
    "label": "Healthcare References",
@@ -262,7 +263,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-13 22:52:30.123103",
+ "modified": "2024-08-14 00:04:16.626332",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Premature",

@@ -7,22 +7,35 @@ from frappe.utils import today
 
 
 @frappe.whitelist()
-def create_clinical_procedure_doc(patient, company, clinical_procedure_template):
+def create_clinical_procedure_doc(
+    patient, company, clinical_procedure_template, healthcare_practitioner=None
+):
+    clinical_procedure_original_template = frappe.get_doc(
+        "Clinical Procedure Template", clinical_procedure_template
+    )
+    if not clinical_procedure_original_template:
+        frappe.throw(_("No Clinical Procedure Template found"))
     clinical_procedure = frappe.new_doc("Clinical Procedure")
     clinical_procedure.patient = patient
     clinical_procedure.company = company
     clinical_procedure.procedure_template = clinical_procedure_template
-
+    clinical_procedure.items = clinical_procedure_original_template.items
+    if healthcare_practitioner:
+        clinical_procedure.practitioner = healthcare_practitioner
     clinical_procedure.insert(ignore_mandatory=True, ignore_permissions=True)
+    return clinical_procedure
 
 
 @frappe.whitelist()
 def create_clinical_procedure_invoice(
     patient, company, clinical_procedure_template, healthcare_practitioner=None
 ):
+
     clinical_procedure_template = frappe.get_doc(
         "Clinical Procedure Template", clinical_procedure_template
     )
+    if not clinical_procedure_template:
+        frappe.throw(_("No Clinical Procedure Template found"))
     income_account = frappe.get_cached_value(
         "Company", company, "default_income_account"
     )
@@ -59,7 +72,12 @@ def create_imaging_test_from_inpatient_record(
         imaging_test.imaging_scan_template = imaging_scan_template.name
         imaging_test.insert(ignore_mandatory=True, ignore_permissions=True)
 
-        imaging_scan.append(imaging_test.name)
+        imaging_scan.append(
+            {
+                "imaging_test": imaging_test.name,
+                "scan_type": imaging_scan_template.scan_type,
+            }
+        )
 
     frappe.db.commit()
     return imaging_scan
@@ -110,7 +128,7 @@ def create_lab_test_invoice(patient, company, lab_test_templates):
         income_account, company, customer, patient, practitioner, items
     )
 
-    return invoice.name
+    return invoice
 
 
 @frappe.whitelist()
@@ -142,7 +160,7 @@ def create_imaging_test_invoice(
         account=income_account,  # Add this line if needed
     )
 
-    return invoice.name
+    return invoice
 
 
 def create_draft_sales_invoice(
@@ -562,7 +580,12 @@ def create_healthcare_service_invoice(self, item_code, qty) -> None:
     letter_head = frappe.db.get_value("Company", self.company, "default_letter_head")
     settings = frappe.get_single("Default Healthcare Service Settings")
 
-    if not item_code or not settings.healthcare_service_income_account:
+    if not self.service_item:
+        service_item = item_code
+    else:
+        service_item = self.service_item
+
+    if not service_item or not settings.healthcare_service_income_account:
         frappe.throw(
             _(
                 "Please set the healthcare service item and income account in Default Healthcare Service Settings"
@@ -579,8 +602,8 @@ def create_healthcare_service_invoice(self, item_code, qty) -> None:
             "letter_head": letter_head,
             "items": [
                 {
-                    "item_code": item_code,
-                    "item_name": item_code,
+                    "item_code": service_item,
+                    "item_name": service_item,
                     "income_account": settings.healthcare_service_income_account,
                     "qty": qty,
                 }
@@ -589,5 +612,4 @@ def create_healthcare_service_invoice(self, item_code, qty) -> None:
     )
 
     invoice.insert()
-    invoice.submit()
     self.invoiced = True

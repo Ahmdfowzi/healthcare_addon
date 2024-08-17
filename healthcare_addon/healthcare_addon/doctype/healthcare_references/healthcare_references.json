@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-13 22:47:15.208016",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "medical_reference",
+  "reference_link",
+  "further_details",
+  "timestamp"
+ ],
+ "fields": [
+  {
+   "fieldname": "medical_reference",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Medical Reference",
+   "options": "DocType",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_link",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "label": "Reference Link",
+   "options": "medical_reference",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "further_details",
+   "fieldtype": "Small Text",
+   "label": "Further Details",
+   "read_only": 1
+  },
+  {
+   "fieldname": "timestamp",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Timestamp",
+   "read_only": 1,
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-08-13 22:52:53.463786",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Healthcare References",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

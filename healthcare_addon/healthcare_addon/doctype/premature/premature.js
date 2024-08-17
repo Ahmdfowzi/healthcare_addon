@@ -1,9 +1,18 @@
 // Copyright (c) 2023, Ahmed Ghazi and contributors
 // For license information, please see license.txt
 
-
 frappe.ui.form.on('Premature', {
-    refresh(frm) {
+    refresh(frm) {        
+        frappe.require('/assets/healthcare_addon/js/HealthcareCustomButtons.js', () => {
+            
+            if (healthcare_addon && healthcare_addon.HealthcareCustomButtons) {
+                const customButtons = new healthcare_addon.HealthcareCustomButtons(frm, 'practitioner');
+                customButtons.addCustomButtons();
+            } else {
+                console.error('HealthcareCustomButtons class not found');
+            }
+        });
+
         frm.fields_dict['imaging_tests'].grid.get_field('imaging_scan_template').get_query = function(doc, cdt, cdn) {
             let row = locals[cdt][cdn];
             return {
@@ -14,6 +23,7 @@ frappe.ui.form.on('Premature', {
         };
     }
 });
+
 
 
 frappe.ui.form.on('Premature', {

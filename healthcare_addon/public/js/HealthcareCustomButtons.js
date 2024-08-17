@@ -7,11 +7,11 @@ class HealthcareCustomButtons {
   }
 
   updateHealthcareReferences(doctype, response) {
-    let field_name = null
-    if (!this.frm.fields_dict['healthcare_references']) {
-        field_name = 'custom_healthcare_references'
+    let field_name = null;
+    if (!this.frm.fields_dict["healthcare_references"]) {
+      field_name = "custom_healthcare_references";
     } else {
-        field_name = 'healthcare_references'
+      field_name = "healthcare_references";
     }
     try {
       if (
@@ -153,17 +153,17 @@ class HealthcareCustomButtons {
   showLabTestDialog() {
     new frappe.ui.form.MultiSelectDialog({
       doctype: "Lab Test Template",
-      target: this.frm,
-      setters: {
-        department: null,
-        is_billable: 1,
-      },
+      target: this.cur_frm,
+      setters: {},
       date_field: "modified",
       get_query() {
         return {
           filters: { disabled: 0 },
         };
       },
+      page_length: 9999, // Change this value to the number of items you want
+      child_page_length: 9999, // For child items if needed
+
       action: (selections) => {
         if (selections.length === 0) {
           frappe.msgprint(__("Please select at least one lab test template."));

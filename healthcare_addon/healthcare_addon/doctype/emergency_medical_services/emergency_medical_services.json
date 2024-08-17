@@ -38,7 +38,9 @@
   "section_break_33",
   "encounter_comment",
   "more_info_section",
-  "amended_from"
+  "amended_from",
+  "more_tab",
+  "visit_checks"
  ],
  "fields": [
   {
@@ -249,11 +251,22 @@
    "fieldtype": "Table",
    "label": "Imaging Tests",
    "options": "Imaging Prescription"
+  },
+  {
+   "fieldname": "more_tab",
+   "fieldtype": "Tab Break",
+   "label": "More"
+  },
+  {
+   "fieldname": "visit_checks",
+   "fieldtype": "Table",
+   "label": "Visit Checks",
+   "options": "Visit Checks Inpatient"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2024-07-18 13:01:47.287023",
+ "modified": "2024-08-17 08:35:26.098020",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Emergency Medical Services",

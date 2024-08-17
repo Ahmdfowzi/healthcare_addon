@@ -133,10 +133,11 @@ def create_lab_test_from_encounter(encounter, lab_test_template):
 
 @frappe.whitelist()
 def create_lab_test_from_inpatient_record(
-    patient, healthcare_practitioner, lab_test_templates
+    patient, healthcare_practitioner, lab_test_templates, company
 ):
     laboratory_test = frappe.new_doc("Laboratory Test")
     laboratory_test.patient = patient
+    laboratory_test.company = company
     laboratory_test.primary_practitioner = healthcare_practitioner
     for test in frappe.parse_json(lab_test_templates):
         laboratory_test.append("lab_tests", {"lab_test_code": test})

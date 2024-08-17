@@ -440,7 +440,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Time",
-   "options": "Morning\nEvening",
+   "options": "Morning\nEvening\nBefore Procedure\nAfter Procedure",
    "reqd": 1
   },
   {
@@ -475,7 +475,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-06-13 11:59:03.354113",
+ "modified": "2024-08-17 08:25:17.267036",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Visit Checks Inpatient",

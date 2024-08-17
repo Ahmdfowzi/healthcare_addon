@@ -101,53 +101,110 @@ class HealthcareCustomButtons {
     );
   }
 
-  showClinicalProcedureDialog() {
-    frappe.prompt(
-      {
-        label: "Clinical Procedure Template",
-        field_name: "procedure_template",
-        fieldtype: "Link",
-        options: "Clinical Procedure Template",
-      },
-      (values) => {
-        try {
-          frappe.call({
-            method:
-              "healthcare_addon.utils.utils.create_clinical_procedure_invoice",
-            args: {
-              patient: this.frm.doc.patient,
-              company: this.frm.doc.company,
-              clinical_procedure_template: values.procedure_template,
-              healthcare_practitioner:
-                this.frm.doc[this.practitioner_field_name],
-            },
-            callback: function (r) {
-              if (r.message) {
-                frappe.msgprint(
-                  __(`Invoice ${r.message} created successfully`)
-                );
-              }
-            },
-          });
+  // showClinicalProcedureDialog() {
+  //   frappe.prompt(
+  //     {
+  //       label: "Clinical Procedure Template",
+  //       field_name: "procedure_template",
+  //       fieldtype: "Link",
+  //       options: "Clinical Procedure Template",
+  //     },
+  //     (values) => {
+  //       try {
+  //         // First call to create the invoice
+  //         frappe.call({
+  //           method: "healthcare_addon.utils.utils.create_clinical_procedure_invoice",
+  //           args: {
+  //             patient: this.frm.doc.patient,
+  //             company: this.frm.doc.company,
+  //             clinical_procedure_template: values.procedure_template,
+  //             healthcare_practitioner: this.frm.doc[this.practitioner_field_name],
+  //           },
+  //           callback: function (r) {
+  //             if (r.message) {
+  //               frappe.msgprint(__(`Invoice ${r.message} created successfully`));
+  //             }
+  //           },
+  //         });
 
-          frappe.call({
-            method:
-              "healthcare_addon.utils.utils.create_clinical_procedure_doc",
-            args: {
-              patient: this.frm.doc.patient,
-              company: this.frm.doc.company,
-              healthcare_practitioner:
-                this.frm.doc[this.practitioner_field_name],
-              clinical_procedure_template: values.procedure_template,
-            },
-            callback: (r) =>
-              this.updateHealthcareReferences("Clinical Procedure", r),
-          });
-        } catch (error) {
-          console.log(error);
-        }
+  //         // Second call to create the clinical procedure document
+  //         frappe.call({
+  //           method: "healthcare_addon.utils.utils.create_clinical_procedure_doc",
+  //           args: {
+  //             patient: this.frm.doc.patient,
+  //             company: this.frm.doc.company,
+  //             clinical_procedure_template: values.procedure_template,
+  //             healthcare_practitioner: this.frm.doc[this.practitioner_field_name],
+  //           },
+  //           callback: (r) => this.updateHealthcareReferences("Clinical Procedure", r),
+  //         });
+  //       } catch (error) {
+  //         console.error("Error in clinical procedure creation:", error);
+  //         frappe.msgprint(__(`Error: ${error.message}`));
+  //       }
+  //     }
+  //   );
+  // }
+
+  showClinicalProcedureDialog() {
+    const promptOptions = {
+      label: "Clinical Procedure Template",
+      fieldname: "procedure_template",
+      fieldtype: "Link",
+      options: "Clinical Procedure Template",
+    };
+
+    const commonArgs = () => ({
+      patient: this.frm.doc.patient,
+      company: this.frm.doc.company,
+      healthcare_practitioner: this.frm.doc[this.practitioner_field_name],
+    });
+
+    const createInvoice = (template) => {
+      return frappe.call({
+        method:
+          "healthcare_addon.utils.utils.create_clinical_procedure_invoice",
+        args: {
+          ...commonArgs(),
+          clinical_procedure_template: template,
+        },
+      });
+    };
+
+    const createClinicalProcedure = (template) => {
+      return frappe.call({
+        method: "healthcare_addon.utils.utils.create_clinical_procedure_doc",
+        args: {
+          ...commonArgs(),
+          clinical_procedure_template: template,
+        },
+      });
+    };
+
+    const handleSuccess = (result) => {
+      if (result.message) {
+        frappe.msgprint(__(`Invoice ${result.message} created successfully`));
       }
-    );
+    };
+
+    const handleError = (error) => {
+      console.error("Error in clinical procedure creation:", error);
+      frappe.msgprint(__(`Error: ${error.message}`));
+    };
+
+    frappe.prompt(promptOptions, async (values) => {
+      try {
+        const invoiceResult = await createInvoice(values.procedure_template);
+        handleSuccess(invoiceResult);
+
+        const procedureResult = await createClinicalProcedure(
+          values.procedure_template
+        );
+        this.updateHealthcareReferences("Clinical Procedure", procedureResult);
+      } catch (error) {
+        handleError(error);
+      }
+    });
   }
 
   showLabTestDialog() {
@@ -186,16 +243,31 @@ class HealthcareCustomButtons {
   }
 
   createLabTestDoc(lab_test_templates) {
-    frappe.call({
-      method:
-        "healthcare_addon.healthcare_addon.doctype.laboratory_test.laboratory_test.create_lab_test_from_inpatient_record",
-      args: {
-        patient: this.frm.doc.patient,
-        healthcare_practitioner: this.frm.doc[this.practitioner_field_name],
-        lab_test_templates: lab_test_templates,
-      },
-      callback: (r) => this.updateHealthcareReferences("Laboratory Test", r),
-    });
+    frappe.db
+      .get_single_value(
+        "Default Healthcare Service Settings",
+        "hospital_laboratory_entity"
+      )
+      .then((company) => {
+        if (!company) {
+          frappe.msgprint(
+            __("Please set default Laboratory Entity in Healthcare Settings.")
+          );
+          return;
+        }
+        frappe.call({
+          method:
+            "healthcare_addon.healthcare_addon.doctype.laboratory_test.laboratory_test.create_lab_test_from_inpatient_record",
+          args: {
+            patient: this.frm.doc.patient,
+            healthcare_practitioner: this.frm.doc[this.practitioner_field_name],
+            lab_test_templates: lab_test_templates,
+            company: company,
+          },
+          callback: (r) =>
+            this.updateHealthcareReferences("Laboratory Test", r),
+        });
+      });
   }
 
   showImagingTestDialog(scan_type) {

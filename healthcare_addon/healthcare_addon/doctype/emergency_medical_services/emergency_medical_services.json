@@ -11,6 +11,7 @@
  "field_order": [
   "naming_series",
   "title",
+  "emergency_services_template",
   "service_item",
   "patient",
   "patient_name",
@@ -38,6 +39,7 @@
   "section_break_33",
   "encounter_comment",
   "more_info_section",
+  "healthcare_references",
   "amended_from",
   "more_tab",
   "visit_checks"
@@ -239,6 +241,7 @@
   },
   {
    "allow_on_submit": 1,
+   "fetch_from": "emergency_services_template.service_item",
    "fieldname": "service_item",
    "fieldtype": "Link",
    "label": "Service Item",
@@ -262,11 +265,25 @@
    "fieldtype": "Table",
    "label": "Visit Checks",
    "options": "Visit Checks Inpatient"
+  },
+  {
+   "fieldname": "emergency_services_template",
+   "fieldtype": "Link",
+   "label": "Emergency Services Template",
+   "options": "Emergency Services Template"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "healthcare_references",
+   "fieldtype": "Table",
+   "label": "Healthcare References",
+   "options": "Healthcare References",
+   "read_only": 1
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-17 08:35:26.098020",
+ "modified": "2024-08-18 09:48:04.658670",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Emergency Medical Services",

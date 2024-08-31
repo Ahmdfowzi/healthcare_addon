@@ -19,6 +19,9 @@
                         <div style="max-width: 150px;" class="py-2 px-2 occupied m-1 rounded-sm">
                             <h4 class="text-center text-md-center font-weight-bold mb-2">{{room.room_name}}</h4>
                             <h5 class="text-center text-md-center font-weight-bold mb-0 p-0">{{room.patient_name}}</h5>
+                            {% if room.primary_practitioner %}
+                            <p class="text-center text-white text-md-center mb-0 mt-1">Dr. {{room.primary_practitioner}}</p>
+                            {% endif %}
                         </div>
                         {%endif%}
                         {% if room.room_status == "Vacant" %}

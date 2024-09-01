@@ -1,0 +1,39 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-29 17:27:37.618991",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "prescription",
+  "medications"
+ ],
+ "fields": [
+  {
+   "fieldname": "prescription",
+   "fieldtype": "Link",
+   "label": "Prescription",
+   "options": "Prescription"
+  },
+  {
+   "fetch_from": "prescription.medications",
+   "fieldname": "medications",
+   "fieldtype": "Small Text",
+   "label": "Medications",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-08-29 17:30:24.201520",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Prescriptions",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

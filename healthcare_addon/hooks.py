@@ -160,19 +160,24 @@ doc_events = {
     },
     # "POS Closing Entry": {
     #     "before_save": "healthcare_addon.utils.events.pos_closing_entry.adjust_payment_reconciliation",
-    # }
+    # },
+    'Inpatient Record': {
+    'before_save': 'healthcare_addon.utils.events.inpatient_record.before_save'
+    }
 }
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
+
 # "all": [
 # "healthcare_addon.tasks.all"
 # ],
-# "daily": [
-# "healthcare_addon.tasks.daily"
-# ],
+    "daily": [
+        # "healthcare_addon.tasks.daily"
+        "healthcare_addon.utils.create_draft_invoices_for_admitted_patients"
+    ],
 # "hourly": [
 # "healthcare_addon.tasks.hourly"
 # ],
@@ -182,7 +187,7 @@ doc_events = {
 # "monthly": [
 # "healthcare_addon.tasks.monthly"
 # ]
-# }
+}
 
 # Testing
 # -------

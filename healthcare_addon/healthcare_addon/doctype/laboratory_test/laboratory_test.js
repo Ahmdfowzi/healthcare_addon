@@ -208,3 +208,32 @@ function generateRandomString(length) {
 
     return result;
 }
+
+frappe.ui.form.on('Laboratory Test', {
+    patient: function(frm) {
+        if (!frm.doc.patient) return frm.set_value('patient_room', '');
+
+        frappe.db.get_list('Inpatient Record', {
+            filters: {
+                patient: frm.doc.patient,
+                status: ['!=', 'Discharged'],  // Ensures only active inpatients are fetched
+            },
+            fields: ['name'],
+            limit: 1
+        }).then((inpatient_records) => {
+            if (inpatient_records.length > 0) {
+                frappe.model.with_doc('Inpatient Record', inpatient_records[0].name, function() {
+                    let inpatient_record = frappe.model.get_doc('Inpatient Record', inpatient_records[0].name);
+                    
+                    // Sort occupancies by creation or entry date to get the last one
+                    let last_occupancy = inpatient_record.inpatient_occupancies
+                        .sort((a, b) => new Date(b.creation) - new Date(a.creation))[0];  // Sort by creation date (descending)
+
+                    frm.set_value('patient_room', last_occupancy ? last_occupancy.service_unit : '');
+                });
+            } else {
+                frm.set_value('patient_room', '');
+            }
+        });
+    }
+});

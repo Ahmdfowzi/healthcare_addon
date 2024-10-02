@@ -1,0 +1,177 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:PR-{####}",
+ "creation": "2024-09-23 10:27:25.197920",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_bsxv",
+  "patient",
+  "full_name",
+  "company",
+  "status",
+  "column_break_zhjd",
+  "date",
+  "time",
+  "amended_from",
+  "section_break_iuyv",
+  "lab_prescription",
+  "section_break_niju",
+  "column_break_wocq",
+  "imaging_prescription"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_bsxv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Patient Referral",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Patient",
+   "options": "Patient",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Incomplete",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Incomplete\nPartly Complete\nComplete",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_zhjd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_iuyv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "lab_prescription",
+   "fieldtype": "Table",
+   "label": "Lab Prescription",
+   "options": "Lab Prescription"
+  },
+  {
+   "fieldname": "section_break_niju",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_wocq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "imaging_prescription",
+   "fieldtype": "Table",
+   "label": "Imaging Prescription",
+   "options": "Imaging Prescription"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "patient.patient_name",
+   "fieldname": "full_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Full Name",
+   "options": "Patient",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Laboratory Test",
+   "link_fieldname": "patient"
+  },
+  {
+   "link_doctype": "X-ray",
+   "link_fieldname": "patient"
+  },
+  {
+   "link_doctype": "CT Scan",
+   "link_fieldname": "patient"
+  },
+  {
+   "link_doctype": "MRI",
+   "link_fieldname": "patient"
+  }
+ ],
+ "modified": "2024-09-24 11:31:24.536846",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Patient Referral",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Orange",
+   "title": "Incomplete"
+  },
+  {
+   "color": "Blue",
+   "title": "Partly Complete"
+  },
+  {
+   "color": "Green",
+   "title": "Complete"
+  }
+ ],
+ "title_field": "patient"
+}

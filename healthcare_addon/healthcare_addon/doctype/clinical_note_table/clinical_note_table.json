@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-09-24 11:48:14.850337",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "clinical_note_reference",
+  "clinical_note",
+  "posting_date"
+ ],
+ "fields": [
+  {
+   "fetch_from": "clinical_note_reference.posting_date",
+   "fieldname": "posting_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "clinical_note_reference",
+   "fieldtype": "Link",
+   "label": "Clinical Note Reference",
+   "options": "Clinical Note"
+  },
+  {
+   "fetch_from": "clinical_note_reference.note",
+   "fieldname": "clinical_note",
+   "fieldtype": "Text Editor",
+   "in_list_view": 1,
+   "label": "Clinical Note"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-09-24 14:12:30.201777",
+ "modified_by": "Administrator",
+ "module": "Healthcare Addon",
+ "name": "Clinical Note Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -12,6 +12,7 @@
   "column_break_hkonl",
   "premature_service_item",
   "premature_income_account",
+  "item_for_inpatient_every_24h",
   "accounts_section",
   "default_practitioners_commission_account",
   "section_break_ushh",
@@ -118,12 +119,18 @@
    "label": "Hospital Laboratory Entity",
    "options": "Company",
    "reqd": 1
+  },
+  {
+   "fieldname": "item_for_inpatient_every_24h",
+   "fieldtype": "Link",
+   "label": "Item For Inpatient Every 24H",
+   "options": "Item"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-08-04 09:07:12.907658",
+ "modified": "2024-09-21 14:55:09.837321",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Default Healthcare Service Settings",

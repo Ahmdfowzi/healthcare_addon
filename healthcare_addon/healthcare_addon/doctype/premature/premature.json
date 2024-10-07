@@ -40,7 +40,8 @@
   "encounter_comment",
   "more_info_section",
   "healthcare_references",
-  "amended_from"
+  "amended_from",
+  "clinical_note_table"
  ],
  "fields": [
   {
@@ -259,11 +260,19 @@
    "fieldtype": "Table",
    "label": "Healthcare References",
    "options": "Healthcare References"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "clinical_note_table",
+   "fieldtype": "Table",
+   "label": "Clinical Note Table",
+   "options": "Clinical Note Table",
+   "read_only": 1
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-14 00:04:16.626332",
+ "modified": "2024-09-24 14:09:35.090227",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Premature",

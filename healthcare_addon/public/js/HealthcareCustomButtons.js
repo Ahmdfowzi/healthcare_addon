@@ -21,7 +21,7 @@ class HealthcareCustomButtons {
   }
 
   getReferenceData(doctype, response) {
-    const isSpecialDoctype = ["Prescription", "Clinical Procedure", "Laboratory Test"].includes(doctype);
+    const isSpecialDoctype = ["Prescription", "Clinical Procedure", "Laboratory Test", "Clinical Note"].includes(doctype);
     const referenceLink = isSpecialDoctype ? response?.message?.name : response;
 
     if (!referenceLink) {
@@ -56,6 +56,7 @@ class HealthcareCustomButtons {
       { label: "CT Scan", action: () => this.showImagingTestDialog("CT Scan") },
       { label: "X-Ray", action: () => this.showImagingTestDialog("X-ray") },
       { label: "MRI", action: () => this.showImagingTestDialog("MRI") },
+      { label: "Clinical Note", action: () => frappe.new_doc("Clinical Note", { patient: this.frm.doc.patient }) },
     ];
 
     createButtons.forEach(({ label, action }) => {
@@ -288,3 +289,48 @@ class HealthcareCustomButtons {
 
 frappe.provide("healthcare_addon.HealthcareCustomButtons");
 healthcare_addon.HealthcareCustomButtons = HealthcareCustomButtons;
+
+function setup_clinical_note_fetch(doctype_name) {
+  frappe.ui.form.on(doctype_name, {
+      onload: function(frm) {
+          if (frm.doc.patient) fetch_clinical_notes(frm);
+      },
+      refresh: function(frm) {
+          if (frm.doc.patient) fetch_clinical_notes(frm);
+      },
+      patient: function(frm) {
+          if (frm.doc.patient) fetch_clinical_notes(frm);
+      }
+  });
+}
+
+function fetch_clinical_notes(frm) {
+  if (!frm.doc.patient) return;
+
+  frappe.call({
+      method: 'frappe.client.get_list',
+      args: {
+          doctype: 'Clinical Note',
+          filters: { 'patient': frm.doc.patient },
+          fields: ['name', 'note', 'posting_date'],
+          order_by: 'posting_date desc',
+          limit_page_length: 15
+      },
+      callback: function(r) {
+          if (r.message) {
+              // frm.clear_table('clinical_note_table');
+              r.message.forEach(d => {
+                  let row = frm.add_child('clinical_note_table');
+                  row.clinical_note_reference = d.name;
+                  row.clinical_note = d.note;
+                  row.posting_date = d.posting_date;
+              });
+              frm.refresh_field('clinical_note_table');
+          }
+      }
+  });
+}
+
+// Call this function for each doctype
+setup_clinical_note_fetch('Inpatient Record');
+setup_clinical_note_fetch('Premature');

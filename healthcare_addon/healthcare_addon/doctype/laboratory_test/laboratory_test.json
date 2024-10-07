@@ -26,6 +26,7 @@
   "inpatient_record",
   "report_preference",
   "mobile",
+  "patient_room",
   "c_b",
   "referred_by_practitioner",
   "sb_normal",
@@ -300,6 +301,12 @@
    "label": "Referred By Practitioner",
    "options": "Healthcare Practitioner",
    "read_only": 1
+  },
+  {
+   "fieldname": "patient_room",
+   "fieldtype": "Data",
+   "label": "Patient Room",
+   "read_only": 1
   }
  ],
  "is_submittable": 1,
@@ -309,7 +316,7 @@
    "link_fieldname": "patient"
   }
  ],
- "modified": "2024-08-07 12:09:38.116685",
+ "modified": "2024-09-21 12:27:19.214197",
  "modified_by": "Administrator",
  "module": "Healthcare Addon",
  "name": "Laboratory Test",

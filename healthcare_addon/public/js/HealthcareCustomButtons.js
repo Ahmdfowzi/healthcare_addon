@@ -4,8 +4,8 @@ class HealthcareCustomButtons {
   constructor(frm, practitioner_field_name = "healthcare_practitioner") {
     this.frm = frm;
     this.practitioner_field_name = practitioner_field_name;
-    this.healthcare_reference_field = this.frm.fields_dict["healthcare_references"] 
-      ? "healthcare_references" 
+    this.healthcare_reference_field = this.frm.fields_dict["healthcare_references"]
+      ? "healthcare_references"
       : "custom_healthcare_references";
   }
 
@@ -50,7 +50,8 @@ class HealthcareCustomButtons {
     if (this.frm.is_new()) return;
 
     const createButtons = [
-      { label: "Laboratory Test", action: () => this.showLabTestDialog() },
+      // { label: "Laboratory Test", action: () => this.showLabTestDialog() },
+      { label: "Laboratory Test", action: () => this.showCustomLabTestDialog() },
       { label: "Medication", action: () => this.showMedicationDialog() },
       { label: "Clinical Procedure", action: () => this.showClinicalProcedureDialog() },
       { label: "CT Scan", action: () => this.showImagingTestDialog("CT Scan") },
@@ -132,23 +133,101 @@ class HealthcareCustomButtons {
     }
   }
 
-  showLabTestDialog() {
-    new frappe.ui.form.MultiSelectDialog({
-      doctype: "Lab Test Template",
-      target: this.frm,
-      setters: {},
-      date_field: "modified",
-      get_query: () => ({ filters: { disabled: 0 } }),
-      page_length: 9999,
-      action: (selections) => {
-        if (selections.length === 0) {
+
+
+  showCustomLabTestDialog() {
+    const self = this;  // Save context to self
+
+    let selected_items = new Set();  // Use a Set to track selected items
+
+    const dialog = new frappe.ui.Dialog({
+      title: __("Select Lab Test Templates"),
+      fields: [
+        {
+          label: __("Search"),
+          fieldname: "search_field",
+          fieldtype: "Data",
+          change: function () {
+            filterLabTestItems(this.value);
+          }
+        },
+        {
+          fieldtype: "HTML",
+          fieldname: "lab_test_list"
+        }
+      ],
+      primary_action: function () {
+        if (selected_items.size === 0) {
           frappe.msgprint(__("Please select at least one lab test template."));
           return;
         }
-        this.createLabTestInvoice(selections);
-        this.createLabTestDoc(selections);
+
+        let selected_values = Array.from(selected_items);
+        console.log(selected_values);  // Contains the selected items
+        dialog.hide();
+        // Proceed with selected_values, e.g., create an invoice or lab test doc
+
+        if (selected_values.length === 0) {
+          frappe.msgprint(__("Please select at least one lab test template."));
+          return;
+        }
+        self.createLabTestInvoice(selected_values);
+        self.createLabTestDoc(selected_values);
       },
+      primary_action_label: __("Submit")
     });
+
+    // Load items initially
+    loadLabTestItems();
+
+    // Show the dialog
+    dialog.show();
+
+    // Function to load the items and populate the checkboxes
+    function loadLabTestItems(search_term = "") {
+      frappe.call({
+        method: "frappe.client.get_list",
+        args: {
+          doctype: "Lab Test Template",
+          filters: { disabled: 0, name: ["like", `%${search_term}%`] },
+          fields: ["name"],
+          limit_page_length: 20
+        },
+        callback: function (r) {
+          const container = dialog.fields_dict.lab_test_list.$wrapper.empty();
+
+          if (r.message && r.message.length > 0) {
+            r.message.forEach((item) => {
+              // Create a checkbox for each item and embed logic for selection/deselection
+              const is_checked = selected_items.has(item.name) ? "checked" : "";
+              const checkbox = `
+                <div>
+                  <input type="checkbox" name="lab_test_item" value="${item.name}" ${is_checked} 
+                    onchange="toggleSelection('${item.name}', this.checked)">
+                  <label>${item.name}</label>
+                </div>`;
+              container.append(checkbox);
+            });
+          } else {
+            container.append('<div>No items found.</div>');
+          }
+        }
+      });
+    }
+
+    // Function to filter items based on the search term
+    function filterLabTestItems(search_term) {
+      loadLabTestItems(search_term);
+    }
+
+    // Function to add or remove items from selected_items
+    window.toggleSelection = function (item_name, is_checked) {
+      if (is_checked) {
+        selected_items.add(item_name);  // Add to the Set if checked
+      } else {
+        selected_items.delete(item_name);  // Remove from the Set if unchecked
+      }
+    };
   }
 
   addLabTestToDoc(selections) {
@@ -182,28 +261,100 @@ class HealthcareCustomButtons {
 
       this.updateHealthcareReferences("Laboratory Test", response);
     } catch (error) {
-      this.handleError(error, "Laboratory Test");
+      console.log(error);
+      // this.handleError(error, "Laboratory Test");
     }
   }
 
+
   showImagingTestDialog(scan_type) {
-    new frappe.ui.form.MultiSelectDialog({
-      doctype: "Imaging Scan Template",
-      target: this.frm,
-      setters: { is_billable: 1 },
-      date_field: "modified",
-      get_query: () => ({ filters: { scan_type: scan_type } }),
-      action: (selections) => {
-        if (selections.length === 0) {
-          frappe.msgprint(__("Please select at least one imaging scan template."));
-          return;
-        }
-        this.createImagingTestInvoice(selections);
-        this.createImagingScanDoc(selections);
-        this.addImagingScanToDoc(scan_type, selections);
-      },
+    const self = this;  // Save context to self
+
+    let selected_items = new Set();  // Use a Set to track selected items
+
+    const dialog = new frappe.ui.Dialog({
+        title: __("Select Imaging Scan Templates"),
+        fields: [
+            {
+                label: __("Search"),
+                fieldname: "search_field",
+                fieldtype: "Data",
+                change: function () {
+                    filterImagingScanItems(this.value);
+                }
+            },
+            {
+                fieldtype: "HTML",
+                fieldname: "imaging_scan_list"
+            }
+        ],
+        primary_action: function () {
+            if (selected_items.size === 0) {
+                frappe.msgprint(__("Please select at least one imaging scan template."));
+                return;
+            }
+
+            let selected_values = Array.from(selected_items);
+            dialog.hide();
+            self.createImagingTestInvoice(selected_values);
+            self.createImagingScanDoc(selected_values);
+            self.addImagingScanToDoc(scan_type, selected_values);
+        },
+        primary_action_label: __("Submit")
     });
-  }
+
+    // Load items initially
+    loadImagingScanItems();
+
+    // Show the dialog
+    dialog.show();
+
+    // Function to load the items and populate the checkboxes
+    function loadImagingScanItems(search_term = "") {
+        frappe.call({
+            method: "frappe.client.get_list",
+            args: {
+                doctype: "Imaging Scan Template",
+                filters: { is_billable: 1, name: ["like", `%${search_term}%`] },
+                fields: ["name"],
+                limit_page_length: 1
+            },
+            callback: function (r) {
+                const container = dialog.fields_dict.imaging_scan_list.$wrapper.empty();
+
+                if (r.message && r.message.length > 0) {
+                    r.message.forEach((item) => {
+                        const is_checked = selected_items.has(item.name) ? "checked" : "";
+                        const checkbox = `
+                            <div>
+                                <input type="checkbox" name="imaging_scan_item" value="${item.name}" ${is_checked} 
+                                    onchange="toggleSelection('${item.name}', this.checked)">
+                                <label>${item.name}</label>
+                            </div>`;
+                        container.append(checkbox);
+                    });
+                } else {
+                    container.append('<div>No items found.</div>');
+                }
+            }
+        });
+    }
+
+    // Function to filter items based on the search term
+    function filterImagingScanItems(search_term) {
+        loadImagingScanItems(search_term);
+    }
+
+    // Function to add or remove items from selected_items
+    window.toggleSelection = function (item_name, is_checked) {
+        if (is_checked) {
+            selected_items.add(item_name);  // Add to the Set if checked
+        } else {
+            selected_items.delete(item_name);  // Remove from the Set if unchecked
+        }
+    };
+}
+
 
   addImagingScanToDoc(scan_type, selections) {
     selections.forEach((selection) => {
@@ -241,7 +392,8 @@ class HealthcareCustomButtons {
         frappe.msgprint(__("Invoice {0} created successfully", [response.message]));
       }
     } catch (error) {
-      this.handleError(error, "Lab Test Invoice");
+      console.log(error)
+      // this.handleError(error, "Lab Test Invoice");
     }
   }
 
@@ -292,15 +444,15 @@ healthcare_addon.HealthcareCustomButtons = HealthcareCustomButtons;
 
 function setup_clinical_note_fetch(doctype_name) {
   frappe.ui.form.on(doctype_name, {
-      onload: function(frm) {
-          if (frm.doc.patient) fetch_clinical_notes(frm);
-      },
-      refresh: function(frm) {
-          if (frm.doc.patient) fetch_clinical_notes(frm);
-      },
-      patient: function(frm) {
-          if (frm.doc.patient) fetch_clinical_notes(frm);
-      }
+    onload: function (frm) {
+      if (frm.doc.patient) fetch_clinical_notes(frm);
+    },
+    refresh: function (frm) {
+      if (frm.doc.patient) fetch_clinical_notes(frm);
+    },
+    patient: function (frm) {
+      if (frm.doc.patient) fetch_clinical_notes(frm);
+    }
   });
 }
 
@@ -308,26 +460,26 @@ function fetch_clinical_notes(frm) {
   if (!frm.doc.patient) return;
 
   frappe.call({
-      method: 'frappe.client.get_list',
-      args: {
-          doctype: 'Clinical Note',
-          filters: { 'patient': frm.doc.patient },
-          fields: ['name', 'note', 'posting_date'],
-          order_by: 'posting_date desc',
-          limit_page_length: 15
-      },
-      callback: function(r) {
-          if (r.message) {
-              // frm.clear_table('clinical_note_table');
-              r.message.forEach(d => {
-                  let row = frm.add_child('clinical_note_table');
-                  row.clinical_note_reference = d.name;
-                  row.clinical_note = d.note;
-                  row.posting_date = d.posting_date;
-              });
-              frm.refresh_field('clinical_note_table');
-          }
+    method: 'frappe.client.get_list',
+    args: {
+      doctype: 'Clinical Note',
+      filters: { 'patient': frm.doc.patient },
+      fields: ['name', 'note', 'posting_date'],
+      order_by: 'posting_date desc',
+      limit_page_length: 15
+    },
+    callback: function (r) {
+      if (r.message) {
+        // frm.clear_table('clinical_note_table');
+        r.message.forEach(d => {
+          let row = frm.add_child('clinical_note_table');
+          row.clinical_note_reference = d.name;
+          row.clinical_note = d.note;
+          row.posting_date = d.posting_date;
+        });
+        frm.refresh_field('clinical_note_table');
       }
+    }
   });
 }
 
